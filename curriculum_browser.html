@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>სასწავლო განრიგი და კალენდარული გეგმა - შოთა მარტყოფლიშვილი</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151d2f;
+      --card-hover: #1c273e;
+      --border: #26354f;
+      --border-light: #334466;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --theory-bg: rgba(59, 130, 246, 0.12);
+      --theory-border: rgba(59, 130, 246, 0.3);
+      --theory-text: #60a5fa;
+      --practice-bg: rgba(16, 185, 129, 0.12);
+      --practice-border: rgba(16, 185, 129, 0.3);
+      --practice-text: #34d399;
+      --accent-bg: rgba(245, 158, 11, 0.12);
+      --accent-border: rgba(245, 158, 11, 0.3);
+      --accent-text: #fbbf24;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .badges-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-blue {
+      background: var(--theory-bg);
+      color: var(--theory-text);
+      border: 1px solid var(--theory-border);
+    }
+    .badge-green {
+      background: var(--practice-bg);
+      color: var(--practice-text);
+      border: 1px solid var(--practice-border);
+    }
+    .badge-amber {
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      border: 1px solid var(--accent-border);
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    .lecturer-sub {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .lecturer-sub strong {
+      color: var(--text);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border-color: var(--border);
+    }
+    .btn-secondary:hover {
+      color: var(--text);
+      border-color: var(--border-light);
+    }
+    .btn-active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Course Tabs */
+    .tabs-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .tab-card {
+      flex: 1;
+      min-width: 280px;
+      padding: 12px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .tab-card:hover {
+      border-color: var(--primary);
+    }
+    .tab-card.active {
+      background: #1e3a8a;
+      border-color: #3b82f6;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+    }
+    .tab-icon {
+      font-size: 24px;
+    }
+    .tab-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .tab-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .tab-card.active .tab-subtitle {
+      color: #bfdbfe;
+    }
+
+    /* Info Bar */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .info-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .info-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .info-value.highlight {
+      color: #60a5fa;
+    }
+
+    /* Filter Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+    }
+    .search-wrap {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 9px 12px 9px 36px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .filter-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .select-dropdown {
+      padding: 9px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      cursor: pointer;
+    }
+    .select-dropdown:focus {
+      border-color: var(--primary);
+    }
+    .view-toggle {
+      display: flex;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px;
+    }
+    .view-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .view-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+    .counter-badge {
+      font-size: 12px;
+      font-family: monospace;
+      color: var(--text-muted);
+      background: var(--bg);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* Table Styles */
+    .table-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .table-responsive {
+      overflow-x: auto;
+      width: 100%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+    thead th {
+      background: #111927;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.15s ease;
+    }
+    tbody tr:hover {
+      background-color: var(--card-hover);
+    }
+    tbody td {
+      padding: 12px 14px;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .td-num {
+      font-family: monospace;
+      font-weight: 800;
+      color: #60a5fa;
+      text-align: center;
+      width: 50px;
+      font-size: 13px;
+    }
+    .td-date {
+      width: 140px;
+    }
+    .date-day {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .date-week {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .td-topic {
+      min-width: 240px;
+    }
+    .topic-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .topic-res {
+      font-size: 11px;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .td-theory {
+      min-width: 260px;
+      background: rgba(59, 130, 246, 0.03);
+    }
+    .td-practice {
+      min-width: 320px;
+      background: rgba(16, 185, 129, 0.03);
+    }
+    .block-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .block-theory {
+      background: var(--theory-bg);
+      color: var(--theory-text);
+      border: 1px solid var(--theory-border);
+    }
+    .block-practice {
+      background: var(--practice-bg);
+      color: var(--practice-text);
+      border: 1px solid var(--practice-border);
+    }
+    .td-actions {
+      width: 90px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .action-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 5px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+      margin: 2px;
+    }
+    .action-btn:hover {
+      color: var(--text);
+      border-color: var(--primary);
+    }
+    .action-btn.has-note {
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      border-color: var(--accent-border);
+      font-weight: bold;
+    }
+    .note-callout {
+      margin-top: 8px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      color: #fde68a;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .note-text {
+      flex: 1;
+    }
+    .note-edit-btn {
+      color: var(--accent-text);
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 11px;
+      background: none;
+      border: none;
+    }
+
+    /* Cards View */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .card-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .card-item:hover {
+      border-color: var(--border-light);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .card-grid-split {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .card-box {
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .card-box-theory {
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid var(--theory-border);
+    }
+    .card-box-practice {
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid var(--practice-border);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: opacity 0.3s, transform 0.3s;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      z-index: 9999;
+    }
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .empty-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+  
+    /* Clickable Topic & Official Plan Pill */
+    .topic-title-clickable {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s ease;
+    }
+    .topic-title-clickable:hover {
+      color: #60a5fa;
+    }
+    .topic-title-clickable:hover .topic-name-text {
+      text-decoration: underline;
+    }
+    .syllabus-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .syllabus-pill:hover {
+      background: rgba(99, 102, 241, 0.3);
+      color: #fff;
+      border-color: #818cf8;
+      transform: translateY(-1px);
+    }
+
+    /* Modal Overlay & Card */
+    
+    .modal-card {
+      background: #151d2f;
+      border: 1px solid #3b82f6;
+      border-radius: 14px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(59, 130, 246, 0.2);
+      animation: modalFadeIn 0.2s ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #111927;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+    }
+    .modal-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .modal-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .modal-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .modal-close-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .modal-close-btn:hover {
+      color: #fff;
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.2);
+    }
+    .modal-body {
+      padding: 22px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .docx-box {
+      background: rgba(99, 102, 241, 0.06);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-left: 4px solid #6366f1;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+    }
+    .docx-box-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #a5b4fc;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .docx-verbatim-text {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #f8fafc;
+      white-space: pre-line;
+      line-height: 1.65;
+    }
+    .modal-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .modal-meta-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .modal-meta-label {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .modal-meta-val {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .modal-footer {
+      padding: 14px 22px;
+      border-top: 1px solid var(--border);
+      background: #111927;
+      display: flex;
+      justify-content: flex-end;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+    }
+
+  
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex !important;
+    }
+    .topic-title-clickable {
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      transition: all 0.2s ease !important;
+    }
+    .topic-title-clickable:hover .topic-name-text {
+      color: #60a5fa !important;
+      text-decoration: underline !important;
+    }
+    .syllabus-pill {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      padding: 3px 8px !important;
+      border-radius: 6px !important;
+      background: rgba(99, 102, 241, 0.2) !important;
+      color: #a5b4fc !important;
+      border: 1px solid rgba(99, 102, 241, 0.45) !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+      white-space: nowrap !important;
+    }
+    .syllabus-pill:hover {
+      background: #4f46e5 !important;
+      color: #ffffff !important;
+      border-color: #6366f1 !important;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.5) !important;
+      transform: translateY(-1px) !important;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <div>
+          <div class="badges-row">
+            <span class="badge badge-blue">🎓 კოლეჯის კალენდარული გეგმა</span>
+            <span class="badge badge-green">⚡ 30% თეორია | 70% პრაქტიკა</span>
+          </div>
+          <h1>სასწავლო განრიგისა და ლექციების პორტალი</h1>
+          <div class="lecturer-sub">
+            ლექტორი: <strong>შოთა მარტყოფლიშვილი</strong> | კამპუსი: <strong>ნაძალადევი-დადიანი</strong>
+          </div>
+        </div>
+
+        <div>
+          <button onclick="exportNotes()" class="btn btn-primary">
+            <span>📋</span> შენიშვნების ექსპორტი (<span id="notes-badge">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Course Navigation Tabs -->
+      <div class="tabs-row">
+        <div id="tab-c1" class="tab-card active" onclick="switchCourse('course1')">
+          <div class="tab-icon">🧠</div>
+          <div>
+            <div class="tab-title">1. შესავალი ხელოვნურ ინტელექტში</div>
+            <div class="tab-subtitle">39 ლექცია (8 კვირა + შეფასება) • 4 კრედიტი • 06.7.1.1</div>
+          </div>
+        </div>
+
+        <div id="tab-c2" class="tab-card" onclick="switchCourse('course2')">
+          <div class="tab-icon">💬</div>
+          <div>
+            <div class="tab-title">2. Prompt ინჟინერია & Guardrails</div>
+            <div class="tab-subtitle">64 ლექცია (13 კვირა + შეფასება) • 6 კრედიტი • 06.7.1.3</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Info Banner -->
+    <div id="info-banner" class="info-grid">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Filter Toolbar -->
+    <div class="toolbar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input 
+          id="search-input" 
+          type="text" 
+          class="search-input" 
+          oninput="applyFilters()" 
+          placeholder="მოძებნე თემა, ტექნოლოგია (მაგ. Transformer, Claude, CoT, JSON Schema, Red-team)..."
+        />
+      </div>
+
+      <div class="filter-controls">
+        <select id="week-select" class="select-dropdown" onchange="applyFilters()">
+          <!-- Injected by JS -->
+        </select>
+
+        <div class="view-toggle">
+          <button id="btn-view-table" class="view-btn active" onclick="setViewMode('table')">📑 ცხრილი</button>
+          <button id="btn-view-cards" class="view-btn" onclick="setViewMode('cards')">🗂️ ბარათები</button>
+        </div>
+
+        <div id="counter-badge" class="counter-badge">0 / 0</div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="content-container">
+      <!-- Injected by JS -->
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">შეტყობინება</div>
+
+  <script>
+    const DATA = {"course1": {"title": "შესავალი ხელოვნურ ინტელექტში", "code": "06.7.1.1 (მოდული 5)", "credits": 4, "weeks_count": "8 კვირა + შეფასება", "hours": "78 საკონტაქტო სთ (39 ლექცია × 2 სთ)", "groups": "ჯგუფი II (N3, 17:00–19:00) | ჯგუფი III (Zoom3, 12:00–14:00)", "lectures": [{"num": 1, "week": "კვირა 1 (1 – 5 დეკემბერი) – AI საფუძვლები და LLM არქიტექტურა", "day_date": "სამშაბათი, 1 დეკ.", "title": "რა არის AI, მოდულის რუკა და პლატფორმების 4 კატეგორია", "theory": "AI-ის განმარტება, ინტელექტუალური ქცევის 5 ნიშანი, ტიურინგის ტესტი. პლატფორმების 4 კატეგორია: Consumer, Enterprise Copilot, Cloud Platform, Open-Weights. მონაცემთა დაცვის 3 „არასდროს“ წესი.", "practice": "სამუშაო ანგარიშების გამართვა (ChatGPT, Claude, Gemini). ერთი და იგივე 3 პრომპტის გაშვება სამივეზე, პასუხების შედარება. 15 პოპულარული AI ხელსაწყოს კლასიფიცირება 4 კატეგორიაში.", "resources": "MIT uAI Intro Art. 1.", "official": {"week": "1", "res": "1", "activity": "რა არის AI, მოდულის რუკა და პლატფორმების 4 კატეგორია\nAI-ის განმარტება, ინტელექტუალური ქცევის 5 ნიშანი, ტიურინგის ტესტი\nპლატფორმების 4 კატეგორია: consumer, enterprise copilot, cloud platform, open-weights/self-hosted; 3 „არასდროს“ წესი\nანგარიშების გახსნა ChatGPT, Claude, Gemini-ზე; ერთი და იგივე 3 პრომპტი სამივეზე; 15 პროდუქტის დახარისხება 4 კატეგორიაში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, Intro: Welcome to Universal AI, Article 1"}}, {"num": 2, "week": "კვირა 1 (1 – 5 დეკემბერი) – AI საფუძვლები და LLM არქიტექტურა", "day_date": "ოთხშაბათი, 2 დეკ.", "title": "როგორ მუშაობს LLM: ტოკენები, Embeddings და სემანტიკური ძებნა", "theory": "რა არის ტოკენი, ტოკენიზაციის მექანიზმი. ტოკენების ხარჯი და ფასი ქართულ vs ინგლისურ ენაზე. Embeddings და ვექტორული სივრცე, კოსინუსური მსგავსება. RAG-ის (Retrieval-Augmented Generation) საბაზისო პრინციპი.", "practice": "მუშაობა OpenAI Tokenizer დემოსა და Tiktoken-თან. Embedding Projector-ში ვექტორული კლასტერების ვიზუალიზაცია და სიტყვათა სემანტიკური სიახლოვის ექსპერიმენტები.", "resources": "MIT uAI LLMs L1, OpenAI Tokenizer.", "official": {"week": "1", "res": "1", "activity": "როგორ მუშაობს LLM: ტოკენი, embeddings, Transformer, attention, წვრთნა\nტოკენი და ტოკენების ფასი ქართულად vs ინგლისურად; embeddings, მსგავსება ვექტორებით, სემანტიკური ძებნა (RAG-ის საფუძველი)\nTransformer 2017 ერთ სურათზე, attention ერთი წინადადების მაგალითზე, next-token წვრთნა, GPT და BERT ოჯახები\ntokenizer დემო, Embedding Projector, Transformer Explainer: წინადადება ტოკენიდან ალბათობებამდე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs: Lecture 1 Foundations, Lecture 2 Understanding LLMs; Transformer Explainer (poloclub)"}}, {"num": 3, "week": "კვირა 1 (1 – 5 დეკემბერი) – AI საფუძვლები და LLM არქიტექტურა", "day_date": "ხუთშაბათი, 3 დეკ.", "title": "Transformer არქიტექტურა, Attention მექანიზმი და წვრთნა", "theory": "„Attention Is All You Need“ (2017) არქიტექტურა. Self-Attention მექანიზმი წინადადების კონტექსტში. Next-token prediction წვრთნის ციკლი. GPT (ავტორეგრესიული) vs BERT (ენკოდერული) ოჯახები.", "practice": "ინტერაქტიული ლაბორატორია *Transformer Explainer* (poloclub) პლატფორმაზე: ტოკენიდან ალბათობების განაწილებამდე გზის ნაბიჯ-ნაბიჯ სიმულაცია.", "resources": "Transformer Explainer, MIT uAI LLMs L2.", "official": {"week": "1", "res": "1", "activity": "როგორ მუშაობს LLM: ტოკენი, embeddings, Transformer, attention, წვრთნა\nტოკენი და ტოკენების ფასი ქართულად vs ინგლისურად; embeddings, მსგავსება ვექტორებით, სემანტიკური ძებნა (RAG-ის საფუძველი)\nTransformer 2017 ერთ სურათზე, attention ერთი წინადადების მაგალითზე, next-token წვრთნა, GPT და BERT ოჯახები\ntokenizer დემო, Embedding Projector, Transformer Explainer: წინადადება ტოკენიდან ალბათობებამდე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs: Lecture 1 Foundations, Lecture 2 Understanding LLMs; Transformer Explainer (poloclub)"}}, {"num": 4, "week": "კვირა 1 (1 – 5 დეკემბერი) – AI საფუძვლები და LLM არქიტექტურა", "day_date": "პარასკევი, 4 დეკ.", "title": "Machine Learning და Deep Learning მომხმარებლის დონეზე", "theory": "Supervised, Unsupervised და Reinforcement Learning (RL / RLHF). Train/Test split და Overfitting. ხელოვნური ნეირონი, ფენები, წონები და GPU-ს კრიტიკული როლი.", "practice": "Google Teachable Machine-ში სურათების საკუთარი კლასიფიკატორის გაწვრთნა და ტესტირება. TensorFlow Playground-ში გადაწყვეტილების საზღვრების (Decision Boundary) რეგულირება.", "resources": "Teachable Machine, TensorFlow Playground.", "official": {"week": "1", "res": "1", "activity": "Machine Learning და Deep Learning მომხმარებლის დონეზე\nsupervised / unsupervised / RL, train/test, overfitting; ნეირონი, ფენები, წონები, წვრთნის ციკლი, GPU-ს როლი\nTeachable Machine: სურათების კლასიფიკატორის გაწვრთნა; TensorFlow Playground: decision boundary; MIT Article 2 knowledge check ჯგუფში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, Intro: Lecture 2 AI in Action, Article 2 + Knowledge Check; Teachable Machine; TensorFlow Playground"}}, {"num": 5, "week": "კვირა 2 (7 – 12 დეკემბერი) – წამყვანი პლატფორმები: Claude & ChatGPT სიღრმისეულად", "day_date": "ორშაბათი, 7 დეკ.", "title": "Claude სრულად I: ინტერფეისი, მოდელების ხაზი და ფაილებთან მუშაობა", "theory": "Anthropic-ის ფილოსოფია. Claude 3.5 Sonnet vs Haiku vs Opus. კონტექსტის ფანჯარა. მულტიმოდალური შეყვანა (PDF, სურათები, CSV). Web Search რეჟიმი.", "practice": "5 რეალური სამუშაო ამოცანა Claude-ში: მრავალგვერდიანი PDF-ის ანალიზი, ფინანსური ცხრილის წაკითხვა და ვიზუალიზაცია, სქემის აღწერა, წყაროებით ვებ-კვლევა.", "resources": "Anthropic Claude Documentation.", "official": {"week": "1", "res": "1", "activity": "Claude სრულად I: ინტერფეისი, ფაილები, Artifacts\nმოდელების არჩევა, ჩატის მართვა, ფაილები შესასვლელად (PDF, სურათი, ცხრილი), web search, Artifacts\n5 სამუშაო ამოცანა Claude-ში: PDF-ის შეჯამება, ცხრილის წაკითხვა და დიაგრამა, სურათის აღწერა, ვებ-ძიება წყაროებით, Artifact-ის შექმნა", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Academy: Claude 101; claude.ai"}}, {"num": 6, "week": "კვირა 2 (7 – 12 დეკემბერი) – წამყვანი პლატფორმები: Claude & ChatGPT სიღრმისეულად", "day_date": "სამშაბათი, 8 დეკ.", "title": "Claude სრულად II: Artifacts, Projects და Custom Instructions", "theory": "Artifacts სისტემა (კოდი, Markdown, SVG, React). Projects-ის არქიტექტურა: პროექტის ცოდნის ბაზა (Project Knowledge) და სისტემური ინსტრუქციები.", "practice": "საკუთარი Claude Project-ის შექმნა 3 დარგობრივი დოკუმენტის ატვირთვით. Custom Instructions-ის გაწერა და პროექტის გამოცდა 5 საკონტროლო კითხვით.", "resources": "Claude Projects & Artifacts guide.", "official": {"week": "2", "res": "1", "activity": "Claude სრულად II to III: Projects, Skills, memory; connectors, MCP, Claude Code და Cowork, Enterprise\nProjects და ცოდნის ფაილები, Skills, memory, custom instructions და სტილი; საკუთარი Project 3 ფაილით და ინსტრუქციით, ტესტი 5 კითხვით\nconnectors (Drive, Gmail), MCP როგორც სტანდარტი; Claude Code და Cowork გაცნობის დონეზე; Enterprise, ადმინი, data policy, Constitutional AI\nconnector-ის მიერთება და ამოცანა საკუთარ ფაილებზე; enterprise გვერდიდან ნიშნების ამოწერა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Academy: Claude 101; Anthropic docs; Anthropic Claude Enterprise"}}, {"num": 7, "week": "კვირა 2 (7 – 12 დეკემბერი) – წამყვანი პლატფორმები: Claude & ChatGPT სიღრმისეულად", "day_date": "ოთხშაბათი, 9 დეკ.", "title": "Claude სრულად III: Connectors, MCP სტანდარტი და Enterprise გარემო", "theory": "გარე წყაროების მიერთება (Connectors: Google Drive, Gmail). Model Context Protocol (MCP) როგორც ღია ინტეგრაციის სტანდარტი. Claude Code გაცნობა. Constitutional AI და Enterprise Data Policy.", "practice": "Google Drive-ის connector-ის მიერთება, დოკუმენტების მოძიება და ანალიზი. MCP სერვერის მუშაობის პრინციპის დემონსტრაცია.", "resources": "Anthropic MCP specification.", "official": {"week": "2", "res": "1", "activity": "Claude სრულად II to III: Projects, Skills, memory; connectors, MCP, Claude Code და Cowork, Enterprise\nProjects და ცოდნის ფაილები, Skills, memory, custom instructions და სტილი; საკუთარი Project 3 ფაილით და ინსტრუქციით, ტესტი 5 კითხვით\nconnectors (Drive, Gmail), MCP როგორც სტანდარტი; Claude Code და Cowork გაცნობის დონეზე; Enterprise, ადმინი, data policy, Constitutional AI\nconnector-ის მიერთება და ამოცანა საკუთარ ფაილებზე; enterprise გვერდიდან ნიშნების ამოწერა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Academy: Claude 101; Anthropic docs; Anthropic Claude Enterprise"}}, {"num": 8, "week": "კვირა 2 (7 – 12 დეკემბერი) – წამყვანი პლატფორმები: Claude & ChatGPT სიღრმისეულად", "day_date": "ხუთშაბათი, 10 დეკ.", "title": "ChatGPT სრულად I: ეკოსისტემა, მოდელები და Canvas", "theory": "OpenAI-ის პაკეტები (Free, Plus, Team, Enterprise). GPT-4o და o-სერიის მოდელები. Advanced Data Analysis (Python გარემო), Canvas, Deep Research და ხმოვანი რეჟიმი.", "practice": "Canvas-ში ტექსტის ერთობლივი რედაქტირება. მონაცემთა ანალიზი: CSV ფაილის ატვირთვა, სტატისტიკური გათვლები და გრაფიკების აგება. შედარებითი Scorecard-ის შევსება Claude-თან.", "resources": "OpenAI Help Center, Canvas Guide.", "official": {"week": "2", "res": "2", "activity": "ChatGPT სრულად: ინტერფეისი, მოდელები, ფუნქციები; GPTs და Projects\nპაკეტები Free/Plus/Team/Enterprise, მოდელების ხაზი, search, canvas, deep research, voice, ფაილები, memory, custom instructions, admin და data policy\nGPT builder: ინსტრუქცია, ცოდნის ფაილები, actions გაცნობის დონეზე; ChatGPT Projects\n5 სტანდარტული ამოცანა (იგივე, რაც Claude-ში) და scorecard-ის სტრიქონი; პირველი custom GPT ლექტორის ბრიფით", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "openai.com; OpenAI: GPT builder docs"}}, {"num": 9, "week": "კვირა 2 (7 – 12 დეკემბერი) – წამყვანი პლატფორმები: Claude & ChatGPT სიღრმისეულად", "day_date": "პარასკევი, 11 დეკ.", "title": "ChatGPT სრულად II: Custom GPTs (GPT Builder) და Projects", "theory": "Custom GPT-ის სტრუქტურა: Instructions, Knowledge files, Capabilities (Web, DALL-E, Code Interpreter), Actions (Custom API/OpenAPI).", "practice": "საკუთარი Custom GPT-ის შექმნა GPT Builder-ის გარეშე (პირდაპირ Configure ჩანართში) ლექტორის ბრიფის მიხედვით. ტესტირება და გაზიარება.", "resources": "OpenAI GPTs documentation.", "official": {"week": "2", "res": "2", "activity": "ChatGPT სრულად: ინტერფეისი, მოდელები, ფუნქციები; GPTs და Projects\nპაკეტები Free/Plus/Team/Enterprise, მოდელების ხაზი, search, canvas, deep research, voice, ფაილები, memory, custom instructions, admin და data policy\nGPT builder: ინსტრუქცია, ცოდნის ფაილები, actions გაცნობის დონეზე; ChatGPT Projects\n5 სტანდარტული ამოცანა (იგივე, რაც Claude-ში) და scorecard-ის სტრიქონი; პირველი custom GPT ლექტორის ბრიფით", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "openai.com; OpenAI: GPT builder docs"}}, {"num": 10, "week": "კვირა 3 (14 – 19 დეკემბერი) – Gemini, Copilot, ალტერნატიული მოდელები და AI-ის ისტორია", "day_date": "ორშაბათი, 14 დეკ.", "title": "Gemini სრულად I: Gemini აპი, Workspace და Google AI Studio", "theory": "Gemini 1.5/2.0 მოდელები, 1M+ ტოკენ კონტექსტი. Google Workspace Extensions. Google AI Studio: System Instructions, Temperature, Top-P, Safety Settings.", "practice": "AI Studio-ში ერთი და იმავე პრომპტის გაშვება Temperature 0, 1 და 2 პარამეტრებზე. სხვაობის ფიქსირება. Scorecard-ში Gemini-ის დამატება.", "resources": "Google AI Studio, DeepMind Gemini papers.", "official": {"week": "2", "res": "2", "activity": "Gemini სრულად I: Gemini, Workspace, AI Studio და პარამეტრები\nGemini აპი და Workspace ინტეგრაცია, Deep Research, Canvas; AI Studio: მოდელები, system instructions, temperature, top-p, max tokens: რას ცვლის თითოეული\n5 სტანდარტული ამოცანა და scorecard-ის სტრიქონი; AI Studio-ში ერთი პრომპტი temperature 0 / 1 / 2-ზე, დაკვირვების ცხრილი", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "gemini.google, aistudio.google.com; MIT uAI, LLMs: Lecture 2 (პარამეტრები)"}}, {"num": 11, "week": "კვირა 3 (14 – 19 დეკემბერი) – Gemini, Copilot, ალტერნატიული მოდელები და AI-ის ისტორია", "day_date": "სამშაბათი, 15 დეკ.", "title": "Gemini სრულად II: NotebookLM და Gems", "theory": "NotebookLM-ის კონცეფცია: წყაროებით გამაგრებული (Grounded) AI, ზუსტი ციტირებები, Audio Overview (პოდკასტის გენერაცია). Gemini Gems შექმნის პრინციპი.", "practice": "3 თემატური PDF-ის ატვირთვა NotebookLM-ში. ციტატებზე დაყრდნობილი კითხვა-პასუხი. სასწავლო მასალისგან 1-გვერდიანი გზამკვლევის შექმნა.", "resources": "Google NotebookLM.", "official": {"week": "3", "res": "2", "activity": "Gemini სრულად II: NotebookLM და Gems\nNotebookLM: წყაროები, კითხვა-პასუხი ციტატებით, audio overview; Gems: ინსტრუქცია და ფაილები\nNotebookLM მოდულის 3 PDF-ით; Gem იმავე ბრიფით; სამი ასისტენტის (Project, GPT, Gem) შედარების ცხრილი", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "notebooklm.google; Google: Gems docs"}}, {"num": 12, "week": "კვირა 3 (14 – 19 დეკემბერი) – Gemini, Copilot, ალტერნატიული მოდელები და AI-ის ისტორია", "day_date": "ოთხშაბათი, 16 დეკ.", "title": "Microsoft Copilot ეკოსისტემა", "theory": "Copilot Web vs M365 Copilot vs GitHub Copilot. მონაცემთა უსაფრთხოება კორპორატიულ გარემოში (Commercial Data Protection). Copilot Studio გაცნობით დონეზე.", "practice": "Edge/Windows გარემოში Copilot-ის შესაძლებლობების ტესტირება. ცხრილის შეჯამება, ელფოსტის დრაფტის მომზადება. Scorecard-ის შევსება.", "resources": "Microsoft Learn Copilot documentation.", "official": {"week": "3", "res": "2", "activity": "Microsoft Copilot სრულად\nCopilot აპი vs M365 Copilot vs GitHub Copilot; Copilot Studio აგენტები გაცნობის დონეზე; enterprise data boundary; Azure OpenAI\nამოცანები Word/Excel/Teams-ში (ლიცენზიით ან დემოთი); scorecard-ის სტრიქონი", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "microsoft.com/copilot; Microsoft Learn: M365 Copilot"}}, {"num": 13, "week": "კვირა 3 (14 – 19 დეკემბერი) – Gemini, Copilot, ალტერნატიული მოდელები და AI-ის ისტორია", "day_date": "ხუთშაბათი, 17 დეკ.", "title": "ალტერნატიული ეკოსისტემები: Grok, DeepSeek, Kimi, Qwen", "theory": "გლობალური კონკურენცია. Grok (X-თან real-time კავშირი), DeepSeek V3 და R1 (Reasoning რევოლუცია), Kimi (ექსტრემალური კონტექსტი), Qwen (ღია მოდელები).", "practice": "ერთი და იმავე რთული ამოცანის (ლოგიკა + კოდი) გაშვება DeepSeek-სა და Claude/ChatGPT-ზე. სიჩქარის, ხარისხისა და პასუხის სიღრმის შედარება.", "resources": "DeepSeek / Qwen papers & interfaces.", "official": {"week": "3", "res": "2", "activity": "Grok, DeepSeek, Kimi, Qwen: ალტერნატიული ეკოსისტემები\nGrok: X-თან ინტეგრაცია, realtime; DeepSeek R1 მომენტი, ღია წონები, ფასი; Kimi, Qwen; მონაცემთა რეზიდენტობის კითხვა\nსამივეზე 2-2 ამოცანა და scorecard-ის სტრიქონები; დისკუსია: რომელი მონაცემი არასდროს გაიგზავნება", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "grok.com, deepseek.com, kimi.com"}}, {"num": 14, "week": "კვირა 3 (14 – 19 დეკემბერი) – Gemini, Copilot, ალტერნატიული მოდელები და AI-ის ისტორია", "day_date": "პარასკევი, 18 დეკ.", "title": "AI-ის ისტორია ერთ ლექციაში: 1943-დან 2026-მდე", "theory": "მაკ-კალოკი & პიტსი, როზენბლატის პერსეპტრონი, დარტმუთის კონფერენცია (1956). AI-ის ზამთრები. ImageNet (2012), Transformer (2017), ChatGPT (2022) და აგენტური ერა (2025–2026).", "practice": "ინტერაქტიული ქვიზი და AI ისტორიული გარღვევების ვიზუალური ტაიმლაინის აწყობა გუნდებში.", "resources": "MIT uAI History of AI.", "official": {"week": "3", "res": "1", "activity": "AI-ის ისტორია ერთ ლექციაში: 1943 to 2026\nმაკ-კალოკი და პიტსი, პერსეპტრონი, დარტმუთი 1956, ექსპერტული სისტემები, ორი „AI ზამთარი“, ML ერა, ImageNet 2012, Transformer 2017, ChatGPT 2022, DeepSeek R1 2025\nქრონოლოგიის თამაში 15 ბარათით; AI კომპანიების რუკა: კომპანია, CEO, ფლაგმანი მოდელი, ღია/დახურული (უკვე ნანახი პლატფორმების მიხედვით)", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, Intro: Lecture 1 AI Basics; Russell & Norvig, AIMA, თავი 1"}}, {"num": 15, "week": "კვირა 4 (21 – 26 დეკემბერი) – უსაფრთხოება, ჰალუცინაციები და AI ასისტენტის აწყობა", "day_date": "ორშაბათი, 21 დეკ.", "title": "ჰალუცინაციები, გადამოწმება და Fact-Checking", "theory": "რატომ ჰალუცინირებს LLM: ალბათური გენერაცია სიმართლის ობიექტური მოდელის გარეშე. ჰალუცინაციის ტიპები: ციტატები, თარიღები, გამოგონილი ფაქტები.", "practice": "5 მიზანმიმართული „პროვოკაციული“ პრომპტის გაშვება ჰალუცინაციის გამოსავლენად. პასუხების ფაქტჩექინგი ვებ-ძიებით და წყაროს მოთხოვნის პრომპტ-ტექნიკით.", "resources": "MIT uAI Verification methods.", "official": {"week": "3", "res": "1", "activity": "ჰალუცინაცია და გადამოწმება\nრატომ ხდება (next-token, სიმართლის მოდელი არ აქვს), ტიპები; 3-კრიტერიუმიანი რუბრიკა: სწორია / სრულია / გადამოწმდა; web search რეჟიმი\n„ჰალუცინაციაზე ნადირობა“: 10 კითხვა ქართულ ფაქტებზე 3 პლატფორმაზე, გადამოწმება, ქულები", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, GenAI FoW: Lecture 3 Human-AI Balance; Anthropic Academy: AI Fluency (Discernment, Diligence)"}}, {"num": 16, "week": "კვირა 4 (21 – 26 დეკემბერი) – უსაფრთხოება, ჰალუცინაციები და AI ასისტენტის აწყობა", "day_date": "სამშაბათი, 22 დეკ.", "title": "„არასდროს“ წესები, მონაცემთა დაცვა და Enterprise-Ready ნიშნები", "theory": "რა არ იგზავნება საჯარო ჩატში: PII (პერსონალური მონაცემები), პაროლები, API გასაღებები, ფინანსური საიდუმლოებები. Opt-out მოდელის წვრთნიდან.", "practice": "20 სხვადასხვა ტიპის ბიზნეს-მონაცემის კლასიფიკაცია (Safe vs Sanitize vs Ban). ტექსტის დე-იდენტიფიკაციის (ანონიმიზაციის) პრაქტიკული სავარჯიშო.", "resources": "OpenAI Enterprise privacy policy, GDPR basics.", "official": {"week": "4", "res": "1", "activity": "„არასდროს“ წესები, მგრძნობიარე მონაცემები და enterprise-ready ნიშნები\nრა არ იგზავნება პლატფორმაზე: PII, კომერციული საიდუმლო, კლიენტის მონაცემი; 3 „არასდროს“ წესი ორგანიზაციისთვის\nenterprise-ready ნიშნები: SSO, ადმინისტრირება, data policy, audit, კომპანიის ცოდნასთან მიერთება; 3 ნანახი პლატფორმის გვერდის შემოწმება\n15 პროდუქტის კლასიფიკაცია 4 კატეგორიაში ტიპური გამოყენებით (შედეგი 1-ის რეპეტიცია)", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "მოდულის სტანდარტი, შედეგი 1; ვენდორების enterprise და data policy გვერდები"}}, {"num": 17, "week": "კვირა 4 (21 – 26 დეკემბერი) – უსაფრთხოება, ჰალუცინაციები და AI ასისტენტის აწყობა", "day_date": "ოთხშაბათი, 23 დეკ.", "title": "აგენტი vs ჩატბოტი; პერსონალიზაცია და Connectors", "theory": "ფუნდამენტური სხვაობა: ჩატბოტი (პასიური კითხვა-პასუხი) vs აგენტი (მიზანი, გარემოს აღქმა, ხელსაწყოების გამოყენება - Tool Use, ავტონომიური ნაბიჯები).", "practice": "აგენტის მოქმედების ციკლის (Sense-Plan-Act) მოდელირება. მომავალი პერსონალური ასისტენტის ფუნქციონალის დაპროექტება.", "resources": "LangChain / Anthropic Agent concepts.", "official": {"week": "4", "res": "2", "activity": "აგენტი vs ჩატბოტი; პერსონალიზაცია და connectors პლატფორმებს შორის\nაგენტის განმარტება: ხელსაწყოები, ციკლი, ავტონომია; deep research, computer use, კოდის აგენტები\nClaude Projects vs GPTs vs Gems vs Copilot აგენტები: რა საერთოა და რა განსხვავდება; connectors, MCP როგორც სტანდარტი\nDeep Research-ის გაშვება და ნაბიჯების დაკვირვება; ერთი და იგივე ასისტენტი ორ პლატფორმაზე, განსხვავებების ცხრილი", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, GenAI FoW: Lecture 2 Gen AI and Creative Problem Solving; ვენდორების დოკუმენტაცია"}}, {"num": 18, "week": "კვირა 4 (21 – 26 დეკემბერი) – უსაფრთხოება, ჰალუცინაციები და AI ასისტენტის აწყობა", "day_date": "ხუთშაბათი, 24 დეკ.", "title": "ასისტენტის აწყობა I: დიზაინი, როლი და სისტემური პრომპტი", "theory": "ასისტენტის დიზაინი: სამიზნე აუდიტორია, როლისა და ტონის მკაცრი განსაზღვრა, შეზღუდვები, Fallback სცენარები.", "practice": "Claude Project-ში ან Custom GPT-ში საკუთარი ასისტენტის სისტემური ინსტრუქციის დეტალური გაწერა და პირველადი ტესტირება.", "resources": "System Prompt design principles.", "official": {"week": "4", "res": "2", "activity": "ასისტენტის აწყობა LLM-ით: დიზაინი, აწყობა, დემო\nდიზაინი: ამოცანა, მომხმარებელი, system instructions ლექტორის შაბლონით, ცოდნის ფაილები, ხელსაწყოები (web, connectors), ტესტ-კითხვები\nაწყობა Claude Project-ში და custom GPT-ში ან Gem-ში; ტესტი 10 კითხვით, გასწორება, ორი ვერსიის შედარება\nდემო 3 წუთი და peer review რუბრიკით; რას ვერ აკეთებს ასეთი ასისტენტი და სად იწყება აგენტი (მოდული 11)", "hours": "6 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Academy: Claude 101; OpenAI: GPT builder docs; Google: Gems docs"}}, {"num": 19, "week": "კვირა 4 (21 – 26 დეკემბერი) – უსაფრთხოება, ჰალუცინაციები და AI ასისტენტის აწყობა", "day_date": "პარასკევი, 25 დეკ.", "title": "ასისტენტის აწყობა II: ცოდნის ბაზის შევსება, ტესტირება და დემო", "theory": "Knowledge ფაილების მომზადება (სტრუქტურირება, ხმაურის მოცილება). ასისტენტის შეფასების 5-პუნქტიანი ჩეკლისტი.", "practice": "ასისტენტში ცოდნის ბაზის ატვირთვა. Edge cases შემოწმება. მეწყვილის ასისტენტის ტესტირება და შეფასების ფურცლის შევსება.", "resources": "Assistant Evaluation rubric.", "official": {"week": "4", "res": "2", "activity": "ასისტენტის აწყობა LLM-ით: დიზაინი, აწყობა, დემო\nდიზაინი: ამოცანა, მომხმარებელი, system instructions ლექტორის შაბლონით, ცოდნის ფაილები, ხელსაწყოები (web, connectors), ტესტ-კითხვები\nაწყობა Claude Project-ში და custom GPT-ში ან Gem-ში; ტესტი 10 კითხვით, გასწორება, ორი ვერსიის შედარება\nდემო 3 წუთი და peer review რუბრიკით; რას ვერ აკეთებს ასეთი ასისტენტი და სად იწყება აგენტი (მოდული 11)", "hours": "6 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Academy: Claude 101; OpenAI: GPT builder docs; Google: Gems docs"}}, {"num": 20, "week": "კვირა 5 (11 – 16 იანვარი) – LLM ექსპერიმენტები, ღია მოდელები და მულტიმოდალობა", "day_date": "ორშაბათი, 11 იანვ.", "title": "LLM-ების გამოკვლევა: საკუთარი Benchmark", "theory": "რას აკეთებს LLM კარგად და სად სუსტდება. სტანდარტული ბენჩმარკები (MMLU, HumanEval, GSM8k).", "practice": "5-დავალიანი საკუთარი მინი-ბენჩმარკის შექმნა (ტექსტის ანალიზი, ლოგიკა, კოდირება, შემოქმედებითობა). 3 მოდელის გამოცდა და შედეგების შეჯამება.", "resources": "LMSYS Chatbot Arena.", "official": {"week": "5", "res": "2", "activity": "LLM-ების გამოკვლევა: საკუთარი benchmark\nრას აკეთებს LLM კარგად და სად სუსტდება; სამართლიანი შედარება: ერთი ამოცანა, ერთი რუბრიკა\n10 ამოცანა 3 პლატფორმაზე, 0 to 2 ქულა თითოზე, ჯგუფის შედეგები ერთ ცხრილში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "lmarena.ai, artificialanalysis.ai"}}, {"num": 21, "week": "კვირა 5 (11 – 16 იანვარი) – LLM ექსპერიმენტები, ღია მოდელები და მულტიმოდალობა", "day_date": "სამშაბათი, 12 იანვ.", "title": "მოდელების ზომა, კონტექსტი და ფასი (SLM vs LLM)", "theory": "პარამეტრების რაოდენობა (3B, 8B, 70B+). მცირე ენობრივი მოდელები (SLM: Phi, Gemma). ტოკენების ხარჯთაღრიცხვა რეალურ ბიზნეს-პროექტებში.", "practice": "ტოკენების კალკულატორი: კონკრეტული კომპანიის ყოველთვიური მოთხოვნების ბიუჯეტირება სხვადასხვა მოდელის მიხედვით.", "resources": "Artificial Analysis (pricing & speed benchmarks).", "official": {"week": "5", "res": "2", "activity": "მოდელების ზომა, კონტექსტი და ფასი; open-weights მოდელები და Hugging Face\nSLM vs LLM: მოდელების ზომის იერარქია, context window, ფასი ტოკენებზე, latency; ფასის გამოთვლა 1000 წერილზე 3 მოდელით\nLlama, Mistral, Qwen, DeepSeek, Gemma; ლიცენზიები; self-hosting; Hugging Face: models, spaces, leaderboards\nლოკალური მოდელის გაშვება LM Studio/Ollama-ში, იგივე პრომპტი ChatGPT-სთან შედარებით", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "ვენდორების ფასების გვერდები; huggingface.co; LM Studio / Ollama"}}, {"num": 22, "week": "კვირა 5 (11 – 16 იანვარი) – LLM ექსპერიმენტები, ღია მოდელები და მულტიმოდალობა", "day_date": "ოთხშაბათი, 13 იანვ.", "title": "Open-Weights მოდელები და Hugging Face ეკოსისტემა", "theory": "კომერციული API vs ღია მოდელები (Open-weights: LLaMA 3, Mistral, Qwen). Hugging Face-ის როლი. ლოკალური გაშვების საფუძვლები (Ollama, LM Studio).", "practice": "Hugging Face Spaces-ში ღია მოდელების პრაქტიკული გატესტვა. მოდელის ბარათის (Model Card) წაკითხვა და ლიცენზიის შემოწმება.", "resources": "Hugging Face Hub.", "official": {"week": "5", "res": "2", "activity": "მოდელების ზომა, კონტექსტი და ფასი; open-weights მოდელები და Hugging Face\nSLM vs LLM: მოდელების ზომის იერარქია, context window, ფასი ტოკენებზე, latency; ფასის გამოთვლა 1000 წერილზე 3 მოდელით\nLlama, Mistral, Qwen, DeepSeek, Gemma; ლიცენზიები; self-hosting; Hugging Face: models, spaces, leaderboards\nლოკალური მოდელის გაშვება LM Studio/Ollama-ში, იგივე პრომპტი ChatGPT-სთან შედარებით", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "ვენდორების ფასების გვერდები; huggingface.co; LM Studio / Ollama"}}, {"num": 23, "week": "კვირა 5 (11 – 16 იანვარი) – LLM ექსპერიმენტები, ღია მოდელები და მულტიმოდალობა", "day_date": "ხუთშაბათი, 14 იანვ.", "title": "ვერტიკალური მოდელები და ქართული ენის თავისებურებები", "theory": "სპეციალიზებული მოდელები: მედიცინა (Med-PaLM), ფინანსები (BloombergGPT), იურიდიული AI. ქართული ენის ტოკენიზაციის სპეციფიკა და ხარისხი.", "practice": "რთული დარგობრივი ქართული ტექსტის დამუშავება სხვადასხვა მოდელზე, შეცდომების ფიქსირება და ოპტიმიზაცია.", "resources": "Domain-specific LLM papers.", "official": {"week": "5", "res": "2", "activity": "ვერტიკალური და მულტიმოდალური მოდელები\nMed-PaLM, BloombergGPT, კოდის მოდელები, ქართულენოვანი მცდელობები; 3 დომენური ამოცანა ზოგად და სპეციალიზებულ ინსტრუმენტზე, რუბრიკით\nსურათის, ხმის, ვიდეოს შეყვანა; STT/TTS; realtime voice; ფოტო, ქვითარი და დიაგრამა 3 პლატფორმაზე; voice რეჟიმი ქართულად", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "ვენდორების model cards; MIT uAI, Multimodal AI: Lecture 1"}}, {"num": 24, "week": "კვირა 5 (11 – 16 იანვარი) – LLM ექსპერიმენტები, ღია მოდელები და მულტიმოდალობა", "day_date": "პარასკევი, 15 იანვ.", "title": "მულტიმოდალური მოდელები: ხედვა (Vision) და აუდიო", "theory": "მულტიმოდალური არქიტექტურა. Vision Capabilities: დოკუმენტის OCR, სქემების ანალიზი, UI-ის გაშიფვრა. ხმის დამუშავება (Whisper).", "practice": "ინვოისის სურათიდან მონაცემების ამოღება და სტრუქტურირებულ ცხრილში გადატანა Vision მოდელის მეშვეობით.", "resources": "OpenAI / Google Vision guides.", "official": {"week": "5", "res": "2", "activity": "ვერტიკალური და მულტიმოდალური მოდელები\nMed-PaLM, BloombergGPT, კოდის მოდელები, ქართულენოვანი მცდელობები; 3 დომენური ამოცანა ზოგად და სპეციალიზებულ ინსტრუმენტზე, რუბრიკით\nსურათის, ხმის, ვიდეოს შეყვანა; STT/TTS; realtime voice; ფოტო, ქვითარი და დიაგრამა 3 პლატფორმაზე; voice რეჟიმი ქართულად", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "ვენდორების model cards; MIT uAI, Multimodal AI: Lecture 1"}}, {"num": 25, "week": "კვირა 6 (18 – 23 იანვარი) – მედია ხელსაწყოები, შედარებითი Scorecard და მინი-პროექტი 1", "day_date": "ორშაბათი, 18 იანვ.", "title": "პლატფორმების შედარება: 9-სტრიქონიანი Scorecard და Vendor Lock-in", "theory": "შედარების კრიტერიუმები: ხარისხი, ფასი, უსაფრთხოება, ეკოსისტემა, ინტეგრაცია, სიჩქარე, Vendor Lock-in რისკები.", "practice": "Scorecard-ის შევსება 3 რეალური ორგანიზაციული სცენარისთვის (სტარტაპი, სკოლა, იურიდიული ფირმა).", "resources": "Enterprise AI evaluation template.", "official": {"week": "6", "res": "2", "activity": "პლატფორმების შედარება: scorecard, vendor lock-in და 3 სცენარი\n9-სტრიქონიანი scorecard-ის წაკითხვა; vendor lock-in და პორტაბელურობა\nჯგუფი იღებს სცენარს (გუნდის პროდუქტიულობა / შიდა ასისტენტი მონაცემებზე / დატა-სუვერენიტეტი), ირჩევს პლატფორმას და იცავს", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, GenAI FoW: Lecture 1 AI and the Future of Work (პირველი ნახევარი)"}}, {"num": 26, "week": "კვირა 6 (18 – 23 იანვარი) – მედია ხელსაწყოები, შედარებითი Scorecard და მინი-პროექტი 1", "day_date": "სამშაბათი, 19 იანვ.", "title": "გენერაციული მედია I: პრეზენტაციები და სურათები", "theory": "Gamma, Canva Magic Studio, DALL-E 3, Midjourney, Imagen. ვიზუალური პრომპტინგის თავისებურებები.", "practice": "Gamma-ში 5-სლაიდიანი პრეზენტაციის ავტომატური გენერაცია და DALL-E-ში შესაბამისი ილუსტრაციების შექმნა.", "resources": "Gamma App, Midjourney/DALL-E documentation.", "official": {"week": "6", "res": "2", "activity": "გენერაციული ხელსაწყოები: პრეზენტაცია და სურათი; ვიდეო, ხმა და ავატარები\nGamma, Canva AI, PowerPoint Copilot; დიფუზია მომხმარებლის დონეზე; Midjourney, GPT Image, Imagen, Flux; უფლებები, SynthID და watermark; 5-სლაიდიანი დეკი და პოსტერი\nVeo/Sora/Kling, ElevenLabs TTS, Suno, HeyGen/Synthesia; ფასი, ლიმიტები, ქართული ხმის ხარისხი; deepfake და თანხმობა; 30-წამიანი ვიდეო-ინტრო", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "gamma.app, canva.com; MIT uAI, GenAI FoW: Lecture 4 (გაცნობა); ვენდორების გვერდები"}}, {"num": 27, "week": "კვირა 6 (18 – 23 იანვარი) – მედია ხელსაწყოები, შედარებითი Scorecard და მინი-პროექტი 1", "day_date": "ოთხშაბათი, 20 იანვ.", "title": "გენერაციული მედია II: ვიდეო, ხმა და ციფრული ავატარები", "theory": "ვიდეო-გენერაცია (Runway, Kling, Sora). ხმის კლონირება (ElevenLabs). AI ავატარები (HeyGen). Deepfake საფრთხეები.", "practice": "ElevenLabs-ში ხმოვანი გახმოვანების მომზადება და მოკლე ვიდეო-პრეზენტაციის გენერაცია.", "resources": "ElevenLabs, HeyGen demos.", "official": {"week": "6", "res": "2", "activity": "გენერაციული ხელსაწყოები: პრეზენტაცია და სურათი; ვიდეო, ხმა და ავატარები\nGamma, Canva AI, PowerPoint Copilot; დიფუზია მომხმარებლის დონეზე; Midjourney, GPT Image, Imagen, Flux; უფლებები, SynthID და watermark; 5-სლაიდიანი დეკი და პოსტერი\nVeo/Sora/Kling, ElevenLabs TTS, Suno, HeyGen/Synthesia; ფასი, ლიმიტები, ქართული ხმის ხარისხი; deepfake და თანხმობა; 30-წამიანი ვიდეო-ინტრო", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "gamma.app, canva.com; MIT uAI, GenAI FoW: Lecture 4 (გაცნობა); ვენდორების გვერდები"}}, {"num": 28, "week": "კვირა 6 (18 – 23 იანვარი) – მედია ხელსაწყოები, შედარებითი Scorecard და მინი-პროექტი 1", "day_date": "ხუთშაბათი, 21 იანვ.", "title": "გენერაციული ხელსაწყოების Enterprise Scorecard და საავტორო უფლებები", "theory": "საავტორო უფლებები (Copyright) და ინტელექტუალური საკუთრება (IP). კომერციული ლიცენზიები და კორპორატიული რისკები.", "practice": "გენერაციული ხელსაწყოების შედარების ბარათის შედგენა ბიზნეს-კონტექსტში.", "resources": "US Copyright Office AI guidance.", "official": {"week": "6", "res": "2", "activity": "გენერაციული ხელსაწყოების scorecard და enterprise-ready ნიშნები\nშედარების კრიტერიუმები: ხარისხი, ფასი, უფლებები, ენა; მოდელი, ჩატბოტი და პლატფორმა განსხვავდება\nenterprise-ready ნიშნები შერჩევის კრიტერიუმად: SSO, ადმინი, data policy, audit; 3 პლატფორმის ადმინ პანელის ან დოკუმენტაციის შემოწმება", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "ვენდორების enterprise გვერდები"}}, {"num": 29, "week": "კვირა 6 (18 – 23 იანვარი) – მედია ხელსაწყოები, შედარებითი Scorecard და მინი-პროექტი 1", "day_date": "პარასკევი, 22 იანვ.", "title": "მინი-პროექტი 1 (ნაწილი I): ორგანიზაციის შერჩევა და საჭიროებების ანალიზი", "theory": "პროექტის ბრიფი: რეალური ორგანიზაციისთვის AI პლატფორმების შერჩევის სრული გეგმა.", "practice": "გუნდების ფორმირება, ორგანიზაციის პროფილის არჩევა, სამუშაო პროცესების (Workflows) რუკის შედგენა.", "resources": "Mini-project 1 brief.", "official": {"week": "6", "res": "2", "activity": "მინი-პროექტი I: ორგანიზაცია და შერჩევის კრიტერიუმები\nჯგუფი ირჩევს ორგანიზაციას და 2 use-case-ს; შეზღუდვები: მონაცემი, ბიუჯეტი, IT\nორგანიზაციის პროფილი და შერჩევის კრიტერიუმები წონებით", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 6-ის მასალა (პლატფორმების შედარება)"}}, {"num": 30, "week": "კვირა 7 (25 – 30 იანვარი) – მინი-პროექტი 1 დასრულება, ეთიკა და საზოგადოება", "day_date": "ორშაბათი, 25 იანვ.", "title": "მინი-პროექტი 1 (ნაწილი II): 3 სცენარი და Scorecard-ის შევსება", "theory": "3 სცენარის მოდელირება: 1. უფასო/მინიმალური ბიუჯეტი; 2. სტანდარტული Copilot/Team; 3. მაღალი კონფიდენციალურობა.", "practice": "თითოეული სცენარის TCO (Total Cost of Ownership) გათვლა და Scorecard-ის საბოლოო ვერსიის მომზადება.", "resources": "", "official": {"week": "7", "res": "2", "activity": "მინი-პროექტი II to III: scorecard, lock-in ანალიზი და დაცვა\nქულის დასაბუთება მტკიცებულებით (ტესტი, ფასის გვერდი, დოკუმენტაცია); lock-in შემცირების 2 გზა კონკრეტულ მაგალითზე\nscorecard 3 პლატფორმაზე მტკიცებულებებით; lock-in ანალიზი\nრეკომენდაცია ხელმძღვანელობას 5 წუთში: გადაწყვეტილება, 3 მიზეზი, რისკი, შემდეგი ნაბიჯი; ჯგუფები რუბრიკით აფასებენ", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 3 to 6-ის მასალა"}}, {"num": 31, "week": "კვირა 7 (25 – 30 იანვარი) – მინი-პროექტი 1 დასრულება, ეთიკა და საზოგადოება", "day_date": "სამშაბათი, 26 იანვ.", "title": "მინი-პროექტი 1 (ნაწილი III): პრეზენტაციები და Peer Review", "theory": "ეფექტური ტექნიკური პრეზენტაციის სტრუქტურა. Peer review-ის კრიტერიუმები.", "practice": "გუნდების 5-წუთიანი პრეზენტაციები, ჯგუფური შეფასება და ლექტორის დეტალური უკუკავშირი.", "resources": "", "official": {"week": "7", "res": "2", "activity": "მინი-პროექტი II to III: scorecard, lock-in ანალიზი და დაცვა\nქულის დასაბუთება მტკიცებულებით (ტესტი, ფასის გვერდი, დოკუმენტაცია); lock-in შემცირების 2 გზა კონკრეტულ მაგალითზე\nscorecard 3 პლატფორმაზე მტკიცებულებებით; lock-in ანალიზი\nრეკომენდაცია ხელმძღვანელობას 5 წუთში: გადაწყვეტილება, 3 მიზეზი, რისკი, შემდეგი ნაბიჯი; ჯგუფები რუბრიკით აფასებენ", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 3 to 6-ის მასალა"}}, {"num": 32, "week": "კვირა 7 (25 – 30 იანვარი) – მინი-პროექტი 1 დასრულება, ეთიკა და საზოგადოება", "day_date": "ოთხშაბათი, 27 იანვ.", "title": "AI-ის ეთიკა, მიკერძოება (Bias) და სამართლიანობა", "theory": "როგორ ჩნდება მიკერძოება მონაცემებში. წარმომადგენლობითობის დეფიციტი. დისკრიმინაცია დასაქმებასა და საკრედიტო სკორინგში.", "practice": "3 მიკერძოებული სცენარის ანალიზი. პრომპტის კორექტირებით ალგორითმული მიკერძოების მინიმიზაცია.", "resources": "MIT uAI Ethics module.", "official": {"week": "7", "res": "3", "activity": "LLM-ების ევოლუცია, fine-tuning და alignment\nscaling laws, emergent თვისებები, context length 2K-დან 1M-მდე, Mixture of Experts, ფასის ვარდნა; მოდელების ქრონოლოგია Sheets-ში\npretraining, SFT, RLHF/RLAIF; რატომ ამბობს მოდელი უარს; Constitutional AI; რას ნიშნავს fine-tuning ბიზნესისთვის\nbase vs instruct მოდელის შედარება Hugging Face-ზე; უარის შემთხვევების შედარება 3 პლატფორმაზე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs: Lecture 2; huggingface.co"}}, {"num": 33, "week": "კვირა 7 (25 – 30 იანვარი) – მინი-პროექტი 1 დასრულება, ეთიკა და საზოგადოება", "day_date": "ხუთშაბათი, 28 იანვ.", "title": "უსაფრთხოება: Deepfake, დეზინფორმაცია და Phishing", "theory": "AI-გენერირებული დეზინფორმაცია, პერსონალიზებული Spear Phishing, ხმის კლონირებით თაღლითობა. C2PA და ციფრული Watermarking.", "practice": "AI-ით გენერირებული ფიშინგ-მეილების ამოცნობა. რეალური vs გენერირებული სურათების ანალიზი.", "resources": "C2PA standard documentation.", "official": {"week": "8", "res": "3", "activity": "უსაფრთხოება და რეგულაცია; სამუშაოს მომავალი და ადამიანი-AI ბალანსი\ndeepfake და დეზინფორმაცია; EU AI Act (რისკის დონეები), GDPR, პერსონალურ მონაცემთა დაცვის ქართული კანონი; როდის ჩავრთოთ იურისტი და უსაფრთხოება\n10 use-case-ის დახარისხება: სჭირდება თუ არა იურიდიულ/უსაფრთხოების განხილვას და რატომ\naugmentation vs automation, უნარები, ქართული ბაზრის მაგალითები; საკუთარი პროფესიის 10 ამოცანა: რომელს აკეთებს AI, რომელს არა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "EUR-Lex, Regulation (EU) 2024/1689 (გაცნობა); MIT uAI, GenAI FoW: Lecture 1, 3; Anthropic Academy: AI Fluency"}}, {"num": 34, "week": "კვირა 7 (25 – 30 იანვარი) – მინი-პროექტი 1 დასრულება, ეთიკა და საზოგადოება", "day_date": "პარასკევი, 29 იანვ.", "title": "AI სამუშაო ადგილებზე: ავტომატიზაცია vs აუგმენტაცია", "theory": "Augmentation vs Automation. პროფესიების ტრანსფორმაცია 2026 წლისთვის. ადამიანის შეუცვლელი უნარები (Human-in-the-Loop).", "practice": "საკუთარი პროფესიის ტასკების რუკა: რა ავტომატიზდება, რა ძლიერდება AI-ით და რა რჩება მხოლოდ ადამიანურ კომპეტენციად.", "resources": "WEF Future of Jobs report.", "official": {"week": "8", "res": "3", "activity": "უსაფრთხოება და რეგულაცია; სამუშაოს მომავალი და ადამიანი-AI ბალანსი\ndeepfake და დეზინფორმაცია; EU AI Act (რისკის დონეები), GDPR, პერსონალურ მონაცემთა დაცვის ქართული კანონი; როდის ჩავრთოთ იურისტი და უსაფრთხოება\n10 use-case-ის დახარისხება: სჭირდება თუ არა იურიდიულ/უსაფრთხოების განხილვას და რატომ\naugmentation vs automation, უნარები, ქართული ბაზრის მაგალითები; საკუთარი პროფესიის 10 ამოცანა: რომელს აკეთებს AI, რომელს არა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "EUR-Lex, Regulation (EU) 2024/1689 (გაცნობა); MIT uAI, GenAI FoW: Lecture 1, 3; Anthropic Academy: AI Fluency"}}, {"num": 35, "week": "კვირა 8 (1 – 6 თებერვალი) – რეგულაციები, შეჯამება და შეფასების რეპეტიცია", "day_date": "ორშაბათი, 1 თებ.", "title": "AI რეგულაციები: EU AI Act და გლობალური ჩარჩოები", "theory": "EU AI Act რისკ-დონეები: Unacceptable, High, Limited, Minimal risk. გამჭვირვალობის მოთხოვნები. საქართველოს პერსპექტივა.", "practice": "10 სხვადასხვა AI სისტემის კატეგორიზაცია EU AI Act-ის რისკების მიხედვით.", "resources": "EU AI Act summary.", "official": {"week": "8", "res": "3", "activity": "უსაფრთხოება და რეგულაცია; სამუშაოს მომავალი და ადამიანი-AI ბალანსი\ndeepfake და დეზინფორმაცია; EU AI Act (რისკის დონეები), GDPR, პერსონალურ მონაცემთა დაცვის ქართული კანონი; როდის ჩავრთოთ იურისტი და უსაფრთხოება\n10 use-case-ის დახარისხება: სჭირდება თუ არა იურიდიულ/უსაფრთხოების განხილვას და რატომ\naugmentation vs automation, უნარები, ქართული ბაზრის მაგალითები; საკუთარი პროფესიის 10 ამოცანა: რომელს აკეთებს AI, რომელს არა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "EUR-Lex, Regulation (EU) 2024/1689 (გაცნობა); MIT uAI, GenAI FoW: Lecture 1, 3; Anthropic Academy: AI Fluency"}}, {"num": 36, "week": "კვირა 8 (1 – 6 თებერვალი) – რეგულაციები, შეჯამება და შეფასების რეპეტიცია", "day_date": "სამშაბათი, 2 თებ.", "title": "გარემოზე ზემოქმედება და რესურსების ხარჯი AI-ში", "theory": "მონაცემთა ცენტრების ენერგო და წყლის მოხმარება. CO2 ემისია. SLM და ეფექტური ალგორითმების ეკოლოგიური მნიშვნელობა.", "practice": "სხვადასხვა მოცულობის მოდელების წლიური ენერგომოხმარების ანალიტიკური გათვლა.", "resources": "", "official": {"week": "8", "res": "3", "activity": "აგენტური ეკოსისტემა; ჩიპები, ენერგია და გეოპოლიტიკა\nagentic workspace-ები, ინტეგრაციები, MCP, computer use, კოდის აგენტები; რას ცვლის პლატფორმის არჩევაში; რომელი სამუშაო იცვლება\nNVIDIA, TPU, data center-ები, წვრთნის ფასი, ექსპორტის კონტროლი; 1 მლნ მოთხოვნის ენერგიის შეფასება\nდებატი ორ გუნდად: ღია თუ დახურული მოდელები", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, GenAI FoW: Lecture 1; საჯარო ანგარიშები (IEA, ვენდორები)"}}, {"num": 37, "week": "კვირა 8 (1 – 6 თებერვალი) – რეგულაციები, შეჯამება და შეფასების რეპეტიცია", "day_date": "ოთხშაბათი, 3 თებ.", "title": "სწავლის შედეგი 1-ის შეჯამება და რეპეტიცია", "theory": "სწავლის შედეგი 1-ის 5 კრიტერიუმის (1.1–1.5) გადამეორება.", "practice": "საკონტროლო ტესტის სიმულაცია და ხარვეზების გარჩევა.", "resources": "", "official": {"week": "9", "res": "1", "activity": "შეფასება: სწავლის შედეგი 1, Generative AI პლატფორმების კლასიფიკაცია და გამოყენების სცენარების აღწერა\n12 პროდუქტის კლასიფიკაცია 4 კატეგორიაში ტიპური გამოყენებით; ერთი LLM პასუხის გადამოწმება რუბრიკით\n3 „არასდროს“ წესი მოცემული ორგანიზაციისთვის; enterprise-ready ნიშნების ამოცნობა", "hours": "1 სთ (შეფასება)", "method": "პრაქტიკული დავალება დაკვირვებით", "resources": "მოდულის სტანდარტი, შედეგი 1"}}, {"num": 38, "week": "კვირა 8 (1 – 6 თებერვალი) – რეგულაციები, შეჯამება და შეფასების რეპეტიცია", "day_date": "ხუთშაბათი, 4 თებ.", "title": "სწავლის შედეგი 2-ის შეჯამება და რეპეტიცია", "theory": "სწავლის შედეგი 2-ის 5 კრიტერიუმის (2.1–2.5) გადამეორება.", "practice": "პრაქტიკული დავალების რეპეტიცია დროის ლიმიტით (ასისტენტის აწყობა + Scorecard).", "resources": "", "official": {"week": "9", "res": "2", "activity": "შეფასება: სწავლის შედეგი 2, ოპტიმალური პლატფორმის შერჩევა საკვანძო კრიტერიუმებით\nახალი ქეისი (ორგანიზაცია + use-case): შერჩევის კრიტერიუმები use-case-ის მიხედვით; scorecard 3 პლატფორმაზე და დასაბუთება\nvendor lock-in რისკი და 2 შემცირების მიდგომა; პლატფორმის ტიპის არჩევა სცენარისთვის და დაცვა 10 წუთში", "hours": "2 სთ (შეფასება)", "method": "პრაქტიკული დავალება დაკვირვებით", "resources": "მოდულის სტანდარტი, შედეგი 2"}}, {"num": 39, "week": "კვირა 8 (1 – 6 თებერვალი) – რეგულაციები, შეჯამება და შეფასების რეპეტიცია", "day_date": "პარასკევი, 5 თებ.", "title": "პორტფოლიოს საბოლოო მოწესრიგება და შეფასებისთვის მომზადება", "theory": "შეფასების პროცედურული წესები, დროის მენეჯმენტი.", "practice": "სტუდენტური პორტფოლიოების საბოლოო შემოწმება და ლექტორის ინდივიდუალური კონსულტაციები.", "resources": "", "official": {"week": "9", "res": "3", "activity": "Pilot გეგმების დაცვა; შეჯამება და გზა მოდულებისკენ 6, 7, 8\nუკუკავშირის წესები და რუბრიკა; სტუდენტები pilot გეგმებს წარადგენენ, თანაკურსელები რუბრიკით აფასებენ\n„AI-ის 42 სახის“ გვერდის შეჯამება; რა რჩება შემდეგ მოდულებს; შეფასების წესები\nmock-ამოცანა: ახალი ქეისი 30 წუთში, თვითშეფასება რუბრიკით", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "მთელი მოდულის მასალა"}}]}, "course2": {"title": "Prompt ინჟინერია, დიალოგური დიზაინი და უსაფრთხოების კონტროლის მექანიზმი", "code": "06.7.1.3 (მოდული 7)", "credits": 6, "weeks_count": "13 კვირა + შეფასება", "hours": "128 საკონტაქტო სთ (64 ლექცია × 2 სთ)", "groups": "ჯგუფი III (Zoom3, 14:00–16:00)", "lectures": [{"num": 1, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "სამშაბათი, 1 დეკ.", "title": "რა არის Prompt Engineering და რატომ სჭირდება დეველოპერს/ანალიტიკოსს", "theory": "პრომპტინგი როგორც ბუნებრივ ენაზე პროგრამირება. მოდელის აღქმა, კონტექსტის ფანჯარა, დეტერმინიზმი vs კრეატიულობა.", "practice": "ბუნდოვანი vs ზუსტი პრომპტის შედარება 5 ტიპურ ამოცანაზე Google AI Studio-ში.", "resources": "", "official": {"week": "1", "res": "1", "activity": "Prompt-ის არსი და მკაფიო ინსტრუქცია\nრა არის prompt და რას ხედავს მოდელი: ტოკენი და context window გაცნობის დონეზე\nერთი და იგივე prompt სხვადასხვა მოდელში (Google AI Studio, ChatGPT, Claude), განსხვავებების ჩაწერა\nბუნდოვანი vs კონკრეტული ინსტრუქცია: ზმნა, აუდიტორია, სიგრძე, შეზღუდვა\nანტი-პატერნები: გადატვირთული prompt, წინააღმდეგობრივი წესები, ფორმატის გარეშე მოთხოვნა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.1, L3.2; MIT LLMs Recitation 1 (tokenization); Anthropic docs: Be clear and direct"}}, {"num": 2, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "ოთხშაბათი, 2 დეკ.", "title": "ეფექტური პრომპტის 6 საკვანძო კომპონენტი", "theory": "6-ელემენტიანი არქიტექტურა: Task, Context, Exemplars, Persona/Role, Format, Constraints.", "practice": "არასტრუქტურირებული მოთხოვნის დაშლა და აწყობა 6-კომპონენტიან პრომპტად.", "resources": "", "official": {"week": "1", "res": "1", "activity": "Prompt-ის სტრუქტურა: 6 ელემენტი, როლი, კონტექსტი და გამოსავლის ფორმატი\nმიზანი, როლი, ინსტრუქციები, კონტექსტი, შეზღუდვები, გამოსავლის ფორმატი\nთითო ელემენტის ეფექტი: ამოღება და დაბრუნება სამ ამოცანაზე\nროდის შველის როლი; რა კონტექსტი მივცეთ და რა არა (PII არ იგზავნება)\nფორმატის კონტროლი: ცხრილი, სია, სიგრძე, ენა, ტონი, პასუხის დასაწყისის მიცემა (prefill)", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.3, L3.6; Anthropic docs: Give Claude a role"}}, {"num": 3, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "ხუთშაბათი, 3 დეკ.", "title": "System Instructions vs User Prompt და მოდელის პარამეტრები", "theory": "System Prompt-ის პრიორიტეტი და როლი. Temperature, Top-P, Top-K, Presence/Frequency Penalty, Max Tokens.", "practice": "პარამეტრების მანიპულაცია AI Studio-ში: ერთი და იგივე პრომპტი მკაცრ (T=0) და კრეატიულ (T=1.5) პარამეტრებზე.", "resources": "", "official": {"week": "1", "res": "1", "activity": "System vs user: გამიჯვნა და ინსტრუქციის იერარქია\nsystem, user, assistant შეტყობინებები: რა სად იწერება\nინსტრუქციის იერარქია კონფლიქტისას; Google AI Studio-ს system instructions\nგრძელი prompt-ის დაყოფა system + user-ად და ტესტი 5 user შეტყობინებით", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OpenAI: The Instruction Hierarchy; Anthropic docs: System prompts"}}, {"num": 4, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "პარასკევი, 4 დეკ.", "title": "პრომპტინგის ტიპური შეცდომები და ანტიპატერნები", "theory": "უარყოფითი ინსტრუქციების ხაფანგი („არ გააკეთო X“), ორაზროვანი ტერმინები, გადატვირთული კონტექსტი.", "practice": "5 „გაფუჭებული“ პრომპტის რეფაქტორინგი და გამოსწორება.", "resources": "", "official": {"week": "1", "res": "1", "activity": "Prompt-ის არსი და მკაფიო ინსტრუქცია\nრა არის prompt და რას ხედავს მოდელი: ტოკენი და context window გაცნობის დონეზე\nერთი და იგივე prompt სხვადასხვა მოდელში (Google AI Studio, ChatGPT, Claude), განსხვავებების ჩაწერა\nბუნდოვანი vs კონკრეტული ინსტრუქცია: ზმნა, აუდიტორია, სიგრძე, შეზღუდვა\nანტი-პატერნები: გადატვირთული prompt, წინააღმდეგობრივი წესები, ფორმატის გარეშე მოთხოვნა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.1, L3.2; MIT LLMs Recitation 1 (tokenization); Anthropic docs: Be clear and direct"}}, {"num": 5, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "ორშაბათი, 7 დეკ.", "title": "Few-Shot სწავლება: მაგალითების შერჩევა და ფორმატის ერთგვაროვნება", "theory": "Zero-shot vs One-shot vs Few-shot. 1, 3, 5 მაგალითის ეფექტი. ფორმატის იდენტურობა Input/Output წყვილებში.", "practice": "ტექსტის კლასიფიკაცია: Zero-shot vs 3-shot vs 5-shot სიზუსტის გაზომვა ცხრილში.", "resources": "", "official": {"week": "2", "res": "1", "activity": "Few-shot: მაგალითები შედეგის სტაბილურობისთვის\n1, 3, 5 მაგალითი; მაგალითის შერჩევა და ფორმატის ერთგვაროვნება\nცუდი და ბუნდოვანი მაგალითის ეფექტი, label-ის გადახრა; edge და უარყოფითი მაგალითები\nკლასიფიკაციის ამოცანა: zero-shot vs 3-shot vs 5-shot, სიზუსტე ცხრილში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.2; Anthropic docs: Use examples"}}, {"num": 6, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "სამშაბათი, 8 დეკ.", "title": "Few-Shot: Label Bias, უარყოფითი და Edge მაგალითები", "theory": "მაგალითების დისბალანსის ეფექტი (Majority label bias). Edge cases და რთული გამონაკლისების ჩვენება.", "practice": "Few-shot ნაკრების შედგენა რთული ტექნიკური ტერმინების ექსტრაქციისთვის.", "resources": "", "official": {"week": "2", "res": "1", "activity": "Few-shot: მაგალითები შედეგის სტაბილურობისთვის\n1, 3, 5 მაგალითი; მაგალითის შერჩევა და ფორმატის ერთგვაროვნება\nცუდი და ბუნდოვანი მაგალითის ეფექტი, label-ის გადახრა; edge და უარყოფითი მაგალითები\nკლასიფიკაციის ამოცანა: zero-shot vs 3-shot vs 5-shot, სიზუსტე ცხრილში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.2; Anthropic docs: Use examples"}}, {"num": 7, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "ოთხშაბათი, 9 დეკ.", "title": "ამოცანების ბიბლიოთეკა I: Summarization და Information Extraction", "theory": "შეჯამების სტილები (Executive summary, Key takeaways, TL;DR). ფაქტების ზუსტი ამოღება.", "practice": "გრძელი ანგარიშიდან მეტრიკების ამოღება და Markdown ცხრილად გარდაქმნა.", "resources": "", "official": {"week": "2", "res": "1", "activity": "ამოცანის ტიპების ბიბლიოთეკა და reasoning რეჟიმები\nsummarize, infer, transform, expand: თითოს შაბლონი და ტიპური შეცდომები\nchain-of-thought, reasoning მოდელები და extended thinking: სად შველის, სად აფერხებს, რა ღირს\n10 ლოგიკური ამოცანა CoT-ით და უიმისოდ", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.4; Anthropic docs: Let Claude think; DeepLearning.AI: ChatGPT Prompt Engineering for Developers"}}, {"num": 8, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "ხუთშაბათი, 10 დეკ.", "title": "ამოცანების ბიბლიოთეკა II: Transformation და Expansion", "theory": "ფორმატის ტრანსფორმაცია (JSON -> Markdown -> HTML). ტონის შეცვლა (ტექნიკურიდან მარტივ ენაზე).", "practice": "პროგრამული შეცდომის (Error Log) გარდაქმნა მომხმარებლისთვის გასაგებ შეტყობინებად.", "resources": "", "official": {"week": "2", "res": "1", "activity": "ამოცანის ტიპების ბიბლიოთეკა და reasoning რეჟიმები\nsummarize, infer, transform, expand: თითოს შაბლონი და ტიპური შეცდომები\nchain-of-thought, reasoning მოდელები და extended thinking: სად შველის, სად აფერხებს, რა ღირს\n10 ლოგიკური ამოცანა CoT-ით და უიმისოდ", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.4; Anthropic docs: Let Claude think; DeepLearning.AI: ChatGPT Prompt Engineering for Developers"}}, {"num": 9, "week": "კვირები 1 – 2 (1 – 12 დეკემბერი) – საფუძვლები, არქიტექტურა და Few-Shot სწავლება", "day_date": "პარასკევი, 11 დეკ.", "title": "ამოცანების ბიბლიოთეკა III: კლასიფიკაცია და სენტიმენტ-ანალიზი", "theory": "მრავალკლასიანი კლასიფიკაცია, იერარქიული კატეგორიები, გაურკვეველი შემთხვევების მართვა.", "practice": "მომხმარებელთა უკუკავშირის (Feedback) 5-დონიანი კლასიფიკატორის აწყობა Few-shot-ით.", "resources": "", "official": {"week": "2", "res": "1", "activity": "ამოცანის ტიპების ბიბლიოთეკა და reasoning რეჟიმები\nsummarize, infer, transform, expand: თითოს შაბლონი და ტიპური შეცდომები\nchain-of-thought, reasoning მოდელები და extended thinking: სად შველის, სად აფერხებს, რა ღირს\n10 ლოგიკური ამოცანა CoT-ით და უიმისოდ", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.4; Anthropic docs: Let Claude think; DeepLearning.AI: ChatGPT Prompt Engineering for Developers"}}, {"num": 10, "week": "კვირა 3 (14 – 19 დეკემბერი) – CoT, Reasoning მოდელები და Prompt Chaining", "day_date": "ორშაბათი, 14 დეკ.", "title": "Chain-of-Thought (CoT): ნაბიჯ-ნაბიჯ მსჯელობა", "theory": "Zero-shot CoT („Let's think step by step“) vs Manual Few-shot CoT. სად მუშაობს და სად აძვირებს ტოკენებს.", "practice": "10 რთული მათემატიკური და ლოგიკური ამოცანის ამოხსნა CoT-ით და მის გარეშე, შედეგების შედარება.", "resources": "", "official": {"week": "2", "res": "1", "activity": "ამოცანის ტიპების ბიბლიოთეკა და reasoning რეჟიმები\nsummarize, infer, transform, expand: თითოს შაბლონი და ტიპური შეცდომები\nchain-of-thought, reasoning მოდელები და extended thinking: სად შველის, სად აფერხებს, რა ღირს\n10 ლოგიკური ამოცანა CoT-ით და უიმისოდ", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.4; Anthropic docs: Let Claude think; DeepLearning.AI: ChatGPT Prompt Engineering for Developers"}}, {"num": 11, "week": "კვირა 3 (14 – 19 დეკემბერი) – CoT, Reasoning მოდელები და Prompt Chaining", "day_date": "სამშაბათი, 15 დეკ.", "title": "Reasoning მოდელები (o1, o3-mini, DeepSeek-R1) და Extended Thinking", "theory": "როგორ მუშაობს შიდა მსჯელობის ჯაჭვი (Hidden reasoning tokens). როდის გამოვიყენოთ Prompt CoT და როდის Reasoning მოდელი.", "practice": "ალგორითმული და იურიდიული კაზუსების ტესტირება Reasoning მოდელებზე.", "resources": "", "official": {"week": "2", "res": "1", "activity": "ამოცანის ტიპების ბიბლიოთეკა და reasoning რეჟიმები\nsummarize, infer, transform, expand: თითოს შაბლონი და ტიპური შეცდომები\nchain-of-thought, reasoning მოდელები და extended thinking: სად შველის, სად აფერხებს, რა ღირს\n10 ლოგიკური ამოცანა CoT-ით და უიმისოდ", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.4; Anthropic docs: Let Claude think; DeepLearning.AI: ChatGPT Prompt Engineering for Developers"}}, {"num": 12, "week": "კვირა 3 (14 – 19 დეკემბერი) – CoT, Reasoning მოდელები და Prompt Chaining", "day_date": "ოთხშაბათი, 16 დეკ.", "title": "ჰალუცინაციის პრევენცია პრომპტის დონეზე", "theory": "„არ ვიცი“ წესის ჩაშენება. მკაცრი შეზღუდვა მხოლოდ კონტექსტზე და ციტირების მოთხოვნა.", "practice": "პრომპტის დაწერა, რომელიც 100%-ით ბლოკავს გარე ცოდნის გამოყენებას და მხოლოდ მოწოდებულ ტექსტს ეყრდნობა.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Reasoning-ის პრობლემები, ამოცანის დაშლა და prompt chaining\nჰალუცინაცია და თავდაჯერება: „არ ვიცი“ წესი, წყაროს მოთხოვნა, გადამოწმების prompt\nდიდი ამოცანის ნაბიჯებად დაყოფა: ამოღება, დრაფტი, შემოწმება; ნაბიჯებს შორის გადაცემა\n3-ბიჯიანი ჯაჭვი ანგარიშის გენერაციისთვის Google AI Studio-ში", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.5; Anthropic docs: Chain complex prompts"}}, {"num": 13, "week": "კვირა 3 (14 – 19 დეკემბერი) – CoT, Reasoning მოდელები და Prompt Chaining", "day_date": "ხუთშაბათი, 17 დეკ.", "title": "Prompt Chaining: რთული ამოცანის დაშლა ნაბიჯებად", "theory": "დიდი ამოცანის დაყოფა: 1. ანალიზი -> 2. მონახაზი -> 3. გენერაცია -> 4. გადამოწმება.", "practice": "3-ნაბიჯიანი ჯაჭვის აწყობა ანალიტიკური ანგარიშის მოსამზადებლად AI Studio-ში.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Reasoning-ის პრობლემები, ამოცანის დაშლა და prompt chaining\nჰალუცინაცია და თავდაჯერება: „არ ვიცი“ წესი, წყაროს მოთხოვნა, გადამოწმების prompt\nდიდი ამოცანის ნაბიჯებად დაყოფა: ამოღება, დრაფტი, შემოწმება; ნაბიჯებს შორის გადაცემა\n3-ბიჯიანი ჯაჭვი ანგარიშის გენერაციისთვის Google AI Studio-ში", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.5; Anthropic docs: Chain complex prompts"}}, {"num": 14, "week": "კვირა 3 (14 – 19 დეკემბერი) – CoT, Reasoning მოდელები და Prompt Chaining", "day_date": "პარასკევი, 18 დეკ.", "title": "Prompt Chaining-ის პრაქტიკული ლაბორატორია", "theory": "ჯაჭვის რგოლებს შორის მონაცემთა გადაცემა და ფორმატის ვალიდაცია ყოველ ეტაპზე.", "practice": "მომხმარებლის საჩივრების ავტომატური დამუშავების 4-ეტაპიანი ჯაჭვის იმპლემენტაცია.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Reasoning-ის პრობლემები, ამოცანის დაშლა და prompt chaining\nჰალუცინაცია და თავდაჯერება: „არ ვიცი“ წესი, წყაროს მოთხოვნა, გადამოწმების prompt\nდიდი ამოცანის ნაბიჯებად დაყოფა: ამოღება, დრაფტი, შემოწმება; ნაბიჯებს შორის გადაცემა\n3-ბიჯიანი ჯაჭვი ანგარიშის გენერაციისთვის Google AI Studio-ში", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs L3.5; Anthropic docs: Chain complex prompts"}}, {"num": 15, "week": "კვირა 4 (21 – 26 დეკემბერი) – Advanced Reasoning & Context Engineering", "day_date": "ორშაბათი, 21 დეკ.", "title": "Self-Consistency და Least-to-Most პრომპტინგი", "theory": "რამდენიმე CoT გზის გენერაცია და ხმათა უმრავლესობის პრინციპი (Self-Consistency). Least-to-Most დაშლა.", "practice": "რთული ბიზნეს-დაგეგმვის ამოცანის გადაჭრა Least-to-Most მიდგომით.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Advanced reasoning ტექნიკები და context engineering\nself-consistency, least-to-most, plan-and-solve, tree of thoughts, chain-of-verification, self-refine\nრომელი როდის ღირს: ხარისხი და ტოკენები ცხრილში\nგრძელი კონტექსტი: დოკუმენტი წინ, კითხვა ბოლოს, ციტირება, XML ტეგები\nმულტიმოდალური input: სურათი და PDF (ქვითარი, დიაგრამა, screenshot)", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Learn Prompting: Advanced Prompt Engineering; Anthropic Real World Prompting; Anthropic docs: Long context tips, Use XML tags, Vision"}}, {"num": 16, "week": "კვირა 4 (21 – 26 დეკემბერი) – Advanced Reasoning & Context Engineering", "day_date": "სამშაბათი, 22 დეკ.", "title": "Chain-of-Verification (CoVe) და Self-Refine", "theory": "მოდელის მიერ საკუთარი გამონათქვამების ფაქტობრივი გადამოწმება და კორექცია 4 ეტაპად.", "practice": "CoVe პატერნის გამოყენება ისტორიული და იურიდიული ტექსტის ფაქტობრივი სიზუსტისთვის.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Advanced reasoning ტექნიკები და context engineering\nself-consistency, least-to-most, plan-and-solve, tree of thoughts, chain-of-verification, self-refine\nრომელი როდის ღირს: ხარისხი და ტოკენები ცხრილში\nგრძელი კონტექსტი: დოკუმენტი წინ, კითხვა ბოლოს, ციტირება, XML ტეგები\nმულტიმოდალური input: სურათი და PDF (ქვითარი, დიაგრამა, screenshot)", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Learn Prompting: Advanced Prompt Engineering; Anthropic Real World Prompting; Anthropic docs: Long context tips, Use XML tags, Vision"}}, {"num": 17, "week": "კვირა 4 (21 – 26 დეკემბერი) – Advanced Reasoning & Context Engineering", "day_date": "ოთხშაბათი, 23 დეკ.", "title": "Context Engineering და გრძელი კონტექსტი (Long Context)", "theory": "100k+ ტოკენები: „Lost in the middle“ პრობლემა. დოკუმენტის სტრუქტურირება და საკვანძო კითხვის ბოლოში განთავსება.", "practice": "50-გვერდიან დოკუმენტში კონკრეტული ფაქტის მოძიება და ციტირებით ამოღება.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Advanced reasoning ტექნიკები და context engineering\nself-consistency, least-to-most, plan-and-solve, tree of thoughts, chain-of-verification, self-refine\nრომელი როდის ღირს: ხარისხი და ტოკენები ცხრილში\nგრძელი კონტექსტი: დოკუმენტი წინ, კითხვა ბოლოს, ციტირება, XML ტეგები\nმულტიმოდალური input: სურათი და PDF (ქვითარი, დიაგრამა, screenshot)", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Learn Prompting: Advanced Prompt Engineering; Anthropic Real World Prompting; Anthropic docs: Long context tips, Use XML tags, Vision"}}, {"num": 18, "week": "კვირა 4 (21 – 26 დეკემბერი) – Advanced Reasoning & Context Engineering", "day_date": "ხუთშაბათი, 24 დეკ.", "title": "XML ტეგების და იერარქიული სტრუქტურის გამოყენება", "theory": "Claude და Gemini საუკეთესო პრაქტიკა: `<instructions>`, `<context>`, `<rules>`, `<examples>`, `<input>`.", "practice": "რთული პრომპტის სრული სტრუქტურირება XML ტეგების გამოყენებით.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Advanced reasoning ტექნიკები და context engineering\nself-consistency, least-to-most, plan-and-solve, tree of thoughts, chain-of-verification, self-refine\nრომელი როდის ღირს: ხარისხი და ტოკენები ცხრილში\nგრძელი კონტექსტი: დოკუმენტი წინ, კითხვა ბოლოს, ციტირება, XML ტეგები\nმულტიმოდალური input: სურათი და PDF (ქვითარი, დიაგრამა, screenshot)", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Learn Prompting: Advanced Prompt Engineering; Anthropic Real World Prompting; Anthropic docs: Long context tips, Use XML tags, Vision"}}, {"num": 19, "week": "კვირა 4 (21 – 26 დეკემბერი) – Advanced Reasoning & Context Engineering", "day_date": "პარასკევი, 25 დეკ.", "title": "მულტიმოდალური პრომპტინგი: დოკუმენტები და სურათები", "theory": "ტექსტი + გამოსახულება (დიაგრამები, ინვოისები, UI მაკეტები).", "practice": "ვებ-გვერდის დიზაინის სქრინშოტიდან სტრუქტურის და ტექსტის ამოღება JSON ფორმატში.", "resources": "", "official": {"week": "3", "res": "1", "activity": "Advanced reasoning ტექნიკები და context engineering\nself-consistency, least-to-most, plan-and-solve, tree of thoughts, chain-of-verification, self-refine\nრომელი როდის ღირს: ხარისხი და ტოკენები ცხრილში\nგრძელი კონტექსტი: დოკუმენტი წინ, კითხვა ბოლოს, ციტირება, XML ტეგები\nმულტიმოდალური input: სურათი და PDF (ქვითარი, დიაგრამა, screenshot)", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Learn Prompting: Advanced Prompt Engineering; Anthropic Real World Prompting; Anthropic docs: Long context tips, Use XML tags, Vision"}}, {"num": 20, "week": "კვირა 5 (11 – 16 იანვარი) – პრომპტ პატერნები და ქართული ენა", "day_date": "ორშაბათი, 11 იანვ.", "title": "პრომპტ პატერნები I: Flipped Interaction & Question Refinement", "theory": "როდესაც მოდელი უსვამს კითხვებს მომხმარებელს ინფორმაციის სრულყოფამდე (Flipped Interaction).", "practice": "Intake-პრომპტის შექმნა, რომელიც ამოცანის შესრულებამდე მომხმარებელს 3 დამაზუსტებელ კითხვას უსვამს.", "resources": "", "official": {"week": "3", "res": "1", "activity": "პატერნების კატალოგი\nflipped interaction, question refinement, cognitive verifier, outline expansion, fact-check list, alternative approaches, menu actions\n4 პატერნის გამოყენება ერთ ქეისზე; „intake“ prompt 3 კითხვით; პატერნების ფურცელი პირად ბიბლიოთეკაში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Vanderbilt: Prompt Engineering for ChatGPT; Google Conversation design: clarification"}}, {"num": 21, "week": "კვირა 5 (11 – 16 იანვარი) – პრომპტ პატერნები და ქართული ენა", "day_date": "სამშაბათი, 12 იანვ.", "title": "პრომპტ პატერნები II: Cognitive Verifier & Alternative Approaches", "theory": "ქვეკითხვების ავტომატური გენერაცია და შემოწმება. ალტერნატიული გზების შეთავაზება.", "practice": "გადაწყვეტილების მიმღები პრომპტის აწყობა 3 ალტერნატიული სცენარით.", "resources": "", "official": {"week": "3", "res": "1", "activity": "პატერნების კატალოგი\nflipped interaction, question refinement, cognitive verifier, outline expansion, fact-check list, alternative approaches, menu actions\n4 პატერნის გამოყენება ერთ ქეისზე; „intake“ prompt 3 კითხვით; პატერნების ფურცელი პირად ბიბლიოთეკაში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Vanderbilt: Prompt Engineering for ChatGPT; Google Conversation design: clarification"}}, {"num": 22, "week": "კვირა 5 (11 – 16 იანვარი) – პრომპტ პატერნები და ქართული ენა", "day_date": "ოთხშაბათი, 13 იანვ.", "title": "ქართულ ენაზე პრომპტინგის თავისებურებები", "theory": "ინგლისური სისტემური ინსტრუქცია vs ქართული პასუხი. ტოკენების ხარჯი. ტერმინოლოგია და სტილი.", "practice": "ქართული Few-shot მაგალითების ბაზის შექმნა ოფიციალური დოკუმენტაციის დრაფტირებისთვის.", "resources": "", "official": {"week": "4", "res": "1", "activity": "ქართულ ენაზე prompting; prompt generator და meta-prompting\nინსტრუქცია ინგლისურად, პასუხი ქართულად: როდის სჯობს; ქართული ტექსტის ტოკენის ფასი\nტერმინოლოგია, ტრანსლიტერაცია, ფორმალური/არაფორმალური მიმართვა, ქართული few-shot მაგალითები\nAnthropic Console-ის generator/improver, meta-prompt; Claude, GPT, Gemini გზამკვლევების განსხვავება", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "პლატფორმების tokenizer ინსტრუმენტები; Anthropic Console docs"}}, {"num": 23, "week": "კვირა 5 (11 – 16 იანვარი) – პრომპტ პატერნები და ქართული ენა", "day_date": "ხუთშაბათი, 14 იანვ.", "title": "Meta-Prompting და Prompt Generators", "theory": "პრომპტის გენერირება პრომპტით. Anthropic Metaprompt-ის ანალიზი.", "practice": "Meta-prompt-ის აგება, რომელიც მარტივი მოთხოვნიდან აგენერირებს production-ready პრომპტს.", "resources": "", "official": {"week": "4", "res": "1", "activity": "ქართულ ენაზე prompting; prompt generator და meta-prompting\nინსტრუქცია ინგლისურად, პასუხი ქართულად: როდის სჯობს; ქართული ტექსტის ტოკენის ფასი\nტერმინოლოგია, ტრანსლიტერაცია, ფორმალური/არაფორმალური მიმართვა, ქართული few-shot მაგალითები\nAnthropic Console-ის generator/improver, meta-prompt; Claude, GPT, Gemini გზამკვლევების განსხვავება", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "პლატფორმების tokenizer ინსტრუმენტები; Anthropic Console docs"}}, {"num": 24, "week": "კვირა 5 (11 – 16 იანვარი) – პრომპტ პატერნები და ქართული ენა", "day_date": "პარასკევი, 15 იანვ.", "title": "პრაქტიკული დღე 1: კომპლექსური ბიზნეს-პრომპტის აგება", "theory": "6 კომპონენტი, XML, CoT და few-shot გაერთიანება ერთ ქეისში.", "practice": "გუნდური ლაბორატორია: მომხმარებელთა მხარდაჭერის სრული პრომპტის დაწერა და ტესტირება.", "resources": "", "official": {"week": "2", "res": "1", "activity": "შაბლონები, ცვლადები და zero-shot; პრაქტიკული დღე 1\nprompt template ცვლადებით, შაბლონის ბიბლიოთეკა, სტანდარტიზაცია გუნდში\nროდის საკმარისია zero-shot\nამოცანის აღწერიდან v1-მდე ერთ ქეისზე: მხარდაჭერის პასუხების ასისტენტი, თვითშემოწმების ჩეკლისტი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic docs: prompt engineering guide; Google AI Studio; Google Sheets (შაბლონები)"}}, {"num": 25, "week": "კვირა 6 (18 – 23 იანვარი) – დიალოგის დიზაინი (Conversation Design)", "day_date": "ორშაბათი, 18 იანვ.", "title": "პერსონა, ტონი და ბრენდის ხმა", "theory": "ბოტის იდენტობა, ემპათია, ფორმალური vs მეგობრული სტილი.", "practice": "ერთი და იგივე ფუნქციის მქონე 2 ბოტის აწყობა რადიკალურად განსხვავებული პერსონით.", "resources": "", "official": {"week": "4", "res": "1", "activity": "დიალოგური დიზაინი: ერთი prompt-იდან საუბრამდე, persona და ტონი\nმრავალბიჯიანი დიალოგი, მდგომარეობა კონტექსტში, happy path, Grice-ის 4 მაქსიმა\nჯავშნის ასისტენტის 6-ბიჯიანი საუბრის რუკა\npersona ფურცელი: სახელი, ტონი, რას ამბობს, რას არ ამბობს; system prompt და 10-ბიჯიანი ტესტი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Google Conversation design: persona"}}, {"num": 26, "week": "კვირა 6 (18 – 23 იანვარი) – დიალოგის დიზაინი (Conversation Design)", "day_date": "სამშაბათი, 19 იანვ.", "title": "დიალოგის ნაკადის მართვა (Flow Control)", "theory": "დიალოგის ფაზები: მისალმება, იდენტიფიცირება, დაზუსტება, ქმედება, დასრულება.", "practice": "დიალოგური ხის (Dialog Tree) გაწერა პრომპტში შეცდომების გარეშე.", "resources": "", "official": {"week": "4", "res": "1", "activity": "დიალოგური დიზაინი: ერთი prompt-იდან საუბრამდე, persona და ტონი\nმრავალბიჯიანი დიალოგი, მდგომარეობა კონტექსტში, happy path, Grice-ის 4 მაქსიმა\nჯავშნის ასისტენტის 6-ბიჯიანი საუბრის რუკა\npersona ფურცელი: სახელი, ტონი, რას ამბობს, რას არ ამბობს; system prompt და 10-ბიჯიანი ტესტი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Google Conversation design: persona"}}, {"num": 27, "week": "კვირა 6 (18 – 23 იანვარი) – დიალოგის დიზაინი (Conversation Design)", "day_date": "ოთხშაბათი, 20 იანვ.", "title": "მეხსიერება და კონტექსტის შენარჩუნება", "theory": "დიალოგის ისტორიის შეკუმშვა (Summarization memory), ცვლადების შენახვა.", "practice": "მრავალეტაპიანი დიალოგის სიმულაცია კონტექსტის დაკარგვის გარეშე.", "resources": "", "official": {"week": "5", "res": "1", "activity": "დაზუსტების სტრატეგიები, დიალოგის ნაკადი და კონტექსტის მართვა\nno-match, no-input, ორაზროვანი მოთხოვნა; repair: ხელახლა კითხვა, ვარიანტები, ადამიანთან გადაცემა\nflow დიაგრამა: happy path, განშტოება, გასვლა; slot filling, დადასტურების ბიჯი; system prompt-ად კოდირება\nინსტრუქციის „გაქრობა“ გრძელ საუბარში, ხელახლა დამაგრება, შეჯამების ბიჯი, handoff ადამიანისთვის", "hours": "6 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Google Conversation design: error handling, flows; Anthropic docs: Long context tips; draw.io"}}, {"num": 28, "week": "კვირა 6 (18 – 23 იანვარი) – დიალოგის დიზაინი (Conversation Design)", "day_date": "ხუთშაბათი, 21 იანვ.", "title": "მინი-პროექტი 1 (ნაწილი I): ასისტენტის დიზაინი", "theory": "მინი-პროექტი 1-ის ბრიფი: სპეციალიზებული ასისტენტის შექმნა.", "practice": "სისტემური პრომპტის სრული დრაფტირება და წესების იერარქია.", "resources": "", "official": {"week": "6", "res": "1", "activity": "მინი-პროექტი 1: ამოცანიდან v1-მდე, პარამეტრები და v2\nპროექტის ბრიფი: 4 ქეისიდან ერთის არჩევა, წარმატების კრიტერიუმები\nv1 სრული სტრუქტურით და few-shot-ით; პარამეტრების არჩევა, v2 და change log რეესტრში", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 1 to 6-ის მასალა; Google AI Studio; Google Sheets"}}, {"num": 29, "week": "კვირა 6 (18 – 23 იანვარი) – დიალოგის დიზაინი (Conversation Design)", "day_date": "პარასკევი, 22 იანვ.", "title": "მინი-პროექტი 1 (ნაწილი II): ტესტირება და v1/v2 ოპტიმიზაცია", "theory": "ვერსიონირება (Change log) და შეცდომების ფიქსაცია.", "practice": "v1 vs v2 შედარება 5 ტესტ-ინპუტზე, ქულების ცხრილი.", "resources": "", "official": {"week": "6", "res": "1", "activity": "მინი-პროექტი 1: ამოცანიდან v1-მდე, პარამეტრები და v2\nპროექტის ბრიფი: 4 ქეისიდან ერთის არჩევა, წარმატების კრიტერიუმები\nv1 სრული სტრუქტურით და few-shot-ით; პარამეტრების არჩევა, v2 და change log რეესტრში", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 1 to 6-ის მასალა; Google AI Studio; Google Sheets"}}, {"num": 30, "week": "კვირა 7 (25 – 30 იანვარი) – ვერსიონირება, რეპეტიცია და უსაფრთხოების საფუძვლები", "day_date": "ორშაბათი, 25 იანვ.", "title": "პრომპტების ვერსიონირება და რეესტრის წარმოება", "theory": "Prompt Registry: მეტამონაცემები, ვერსიები, ავტორი, ცვლილებების ისტორია.", "practice": "პრომპტების რეესტრის აწყობა Google Sheets-ში.", "resources": "", "official": {"week": "6", "res": "1", "activity": "Prompt-ის ვერსიონირება, prompt library და შედარებითი ტესტი\nვერსიის ID (მაგ. support-reply-v3); change log: რა შეიცვალა, რატომ, შედეგი\nprompt library use-case-ების მიხედვით; რეესტრი Google Sheets-ში\nორი ვერსია ერთ ტესტ-ნაკრებზე: 5 to 10 input, ქულა 0/1/2, გამარჯვებულის ჩაწერა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Prompt Evaluations, თავი 1; Google Sheets"}}, {"num": 31, "week": "კვირა 7 (25 – 30 იანვარი) – ვერსიონირება, რეპეტიცია და უსაფრთხოების საფუძვლები", "day_date": "სამშაბათი, 26 იანვ.", "title": "სწავლის შედეგი 1-ის შეჯამება და შეფასების რეპეტიცია", "theory": "შედეგი 1-ის 5 კრიტერიუმის (1.1–1.5) მიმოხილვა.", "practice": "საგამოცდო დავალების სიმულაცია დროის კონტროლით.", "resources": "", "official": {"week": "7", "res": "1", "activity": "სწავლის შედეგი 1-ის შეჯამება და თვითშეფასება\nშედეგი 1-ის 5 კრიტერიუმი ერთ ფურცელზე; შეფასების ფორმატის გაცნობა\nMIT Assignment 1 ჯგუფთან ერთად\nთვითშეფასების ჩეკლისტი; ხარვეზიან კრიტერიუმზე ვარჯიში", "hours": "3 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "MIT uAI, LLMs Assignment 1; მოდულის სტანდარტი, შედეგი 1"}}, {"num": 32, "week": "კვირა 7 (25 – 30 იანვარი) – ვერსიონირება, რეპეტიცია და უსაფრთხოების საფუძვლები", "day_date": "ოთხშაბათი, 27 იანვ.", "title": "AI უსაფრთხოება: OWASP Top 10 for LLMs", "theory": "LLM01 (Prompt Injection), LLM02 (Sensitive Information Disclosure) და სხვა ძირითადი რისკები.", "practice": "OWASP-ის რისკების ანალიზი კონკრეტულ ქეისებზე.", "resources": "", "official": {"week": "7", "res": "2", "activity": "OWASP Top 10 for LLM Applications და guardrails-ის 5 ფენა\n10 რისკი გაცნობის დონეზე; რომელს ფარავს მოდული: LLM01 injection, LLM02 გამჟღავნება, LLM05 output, LLM07 system prompt leakage\ninput კონტროლი, ინსტრუქციის იერარქია, tool allowlist, output ვალიდაცია, ლოგირება: თითო ფენაზე მაგალითი\nასისტენტის 10 ჩავარდნა: რომელი ფენა აიცილებდა; ფენების რუკა საკუთარი ბოტისთვის", "hours": "3 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP Top 10 for LLM Applications 2025; Anthropic docs: Mitigate jailbreaks"}}, {"num": 33, "week": "კვირა 7 (25 – 30 იანვარი) – ვერსიონირება, რეპეტიცია და უსაფრთხოების საფუძვლები", "day_date": "ხუთშაბათი, 28 იანვ.", "title": "Guardrails-ის 5 ფენა", "theory": "Input control, System rules, Model alignment, Output filter, Application checks.", "practice": "5-ფენიანი დაცვის არქიტექტურული სქემის შექმნა.", "resources": "", "official": {"week": "7", "res": "2", "activity": "OWASP Top 10 for LLM Applications და guardrails-ის 5 ფენა\n10 რისკი გაცნობის დონეზე; რომელს ფარავს მოდული: LLM01 injection, LLM02 გამჟღავნება, LLM05 output, LLM07 system prompt leakage\ninput კონტროლი, ინსტრუქციის იერარქია, tool allowlist, output ვალიდაცია, ლოგირება: თითო ფენაზე მაგალითი\nასისტენტის 10 ჩავარდნა: რომელი ფენა აიცილებდა; ფენების რუკა საკუთარი ბოტისთვის", "hours": "3 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP Top 10 for LLM Applications 2025; Anthropic docs: Mitigate jailbreaks"}}, {"num": 34, "week": "კვირა 7 (25 – 30 იანვარი) – ვერსიონირება, რეპეტიცია და უსაფრთხოების საფუძვლები", "day_date": "პარასკევი, 29 იანვ.", "title": "Input კონტროლი და მონაცემთა დაცვა", "theory": "PII, API გასაღებების გაფილტვრა შემავალ ტექსტში.", "practice": "Input sanitization წესების დაწერა პრომპტში.", "resources": "", "official": {"week": "7", "res": "2", "activity": "Input კონტროლი და მონაცემთა დაცვა\nრა არ უნდა შევიდეს prompt-ში: PII, secrets, კონფიდენციალური ინფორმაცია; ანონიმიზაცია გაგზავნამდე\ninput წესები system prompt-ში: სიგრძის და ენის შეზღუდვა; input პოლიტიკის 5 წესი ბოტისთვის", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP LLM02; Anthropic docs"}}, {"num": 35, "week": "კვირა 8 (1 – 6 თებერვალი) – Prompt Injection შეტევები და Red-Teaming", "day_date": "ორშაბათი, 1 თებ.", "title": "პირდაპირი Prompt Injection (Direct Injection / Jailbreak)", "theory": "„Ignore previous instructions“, DAN, ჰიპოთეტური როლები.", "practice": "დაუცველი ასისტენტის გატეხვა 5 განსხვავებული ჯეილბრეიკით.", "resources": "", "official": {"week": "8", "res": "2", "activity": "Prompt injection: პირდაპირი, არაპირდაპირი და მულტიმოდალური\n„დაივიწყე წინა ინსტრუქციები“, როლური თამაში, კოდირება, system prompt leakage\nდამალული ინსტრუქციები დოკუმენტში, ვებ-გვერდზე, ელფოსტაში, სურათში\nLakera Gandalf; მოწამლული დოკუმენტის და სურათის ტესტი სასწავლო ბოტზე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP LLM01; Lakera Gandalf; Greshake et al. (2023)"}}, {"num": 36, "week": "კვირა 8 (1 – 6 თებერვალი) – Prompt Injection შეტევები და Red-Teaming", "day_date": "სამშაბათი, 2 თებ.", "title": "არაპირდაპირი Prompt Injection (Indirect Injection)", "theory": "ვებ-გვერდში ან PDF-ში დამალული მავნე პრომპტები.", "practice": "დოკუმენტში დამალული ინექციის აღმოჩენა და ნეიტრალიზაცია.", "resources": "", "official": {"week": "8", "res": "2", "activity": "Prompt injection: პირდაპირი, არაპირდაპირი და მულტიმოდალური\n„დაივიწყე წინა ინსტრუქციები“, როლური თამაში, კოდირება, system prompt leakage\nდამალული ინსტრუქციები დოკუმენტში, ვებ-გვერდზე, ელფოსტაში, სურათში\nLakera Gandalf; მოწამლული დოკუმენტის და სურათის ტესტი სასწავლო ბოტზე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP LLM01; Lakera Gandalf; Greshake et al. (2023)"}}, {"num": 37, "week": "კვირა 8 (1 – 6 თებერვალი) – Prompt Injection შეტევები და Red-Teaming", "day_date": "ოთხშაბათი, 3 თებ.", "title": "მულტიმოდალური ინექციები", "theory": "სურათში ჩამალული ინსტრუქციები (Visual prompt injection).", "practice": "Vision მოდელზე სურათით ინექციის გამოცდა.", "resources": "", "official": {"week": "8", "res": "2", "activity": "Prompt injection: პირდაპირი, არაპირდაპირი და მულტიმოდალური\n„დაივიწყე წინა ინსტრუქციები“, როლური თამაში, კოდირება, system prompt leakage\nდამალული ინსტრუქციები დოკუმენტში, ვებ-გვერდზე, ელფოსტაში, სურათში\nLakera Gandalf; მოწამლული დოკუმენტის და სურათის ტესტი სასწავლო ბოტზე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP LLM01; Lakera Gandalf; Greshake et al. (2023)"}}, {"num": 38, "week": "კვირა 8 (1 – 6 თებერვალი) – Prompt Injection შეტევები და Red-Teaming", "day_date": "ხუთშაბათი, 4 თებ.", "title": "დაცვის მექანიზმები პრომპტში", "theory": "ინსტრუქციების იერარქია, Delimiters, Sandwich Defense.", "practice": "ასისტენტის გამაგრება 3 დაცვის მექანიზმით.", "resources": "", "official": {"week": "8", "res": "2", "activity": "დაცვის მექანიზმები: სტრუქტურა და იერარქია; filtering, least privilege, human-in-the-loop\n„მონაცემი არ არის ბრძანება“ წესი; უცხო კონტენტი ტეგებში; system prompt-ის გამაგრება, გამჟღავნების აკრძალვა\nმეორე მოდელი შემმოწმებლად; საკვანძო სიტყვების ფილტრი; მინიმალური წვდომა; ადამიანის დადასტურება კრიტიკულზე\nსაკუთარი ბოტის გამაგრება და 10 შეტევით ხელახლა ტესტი: before/after ცხრილი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic docs: Mitigate jailbreaks and prompt injections; OWASP LLM01 მიტიგაციები"}}, {"num": 39, "week": "კვირა 8 (1 – 6 თებერვალი) – Prompt Injection შეტევები და Red-Teaming", "day_date": "პარასკევი, 5 თებ.", "title": "Red-Team ლაბორატორია: ერთმანეთის ბოტის შეტევა", "theory": "შეტევის კატალოგი (10 ტიპი), წარმატების პროცენტის გამოთვლა.", "practice": "წყვილებში ერთმანეთის ბოტების შეტევა და სისუსტეების დაფიქსირება.", "resources": "", "official": {"week": "8", "res": "2", "activity": "Red-team ლაბი: ერთმანეთის ბოტი\nშეტევის კატალოგი 10 ტიპით; წარმატების პროცენტის გაზომვა\nწესები: მხოლოდ სასწავლო ბოტებზე და Gandalf-ზე; წყვილები ერთმანეთის ბოტს ამოწმებენ და ასწორებენ", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Lakera Gandalf; OWASP"}}, {"num": 40, "week": "კვირა 9 (8 – 13 თებერვალი) – დაცვის ბარათი, Structured Output და JSON Schema", "day_date": "ორშაბათი, 8 თებ.", "title": "Red-Team-ის შედეგები და დაცვის ბარათი (Defense Card)", "theory": "დაცვის ბარათის სტრუქტურა: სცენარი, დაცვის მეთოდი, შედეგი.", "practice": "საკუთარი ასისტენტის დაცვის ბარათის შევსება.", "resources": "", "official": {"week": "9", "res": "2", "activity": "Red-team-ის შედეგები და დაცვის ბარათი\nდაცვის ბარათის ფორმატი: სცენარი, მექანიზმი, მტკიცებულება\nსაკუთარი ბოტის დაცვის ბარათი 3 მექანიზმით და ტესტის მტკიცებულებებით", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "მოდულის სტანდარტი, კრიტერიუმი 2.2"}}, {"num": 41, "week": "კვირა 9 (8 – 13 თებერვალი) – დაცვის ბარათი, Structured Output და JSON Schema", "day_date": "სამშაბათი, 9 თებ.", "title": "სტრუქტურირებული გამოსავალი და JSON საფუძვლები", "theory": "რატომ ჩავარდება „მხოლოდ JSON“ ინსტრუქცია და რა არის გამოსავალი.", "practice": "ტექსტიდან JSON-ის გენერაცია Few-shot მაგალითებით.", "resources": "", "official": {"week": "9", "res": "2", "activity": "JSON საფუძვლები და JSON Schema\nობიექტი, მასივი, ტიპები; „მხოლოდ JSON“ ინსტრუქცია + მაგალითი; ტიპური ჩავარდნები\ntype, properties, required, enum, ჩადგმული ობიექტი; სქემა როგორც კონტრაქტი\nშემოწმება jsonlint.com-ზე და jsonschemavalidator.net-ზე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "json.org; json-schema.org; OpenAI: Structured outputs guide"}}, {"num": 42, "week": "კვირა 9 (8 – 13 თებერვალი) – დაცვის ბარათი, Structured Output და JSON Schema", "day_date": "ოთხშაბათი, 10 თებ.", "title": "JSON Schema-ს არქიტექტურა", "theory": "Properties, types, required, enum, additionalProperties.", "practice": "ბიზნეს-მონაცემებისთვის მკაცრი JSON Schema-ს დაწერა.", "resources": "", "official": {"week": "9", "res": "2", "activity": "JSON საფუძვლები და JSON Schema\nობიექტი, მასივი, ტიპები; „მხოლოდ JSON“ ინსტრუქცია + მაგალითი; ტიპური ჩავარდნები\ntype, properties, required, enum, ჩადგმული ობიექტი; სქემა როგორც კონტრაქტი\nშემოწმება jsonlint.com-ზე და jsonschemavalidator.net-ზე", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "json.org; json-schema.org; OpenAI: Structured outputs guide"}}, {"num": 43, "week": "კვირა 9 (8 – 13 თებერვალი) – დაცვის ბარათი, Structured Output და JSON Schema", "day_date": "ხუთშაბათი, 11 თებ.", "title": "Structured Output რეჟიმი პლატფორმებში", "theory": "OpenAI & Google AI Studio Structured Output API და პარამეტრები.", "practice": "AI Studio-ში სქემის მიბმა და 100%-ით ვალიდური JSON-ის მიღება.", "resources": "", "official": {"week": "9", "res": "2", "activity": "Structured output რეჟიმი პლატფორმებში, ვალიდაცია და retry\nGoogle AI Studio response schema, OpenAI და Claude structured outputs; enum კლასიფიკაციისთვის\nprompt-only vs რეჟიმი: ჩავარდნის პროცენტის შედარება 20 input-ზე\nვალიდაციის ციკლი: შემოწმება, შეცდომა, ხელახლა მოთხოვნა; მაქსიმუმ 2 ცდა; fallback", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Google AI Studio docs; Anthropic docs: Structured outputs"}}, {"num": 44, "week": "კვირა 9 (8 – 13 თებერვალი) – დაცვის ბარათი, Structured Output და JSON Schema", "day_date": "პარასკევი, 12 თებ.", "title": "ვალიდაცია და Retry ციკლი", "theory": "JSON ვალიდაციის შემოწმება და შეცდომის უკან დაბრუნება (Self-correction).", "practice": "ვალიდაციის ციკლის იმპლემენტაცია.", "resources": "", "official": {"week": "9", "res": "2", "activity": "Structured output რეჟიმი პლატფორმებში, ვალიდაცია და retry\nGoogle AI Studio response schema, OpenAI და Claude structured outputs; enum კლასიფიკაციისთვის\nprompt-only vs რეჟიმი: ჩავარდნის პროცენტის შედარება 20 input-ზე\nვალიდაციის ციკლი: შემოწმება, შეცდომა, ხელახლა მოთხოვნა; მაქსიმუმ 2 ცდა; fallback", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Google AI Studio docs; Anthropic docs: Structured outputs"}}, {"num": 45, "week": "კვირა 10 (15 – 20 თებერვალი) – სტრუქტურირებული ექსტრაქცია და Routing", "day_date": "ორშაბათი, 15 თებ.", "title": "ექსტრაქცია დოკუმენტებიდან სქემით", "theory": "ინვოისები, CV, ხელშეკრულებები სქემის მეშვეობით.", "practice": "ინვოისის ტექსტიდან ზუსტი JSON ექსტრაქცია.", "resources": "", "official": {"week": "10", "res": "2", "activity": "ექსტრაქცია დოკუმენტებიდან სქემით, ჩადგმული სქემები და სიები\nინვოისი, CV, ელფოსტა: თითო ტიპის სქემა; null როცა ველი არ არის; თარიღების და თანხების ფორმატი\nმრავალსტრიქონიანი ექსტრაქცია JSON მასივად; ჯამის შემოწმება სქემის გარეთ; unknown vs null", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Real World Prompting; json-schema.org; Google Sheets"}}, {"num": 46, "week": "კვირა 10 (15 – 20 თებერვალი) – სტრუქტურირებული ექსტრაქცია და Routing", "day_date": "სამშაბათი, 16 თებ.", "title": "ჩადგმული სქემები (Nested Schemas) და სიები", "theory": "ობიექტების მასივები, იერარქიული სტრუქტურები.", "practice": "მრავალდონიანი შეკვეთის ფორმის სქემის შექმნა.", "resources": "", "official": {"week": "10", "res": "2", "activity": "ექსტრაქცია დოკუმენტებიდან სქემით, ჩადგმული სქემები და სიები\nინვოისი, CV, ელფოსტა: თითო ტიპის სქემა; null როცა ველი არ არის; თარიღების და თანხების ფორმატი\nმრავალსტრიქონიანი ექსტრაქცია JSON მასივად; ჯამის შემოწმება სქემის გარეთ; unknown vs null", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Real World Prompting; json-schema.org; Google Sheets"}}, {"num": 47, "week": "კვირა 10 (15 – 20 თებერვალი) – სტრუქტურირებული ექსტრაქცია და Routing", "day_date": "ოთხშაბათი, 17 თებ.", "title": "კლასიფიკაცია და Routing Enum-ით", "theory": "მოთხოვნის გადამისამართება წინასწარ განსაზღვრულ კატეგორიებში.", "practice": "მომხმარებლის ზარის განზრახვის (Intent) Router-ის აწყობა.", "resources": "", "official": {"week": "10", "res": "2", "activity": "კლასიფიკაცია და routing enum-ით; სტრუქტურული გამოსავალი დიალოგში\nგანზრახვის კლასიფიკაცია, confidence ველი, „other“ კლასი; 30 შეტყობინება, confusion ცხრილი\nბოტი, რომელიც პასუხსაც აბრუნებს და JSON-საც: reply + intent + შეგროვებული ველები; handoff payload", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OpenAI cookbook; Google Conversation design; Anthropic docs: Structured outputs"}}, {"num": 48, "week": "კვირა 10 (15 – 20 თებერვალი) – სტრუქტურირებული ექსტრაქცია და Routing", "day_date": "ხუთშაბათი, 18 თებ.", "title": "სტრუქტურული გამოსავალი დიალოგში (UI Payload)", "theory": "UI ელემენტების (Buttons, Cards) გენერაცია ჩატბოტისთვის.", "practice": "დიალოგური პასუხისა და UI JSON-ის ერთობლივი გენერაცია.", "resources": "", "official": {"week": "10", "res": "2", "activity": "კლასიფიკაცია და routing enum-ით; სტრუქტურული გამოსავალი დიალოგში\nგანზრახვის კლასიფიკაცია, confidence ველი, „other“ კლასი; 30 შეტყობინება, confusion ცხრილი\nბოტი, რომელიც პასუხსაც აბრუნებს და JSON-საც: reply + intent + შეგროვებული ველები; handoff payload", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OpenAI cookbook; Google Conversation design; Anthropic docs: Structured outputs"}}, {"num": 49, "week": "კვირა 10 (15 – 20 თებერვალი) – სტრუქტურირებული ექსტრაქცია და Routing", "day_date": "პარასკევი, 19 თებ.", "title": "პრაქტიკული დღე 3: სქემა + Few-Shot + ვალიდაცია", "theory": "სრული pipeline-ის შეჯამება.", "practice": "სრული ექსტრაქციის სისტემის აწყობა რეალურ მონაცემებზე.", "resources": "", "official": {"week": "10", "res": "2", "activity": "პრაქტიკული დღე 3: სქემა + few-shot + ვალიდაცია\nერთ ქეისზე სრული გზა: სქემა, მაგალითები, შემოწმება, retry\nინდივიდუალურად სხვა ქეისზე; ჩავარდნის პროცენტი რეესტრში", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 9 to 10-ის მასალა; Google AI Studio"}}, {"num": 50, "week": "კვირა 11 (22 – 27 თებერვალი) – Output Guardrails და Refusal მექანიზმები", "day_date": "ორშაბათი, 22 თებ.", "title": "გამომავალი მონაცემების (Output) კონტროლი", "theory": "PII და სენსიტიური ინფორმაციის შემოწმება პასუხში.", "practice": "Output regex/semantic ფილტრის წესების შედგენა.", "resources": "", "official": {"week": "11", "res": "2", "activity": "Output შემოწმება სტრუქტურის მიღმა და guardrail ინსტრუმენტების ტური\nგამოსავალში PII, system prompt-ის გაჟონვა, პოლიტიკის დარღვევა, ტონი; შემმოწმებელი prompt 10 გამოსავალზე\nGuardrails AI, NeMo Guardrails, Llama Guard, Lakera Guard: რომელი ფენა, როგორ ერთვება, რა ღირს\nინსტრუმენტების რუკა 5 ფენაზე; საკუთარი ბოტისთვის ერთის არჩევა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP LLM05; ინსტრუმენტების ოფიციალური დოკუმენტაცია"}}, {"num": 51, "week": "კვირა 11 (22 – 27 თებერვალი) – Output Guardrails და Refusal მექანიზმები", "day_date": "სამშაბათი, 23 თებ.", "title": "Guardrail ინსტრუმენტების მიმოხილვა", "theory": "NeMo Guardrails, Llama Guard, Guardrails AI.", "practice": "Guardrail-ის წესების შედარება პრომპტის წესებთან.", "resources": "", "official": {"week": "11", "res": "2", "activity": "Output შემოწმება სტრუქტურის მიღმა და guardrail ინსტრუმენტების ტური\nგამოსავალში PII, system prompt-ის გაჟონვა, პოლიტიკის დარღვევა, ტონი; შემმოწმებელი prompt 10 გამოსავალზე\nGuardrails AI, NeMo Guardrails, Llama Guard, Lakera Guard: რომელი ფენა, როგორ ერთვება, რა ღირს\nინსტრუმენტების რუკა 5 ფენაზე; საკუთარი ბოტისთვის ერთის არჩევა", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "OWASP LLM05; ინსტრუმენტების ოფიციალური დოკუმენტაცია"}}, {"num": 52, "week": "კვირა 11 (22 – 27 თებერვალი) – Output Guardrails და Refusal მექანიზმები", "day_date": "ოთხშაბათი, 24 თებ.", "title": "Refusal: პოლიტიკიდან კონკრეტულ წესებამდე", "theory": "კომპანიის წესდებიდან ბოტის უარის წესების ჩამოყალიბება.", "practice": "5 მკაცრი refusal წესის იმპლემენტაცია პრომპტში.", "resources": "", "official": {"week": "11", "res": "2", "activity": "Refusal: პოლიტიკიდან წესებამდე, უსაფრთხო ალტერნატივა და ესკალაცია\nპოლიტიკიდან კონკრეტულ წესებამდე system prompt-ში: რაზე ვამბობთ უარს და როგორ; ეთიკის ნორმები\nუარი + ალტერნატივა; ადამიანთან გადაცემის შეტყობინება; ტონი\n8 refusal წესის დაწერა და ტესტი; 10 საზღვრისპირა მოთხოვნა, შეფასება 3-დონიანი rubric-ით", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Usage Policy; MIT uAI, AI and Ethics L3 (ამონარიდი); Google Conversation design"}}, {"num": 53, "week": "კვირა 11 (22 – 27 თებერვალი) – Output Guardrails და Refusal მექანიზმები", "day_date": "ხუთშაბათი, 25 თებ.", "title": "უსაფრთხო ალტერნატივა და ესკალაცია", "theory": "უარი გაღიზიანების გარეშე, ადამიან ოპერატორზე გადამისამართება.", "practice": "Refusal პასუხების გენერაცია ალტერნატიული რესურსებით.", "resources": "", "official": {"week": "11", "res": "2", "activity": "Refusal: პოლიტიკიდან წესებამდე, უსაფრთხო ალტერნატივა და ესკალაცია\nპოლიტიკიდან კონკრეტულ წესებამდე system prompt-ში: რაზე ვამბობთ უარს და როგორ; ეთიკის ნორმები\nუარი + ალტერნატივა; ადამიანთან გადაცემის შეტყობინება; ტონი\n8 refusal წესის დაწერა და ტესტი; 10 საზღვრისპირა მოთხოვნა, შეფასება 3-დონიანი rubric-ით", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Usage Policy; MIT uAI, AI and Ethics L3 (ამონარიდი); Google Conversation design"}}, {"num": 54, "week": "კვირა 11 (22 – 27 თებერვალი) – Output Guardrails და Refusal მექანიზმები", "day_date": "პარასკევი, 26 თებ.", "title": "Over-refusal vs Under-refusal ბალანსი", "theory": "ცრუ განგაშის (False positive) პრობლემა და ბალანსი.", "practice": "20 სასაზღვრო ქეისის ტესტირება და წესების კორექცია.", "resources": "", "official": {"week": "11", "res": "2", "activity": "Over-refusal vs under-refusal\nორივე ჩავარდნა შეცდომაა; ბალანსი\nსაზღვრისპირა ნაკრები 20 ქეისით: ბოტის სიზუსტე და წესების კორექცია", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "მოდულის სტანდარტი, კრიტერიუმი 2.4"}}, {"num": 55, "week": "კვირა 12 (1 – 6 მარტი) – შეფასების რუბრიკა, Golden Set და LLM-as-a-Judge", "day_date": "ორშაბათი, 1 მარტი", "title": "Rubric: შეფასების კრიტერიუმები", "theory": "4-5 კრიტერიუმი, 3 დონე, შემფასებლის მკაფიო ინსტრუქცია.", "practice": "საკუთარი ასისტენტისთვის შეფასების რუბრიკის შექმნა.", "resources": "", "official": {"week": "12", "res": "2", "activity": "Rubric და golden set\n4 to 5 კრიტერიუმი, 3 დონე, შემფასებლის ინსტრუქცია; ორი შემფასებლის თანხვედრა\ngolden set 15 to 20 ქეისი: happy path, ორაზროვანი, ნაკლული მონაცემი, პოლიტიკის დარღვევა, injection; თითო ქეისს მოსალოდნელი შედეგი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Prompt Evaluations, თავი 2; Google Sheets"}}, {"num": 56, "week": "კვირა 12 (1 – 6 მარტი) – შეფასების რუბრიკა, Golden Set და LLM-as-a-Judge", "day_date": "სამშაბათი, 2 მარტი", "title": "Golden Set-ის შედგენა", "theory": "15-20 ქეისი: Happy path, ორაზროვანი, ინექციები, დარღვევები.", "practice": "Golden Set-ის ცხრილის აგება მოსალოდნელი შედეგებით.", "resources": "", "official": {"week": "12", "res": "2", "activity": "Rubric და golden set\n4 to 5 კრიტერიუმი, 3 დონე, შემფასებლის ინსტრუქცია; ორი შემფასებლის თანხვედრა\ngolden set 15 to 20 ქეისი: happy path, ორაზროვანი, ნაკლული მონაცემი, პოლიტიკის დარღვევა, injection; თითო ქეისს მოსალოდნელი შედეგი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "Anthropic Prompt Evaluations, თავი 2; Google Sheets"}}, {"num": 57, "week": "კვირა 12 (1 – 6 მარტი) – შეფასების რუბრიკა, Golden Set და LLM-as-a-Judge", "day_date": "ოთხშაბათი, 3 მარტი", "title": "რეგრესიული ტესტირება (Regression Testing)", "theory": "ცვლილებების შემდეგ ძველი ფუნქციონალის შემოწმება. Promptfoo დემო.", "practice": "პრომპტის v2-ის ტესტირება Golden Set-ზე, Before/After შედარება.", "resources": "", "official": {"week": "12", "res": "2", "activity": "რეგრესიის ტესტი before/after და LLM-as-judge\nცვლილების შემდეგ golden set-ის ხელახლა გაშვება; „გატეხილი“ ქეისები; promptfoo დემო\nv2 და v3 golden set-ზე; შედეგის ცხრილი და გადაწყვეტილება\nმოდელი აფასებს მოდელს rubric-ით; შეზღუდვები; judge prompt 10 გამოსავალზე, შედარება საკუთარ ქულებთან", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "promptfoo docs; Anthropic Prompt Evaluations: model-graded evals"}}, {"num": 58, "week": "კვირა 12 (1 – 6 მარტი) – შეფასების რუბრიკა, Golden Set და LLM-as-a-Judge", "day_date": "ხუთშაბათი, 4 მარტი", "title": "LLM-as-a-Judge ტექნიკა", "theory": "მოდელის მიერ მოდელის შეფასება რუბრიკის მიხედვით.", "practice": "Judge Prompt-ის შექმნა და 10 გამოსავლის ავტომატური შეფასება.", "resources": "", "official": {"week": "12", "res": "2", "activity": "რეგრესიის ტესტი before/after და LLM-as-judge\nცვლილების შემდეგ golden set-ის ხელახლა გაშვება; „გატეხილი“ ქეისები; promptfoo დემო\nv2 და v3 golden set-ზე; შედეგის ცხრილი და გადაწყვეტილება\nმოდელი აფასებს მოდელს rubric-ით; შეზღუდვები; judge prompt 10 გამოსავალზე, შედარება საკუთარ ქულებთან", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "promptfoo docs; Anthropic Prompt Evaluations: model-graded evals"}}, {"num": 59, "week": "კვირა 12 (1 – 6 მარტი) – შეფასების რუბრიკა, Golden Set და LLM-as-a-Judge", "day_date": "პარასკევი, 5 მარტი", "title": "მინი-პროექტი 2 (ნაწილი I): სისტემური პრომპტი და Input Guardrails", "theory": "მინი-პროექტი 2-ის ბრიფი: უსაფრთხო საწარმოო ასისტენტი.", "practice": "System prompt იერარქიით და 3 ძირითადი დაცვის მექანიზმით.", "resources": "", "official": {"week": "12", "res": "2", "activity": "მინი-პროექტი 2: system prompt, input წესები და guardrails\nბრიფი: უსაფრთხო ასისტენტი მინი-პროექტ 1-ის ქეისზე; ჩაბარების ჩეკლისტი\nწყვილები: system prompt იერარქიით, input წესები, 3 დაცვა", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 7 to 9-ის მასალა; Google AI Studio"}}, {"num": 60, "week": "კვირა 13 (8 – 13 მარტი) – მინი-პროექტი 2 დასრულება, შეჯამება და პორტფოლიო", "day_date": "ორშაბათი, 8 მარტი", "title": "მინი-პროექტი 2 (ნაწილი II): სქემა და Refusal წესები", "theory": "JSON Schema ვალიდაცია და 5 refusal წესი უსაფრთხო ალტერნატივით.", "practice": "სქემისა და refusal მექანიზმების ინტეგრაცია ასისტენტში.", "resources": "", "official": {"week": "13", "res": "2", "activity": "მინი-პროექტი 2: სქემა, ვალიდაცია, refusal წესები, golden set, red-team და რეგრესია\nJSON Schema, ვალიდაციის ციკლი, 5 refusal წესი ალტერნატივით\ngolden set 15 ქეისით, 10 შეტევა სხვა წყვილისგან, before/after ცხრილი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 9 to 12-ის მასალა; Google AI Studio; Google Sheets"}}, {"num": 61, "week": "კვირა 13 (8 – 13 მარტი) – მინი-პროექტი 2 დასრულება, შეჯამება და პორტფოლიო", "day_date": "სამშაბათი, 9 მარტი", "title": "მინი-პროექტი 2 (ნაწილი III): Red-Team და რეგრესია", "theory": "Golden set 15 ქეისით, 10 შეტევა სხვა წყვილისგან.", "practice": "Before/After ცხრილის შედგენა და ხარვეზების გასწორება.", "resources": "", "official": {"week": "13", "res": "2", "activity": "მინი-პროექტი 2: სქემა, ვალიდაცია, refusal წესები, golden set, red-team და რეგრესია\nJSON Schema, ვალიდაციის ციკლი, 5 refusal წესი ალტერნატივით\ngolden set 15 ქეისით, 10 შეტევა სხვა წყვილისგან, before/after ცხრილი", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 9 to 12-ის მასალა; Google AI Studio; Google Sheets"}}, {"num": 62, "week": "კვირა 13 (8 – 13 მარტი) – მინი-პროექტი 2 დასრულება, შეჯამება და პორტფოლიო", "day_date": "ოთხშაბათი, 10 მარტი", "title": "მინი-პროექტი 2 (ნაწილი IV): დემო და Peer Review", "theory": "დემო პრეზენტაციის რეგლამენტი.", "practice": "5-წუთიანი დემოები (შეტევა, დაცვა, შედეგი), შეფასება რუბრიკით.", "resources": "", "official": {"week": "13", "res": "2", "activity": "მინი-პროექტი 2: დემო და peer review\nდემო 5 წუთი: შეტევა, დაცვა, შედეგი\nჯგუფი rubric-ით აფასებს", "hours": "2 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "კვირა 12 to 13-ის მასალა"}}, {"num": 63, "week": "კვირა 13 (8 – 13 მარტი) – მინი-პროექტი 2 დასრულება, შეჯამება და პორტფოლიო", "day_date": "ხუთშაბათი, 11 მარტი", "title": "სწავლის შედეგი 2-ის შეჯამება და Guardrails-ის რუკა", "theory": "Guardrails-ის 5 ფენა ერთ სურათზე, შედეგი 2-ის 5 კრიტერიუმი.", "practice": "თვითშეფასების ჩეკლისტის შევსება.", "resources": "", "official": {"week": "13", "res": "2", "activity": "სწავლის შედეგი 2-ის შეჯამება, შეფასების რეპეტიცია და პორტფოლიო\nguardrails-ის 5 ფენა ერთ სურათზე; შედეგი 2-ის 5 კრიტერიუმი; თვითშეფასების ჩეკლისტი\nშეფასების ფორმატი, ტიპური ხარვეზები, დროის მართვა; შემოკლებული რეპეტიცია დროზე\nპორტფოლიოს მოწესრიგება: prompt-რეესტრი, დაცვის ბარათი, JSON Schema, golden set", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "მოდულის სტანდარტი, შედეგი 2"}}, {"num": 64, "week": "კვირა 13 (8 – 13 მარტი) – მინი-პროექტი 2 დასრულება, შეჯამება და პორტფოლიო", "day_date": "პარასკევი, 12 მარტი", "title": "შეფასების სრული რეპეტიცია და პორტფოლიოს ჩაბარება", "theory": "საგამოცდო რეგულაციები, ტიპური ხარვეზების პრევენცია.", "practice": "", "resources": "", "official": {"week": "13", "res": "2", "activity": "სწავლის შედეგი 2-ის შეჯამება, შეფასების რეპეტიცია და პორტფოლიო\nguardrails-ის 5 ფენა ერთ სურათზე; შედეგი 2-ის 5 კრიტერიუმი; თვითშეფასების ჩეკლისტი\nშეფასების ფორმატი, ტიპური ხარვეზები, დროის მართვა; შემოკლებული რეპეტიცია დროზე\nპორტფოლიოს მოწესრიგება: prompt-რეესტრი, დაცვის ბარათი, JSON Schema, golden set", "hours": "4 სთ", "method": "ლექცია-სემინარი; დემონსტრირება; პრაქტიკული სავარჯიშო ლექტორის დაკვირვებით.", "resources": "მოდულის სტანდარტი, შედეგი 2"}}]}};
+    let currentCourseKey = 'course1';
+    let viewMode = 'table'; // Default to TABLE view!
+    let userNotes = {};
+
+    try {
+      userNotes = JSON.parse(localStorage.getItem('shota_curriculum_notes') || '{}');
+    } catch(e) {
+      userNotes = {};
+    }
+
+    function saveNotes() {
+      try {
+        localStorage.setItem('shota_curriculum_notes', JSON.stringify(userNotes));
+      } catch(e) {}
+      updateNotesBadge();
+    }
+
+    function updateNotesBadge() {
+      const count = Object.keys(userNotes).length;
+      document.getElementById('notes-badge').innerText = count;
+    }
+
+    function switchCourse(courseKey) {
+      currentCourseKey = courseKey;
+      
+      const t1 = document.getElementById('tab-c1');
+      const t2 = document.getElementById('tab-c2');
+      if (courseKey === 'course1') {
+        t1.classList.add('active');
+        t2.classList.remove('active');
+      } else {
+        t2.classList.add('active');
+        t1.classList.remove('active');
+      }
+
+      renderInfoBanner();
+      populateWeeksDropdown();
+      applyFilters();
+    }
+
+    function renderInfoBanner() {
+      const c = DATA[currentCourseKey];
+      const banner = document.getElementById('info-banner');
+      banner.innerHTML = `
+        <div class="info-item">
+          <div class="info-label">საგნის კოდი / კრედიტი</div>
+          <div class="info-value">${c.code} (${c.credits} კრედიტი)</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">ხანგრძლივობა</div>
+          <div class="info-value">${c.weeks_count}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">საკონტაქტო საათები</div>
+          <div class="info-value">${c.hours}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">განრიგი & აუდიტორიები</div>
+          <div class="info-value highlight">${c.groups}</div>
+        </div>
+      `;
+    }
+
+    function populateWeeksDropdown() {
+      const select = document.getElementById('week-select');
+      const course = DATA[currentCourseKey];
+      const weeks = [...new Set(course.lectures.map(l => l.week))];
+
+      let html = '<option value="all">ყველა კვირა (სრული განრიგი)</option>';
+      weeks.forEach((w, idx) => {
+        // Shorten label for clean display
+        const weekName = w.split('–')[0].trim();
+        const weekTheme = w.includes('–') ? w.substring(w.indexOf('–') + 1).trim() : '';
+        html += `<option value="${escapeAttr(w)}">${weekName} ${weekTheme ? '– ' + weekTheme.substring(0, 30) + '...' : ''}</option>`;
+      });
+      select.innerHTML = html;
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      document.getElementById('btn-view-table').className = mode === 'table' ? 'view-btn active' : 'view-btn';
+      document.getElementById('btn-view-cards').className = mode === 'cards' ? 'view-btn active' : 'view-btn';
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
+      const selectedWeek = document.getElementById('week-select').value;
+      const course = DATA[currentCourseKey];
+
+      const filtered = course.lectures.filter(l => {
+        const matchesWeek = (selectedWeek === 'all' || l.week === selectedWeek);
+        const searchPool = (l.num + ' ' + l.title + ' ' + l.day_date + ' ' + l.theory + ' ' + l.practice + ' ' + (l.resources || '')).toLowerCase();
+        const matchesSearch = !q || searchPool.includes(q);
+        return matchesWeek && matchesSearch;
+      });
+
+      document.getElementById('counter-badge').innerText = `${filtered.length} / ${course.lectures.length} ლექცია`;
+      renderLectures(filtered);
+    }
+
+    function renderLectures(list) {
+      const container = document.getElementById('content-container');
+
+      if (!list || list.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:6px;">ლექცია ვერ მოიძებნა</h3>
+            <p style="font-size:12px; color:var(--text-muted);">სცადეთ სხვა საძიებო სიტყვა ან გაასუფთავეთ ფილტრი</p>
+          </div>
+        `;
+        return;
+      }
+
+      if (viewMode === 'table') {
+        renderTableView(list, container);
+      } else {
+        renderCardsView(list, container);
+      }
+    }
+
+    function renderTableView(list, container) {
+      let rowsHtml = '';
+      list.forEach(l => {
+        const lecKey = `${currentCourseKey}_L${l.num}`;
+        const note = userNotes[lecKey] || '';
+        const weekPrefix = l.week.split('–')[0].trim();
+
+        rowsHtml += `
+          <tr>
+            <td class="td-num">#${l.num}</td>
+            <td class="td-date">
+              <div class="date-day">${escapeHtml(l.day_date)}</div>
+              <div class="date-week">${escapeHtml(weekPrefix)}</div>
+            </td>
+            <td class="td-topic">
+              <div class="topic-title topic-title-clickable" onclick="openOfficialModal(${l.num})" title="დააჭირეთ კალენდარული გეგმის ოფიციალური ჩანაწერის სანახავად">
+                <span class="topic-name-text">${escapeHtml(l.title)}</span>
+                <span class="syllabus-pill" title="კალენდარული გეგმის ჩანაწერი">📑 გეგმა</span>
+              </div>
+              ${l.resources ? `<div class="topic-res"><span>📚</span> ${escapeHtml(l.resources)}</div>` : ''}
+              ${note ? `
+                <div class="note-callout">
+                  <span class="note-text"><strong>ჩემი შენიშვნა:</strong> ${escapeHtml(note)}</span>
+                  <button class="note-edit-btn" onclick="openNoteModal(${l.num})">შეცვლა</button>
+                </div>
+              ` : ''}
+            </td>
+            <td class="td-theory">
+              <span class="block-header block-theory">📘 30% თეორია (~35–40 წთ)</span>
+              <div>${escapeHtml(l.theory)}</div>
+            </td>
+            <td class="td-practice">
+              <span class="block-header block-practice">💻 70% პრაქტიკა (~80–85 წთ)</span>
+              <div>${escapeHtml(l.practice)}</div>
+            </td>
+            <td class="td-actions">
+              <button onclick="openOfficialModal(${l.num})" class="action-btn" title="კალენდარული გეგმის ოფიციალური ჩანაწერი" style="border-color:#6366f1; color:#a5b4fc; font-weight:700;">
+                📑 გეგმა
+              </button>
+              <button onclick="openNoteModal(${l.num})" class="action-btn ${note ? 'has-note' : ''}" title="შენიშვნის ჩაწერა">
+                💬 ${note ? 'ჩანიშნულია' : 'შენიშვნა'}
+              </button>
+              <button onclick="copyLecture(${l.num})" class="action-btn" title="ტექსტის კოპირება">
+                📋
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="table-card">
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 50px; text-align: center;">№</th>
+                  <th style="width: 140px;">თარიღი & დღე</th>
+                  <th style="min-width: 250px;">თემა & შინაარსი</th>
+                  <th style="min-width: 260px;">30% თეორია (~35–40 წთ)</th>
+                  <th style="min-width: 320px;">70% პრაქტიკა (~80–85 წთ)</th>
+                  <th style="width: 90px; text-align: center;">მოქმედება</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCardsView(list, container) {
+      let cardsHtml = '<div class="cards-grid">';
+      list.forEach(l => {
+        const lecKey = `${currentCourseKey}_L${l.num}`;
+        const note = userNotes[lecKey] || '';
+
+        cardsHtml += `
+          <div class="card-item">
+            <div class="card-header">
+              <div class="card-meta">
+                <span class="badge badge-blue">ლექცია #${l.num}</span>
+                <span style="font-weight:600; font-size:12px;">🗓️ ${escapeHtml(l.day_date)}</span>
+                <span style="color:var(--text-muted); font-size:12px;">•</span>
+                <span style="color:var(--text-muted); font-size:12px;">${escapeHtml(l.week)}</span>
+              </div>
+
+              <div>
+                <button onclick="openNoteModal(${l.num})" class="action-btn ${note ? 'has-note' : ''}">
+                  💬 ${note ? 'შენიშვნა ჩანიშნულია' : 'შენიშვნა'}
+                </button>
+                <button onclick="copyLecture(${l.num})" class="action-btn" title="კოპირება">
+                  📋
+                </button>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+              <h3 class="topic-title-clickable" onclick="openOfficialModal(${l.num})" style="font-size:15px; font-weight:800; color:#fff;" title="დააჭირეთ კალენდარული გეგმის ოფიციალური ჩანაწერის სანახავად">
+                <span class="topic-name-text">${escapeHtml(l.title)}</span>
+                <span class="syllabus-pill">📑 გეგმა</span>
+              </h3>
+              ${l.resources ? `<div style="font-size:11px; color:#93c5fd; margin-top:4px;">📚 რესურსები: ${escapeHtml(l.resources)}</div>` : ''}
+            </div>
+
+            ${note ? `
+              <div class="note-callout" style="margin-bottom: 12px;">
+                <span class="note-text"><strong>ჩემი შენიშვნა:</strong> ${escapeHtml(note)}</span>
+                <button class="note-edit-btn" onclick="openNoteModal(${l.num})">შეცვლა</button>
+              </div>
+            ` : ''}
+
+            <div class="card-grid-split">
+              <div class="card-box card-box-theory">
+                <span class="block-header block-theory">📘 30% თეორია (~35–40 წთ)</span>
+                <div>${escapeHtml(l.theory)}</div>
+              </div>
+
+              <div class="card-box card-box-practice">
+                <span class="block-header block-practice">💻 70% პრაქტიკა (~80–85 წთ)</span>
+                <div>${escapeHtml(l.practice)}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      cardsHtml += '</div>';
+      container.innerHTML = cardsHtml;
+    }
+
+    function openNoteModal(lecNum) {
+      const course = DATA[currentCourseKey];
+      const lecture = course.lectures.find(l => l.num === lecNum);
+      if (!lecture) return;
+
+      const lecKey = `${currentCourseKey}_L${lecNum}`;
+      const currentNote = userNotes[lecKey] || '';
+
+      const promptText = `შენიშვნა [${course.title.split(' ')[0]} - ლექცია #${lecNum}]:
+„${lecture.title}“
+
+ჩაწერეთ თქვენი კომენტარი:`;
+      const res = prompt(promptText, currentNote);
+
+      if (res !== null) {
+        if (res.trim() === '') {
+          delete userNotes[lecKey];
+          showToast('შენიშვნა წაიშალა');
+        } else {
+          userNotes[lecKey] = res.trim();
+          showToast('შენიშვნა წარმატებით შეინახა!');
+        }
+        saveNotes();
+        applyFilters();
+      }
+    }
+
+    function copyLecture(lecNum) {
+      const course = DATA[currentCourseKey];
+      const lecture = course.lectures.find(l => l.num === lecNum);
+      if (!lecture) return;
+
+      const text = `საგანი: ${course.title}
+ლექცია #${lecture.num} (${lecture.day_date})
+თემა: ${lecture.title}
+• 30% თეორია (~35–40 წთ): ${lecture.theory}
+• 70% პრაქტიკა (~80–85 წთ): ${lecture.practice}
+რესურსები: ${lecture.resources || '–'}`;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`ლექცია #${lecNum} დაკოპირდა ბუფერში`);
+      }).catch(() => {
+        showToast('ტექსტი მომზადებულია');
+      });
+    }
+
+    function exportNotes() {
+      const entries = Object.entries(userNotes);
+      if (entries.length === 0) {
+        alert('შენიშვნები ჯერ არ გაქვთ დამატებული. ნებისმიერი ლექციის გასწვრივ დააჭირეთ ღილაკს 💬 შენიშვნა.');
+        return;
+      }
+
+      let summary = '📝 ჩემი შენიშვნები კალენდარულ გეგმაზე:\n\n';
+      entries.forEach(([key, note]) => {
+        const parts = key.split('_L');
+        const courseTitle = parts[0] === 'course1' ? 'შესავალი AI' : 'Prompt ინჟინერია';
+        summary += `• [${courseTitle} - ლექცია #${parts[1]}]: ${note}\n`;
+      });
+
+      navigator.clipboard.writeText(summary).then(() => {
+        alert('ყველა შენიშვნა დაკოპირდა ბუფერში! შეგიძლიათ პირდაპირ ჩასვათ (Paste) ჩატში.');
+      }).catch(() => {
+        prompt('დააკოპირეთ თქვენი შენიშვნები აქედან:', summary);
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.classList.add('show');
+      setTimeout(() => {
+        t.classList.remove('show');
+      }, 2500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function escapeAttr(str) {
+      if (!str) return '';
+      return String(str).replace(/"/g, '&quot;');
+    }
+
+    // Initial setup
+    updateNotesBadge();
+    
+    
+    function openOfficialModal(lecNum) {
+      try {
+        console.log("Opening official modal for lecture:", lecNum);
+        const course = DATA[currentCourseKey];
+        if (!course || !course.lectures) return;
+        
+        const lecture = course.lectures.find(l => Number(l.num) === Number(lecNum));
+        if (!lecture) {
+          console.warn("Lecture not found:", lecNum);
+          return;
+        }
+
+        const off = lecture.official || {};
+        const setTxt = (id, val) => {
+          const el = document.getElementById(id);
+          if (el) el.innerText = val;
+        };
+
+        setTxt('modal-course-badge', course.code || course.title);
+        setTxt('modal-lecture-badge', `ლექცია #${lecture.num}`);
+        setTxt('modal-res-badge', `სწავლის შედეგი: ${off.res || '1'}`);
+        setTxt('modal-lecture-title', lecture.title);
+        setTxt('modal-verbatim-text', off.activity || lecture.theory || 'ჩანაწერი არ არის');
+        setTxt('modal-meta-week', off.week ? `კვირა ${off.week}` : (lecture.week ? lecture.week.split('–')[0].trim() : '–'));
+        setTxt('modal-meta-hours', off.hours || '2 საათი');
+        setTxt('modal-meta-resources', off.resources || lecture.resources || 'სასწავლო გეგმის სტანდარტი');
+
+        const modal = document.getElementById('official-modal');
+        if (modal) {
+          modal.classList.add('active');
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      } catch (err) {
+        console.error("Error opening modal:", err);
+      }
+    }
+
+    function closeOfficialModal() {
+      const modal = document.getElementById('official-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+    
+
+    function handleModalOverlayClick(e) {
+      if (e.target && e.target.id === 'official-modal') {
+        closeOfficialModal();
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeOfficialModal();
+      }
+    });
+
+    switchCourse('course1');
+  </script>
+
+  <!-- Official Syllabus Modal Popup -->
+  <div id="official-modal" class="modal-overlay" onclick="handleModalOverlayClick(event)">
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-badge-row">
+            <span id="modal-course-badge" class="badge badge-blue">მოდული 5</span>
+            <span id="modal-lecture-badge" class="badge badge-amber">ლექცია #1</span>
+            <span id="modal-res-badge" class="badge badge-green">სწავლის შედეგი 1</span>
+          </div>
+          <div class="modal-title" id="modal-lecture-title">თემის დასახელება</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeOfficialModal()" title="დახურვა (Esc)">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="docx-box">
+          <div class="docx-box-title">
+            <span>📑</span> ოფიციალური ჩანაწერი დოკუმენტიდან: „განსახორციელებელი აქტივობა/თემატიკა“
+          </div>
+          <div id="modal-verbatim-text" class="docx-verbatim-text">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <div class="modal-meta-grid">
+          <div class="modal-meta-card">
+            <div class="modal-meta-label">კალენდარული კვირა</div>
+            <div id="modal-meta-week" class="modal-meta-val">კვირა 1</div>
+          </div>
+          <div class="modal-meta-card">
+            <div class="modal-meta-label">საკონტაქტო საათები</div>
+            <div id="modal-meta-hours" class="modal-meta-val">2 საათი</div>
+          </div>
+          <div class="modal-meta-card" style="grid-column: 1 / -1;">
+            <div class="modal-meta-label">სასწავლო რესურსი (ოფიციალური გეგმიდან)</div>
+            <div id="modal-meta-resources" class="modal-meta-val" style="color:#93c5fd; font-weight:500;">–</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeOfficialModal()">დახურვა</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

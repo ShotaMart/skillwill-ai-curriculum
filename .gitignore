@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.template_assets/
+
+# Temporary / Scratch
+scratch/
+test_*.js
+*.tmp
+*.log
+
+# Keep main files:
+# index.html
+# სასწავლო_გეგმა_შოთა.html
+# *.md
+# *.docx
+# *.csv
+# *.pptx
+# make_presentation.py
