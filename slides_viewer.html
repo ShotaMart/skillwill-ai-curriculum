@@ -88,7 +88,12 @@
         <span class="font-bold text-[#D52B1E] flex items-center gap-1.5 uppercase tracking-wide">
           🎙️ მიმდინარე სლაიდის სამეტყველო სკრიპტი:
         </span>
-        <span class="text-slate-500 font-mono text-[11px]">ლექტორის საუბარი</span>
+        <div class="flex items-center gap-2">
+          <span class="text-slate-500 font-mono text-[11px]">ლექტორის საუბარი</span>
+          <button onclick="copyCurrentScript()" id="copy-script-btn" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[11px] font-semibold transition flex items-center gap-1 border border-slate-700">
+            📋 კოპირება
+          </button>
+        </div>
       </div>
       <p id="current-slide-script" class="leading-relaxed text-sm text-slate-200">
         <!-- Spoken text -->
@@ -575,11 +580,43 @@
               </span>
               <span class="text-sm font-bold text-white">${s.title}</span>
             </div>
-            <span class="text-xs text-slate-400 font-mono">ლექტორის საუბარი</span>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-400 font-mono">ლექტორის საუბარი</span>
+              <button onclick="copyScriptText(${idx})" id="copy-full-script-btn-${idx}" class="px-2 py-0.5 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded text-xs transition">
+                📋 კოპირება
+              </button>
+            </div>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed pl-1">${s.script || 'სკრიპტი მზადდება...'}</p>
+          <p id="full-script-text-${idx}" class="text-sm text-slate-200 leading-relaxed pl-1">${s.script || 'სკრიპტი მზადდება...'}</p>
         `;
         container.appendChild(card);
+      });
+    }
+
+    function copyCurrentScript() {
+      const txt = document.getElementById('current-slide-script').textContent.trim();
+      if (!txt) return;
+      navigator.clipboard.writeText(txt).then(() => {
+        const btn = document.getElementById('copy-script-btn');
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = '✅ დაკოპირდა!';
+          setTimeout(() => btn.innerHTML = original, 2000);
+        }
+      });
+    }
+
+    function copyScriptText(idx) {
+      const el = document.getElementById(`full-script-text-${idx}`);
+      if (!el) return;
+      const txt = el.textContent.trim();
+      navigator.clipboard.writeText(txt).then(() => {
+        const btn = document.getElementById(`copy-full-script-btn-${idx}`);
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = '✅ დაკოპირდა!';
+          setTimeout(() => btn.innerHTML = original, 2000);
+        }
       });
     }
   </script>
