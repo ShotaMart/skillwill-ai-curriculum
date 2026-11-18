@@ -286,13 +286,13 @@
               <span class="text-xs text-slate-400 font-mono">სლაიდი ${slide.slideNum} / ${deck.slides.length}</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
               ${(slide.items || []).map(item => `
-                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:border-red-300 transition">
                   <div>
-                    <span class="px-2.5 py-1 bg-[#D52B1E] text-white font-black text-xs rounded">${item.num}</span>
-                    <h3 class="text-base font-bold text-slate-900 mt-3">${item.title}</h3>
-                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">${item.desc}</p>
+                    <span class="px-3 py-1 bg-[#D52B1E] text-white font-black text-xs rounded">${item.num}</span>
+                    <h3 class="text-base md:text-lg font-bold text-slate-900 mt-3.5">${item.title}</h3>
+                    <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">${item.desc}</p>
                   </div>
                   <div class="mt-4 pt-2 border-t border-slate-100 text-[11px] text-slate-400 font-medium">საკვანძო მიმართულება</div>
                 </div>
@@ -319,13 +319,13 @@
               <span class="text-xs text-slate-400 font-mono">სლაიდი ${slide.slideNum} / ${deck.slides.length}</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
               ${(slide.cards || []).map((c, i) => `
-                <div class="bg-white rounded-xl p-5 border ${i === 0 ? 'border-red-200 bg-red-50/20' : i === 1 ? 'border-blue-200 bg-blue-50/20' : 'border-slate-200'} shadow-sm flex flex-col justify-between">
+                <div class="bg-white rounded-xl p-6 border ${i === 0 ? 'border-red-200 bg-red-50/20' : i === 1 ? 'border-blue-200 bg-blue-50/20' : 'border-slate-200'} shadow-sm flex flex-col justify-between">
                   <div>
                     <span class="text-[11px] font-bold ${i === 0 ? 'text-[#D52B1E]' : i === 1 ? 'text-blue-600' : 'text-slate-500'} uppercase tracking-wider">${c.tag}</span>
-                    <h3 class="text-base font-bold text-slate-900 mt-2">${c.title}</h3>
-                    <p class="text-xs text-slate-600 mt-2.5 leading-relaxed font-normal">${c.text}</p>
+                    <h3 class="text-base md:text-lg font-bold text-slate-900 mt-2.5">${c.title}</h3>
+                    <p class="text-xs md:text-sm text-slate-600 mt-2.5 leading-relaxed font-normal">${c.text}</p>
                   </div>
                   <div class="mt-4 pt-2 border-t border-slate-100 text-[11px] text-slate-400 font-medium">საფუძვლები</div>
                 </div>
@@ -353,12 +353,12 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
-              <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+              <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
                 <div class="flex items-center gap-2 pb-3 border-b border-slate-100">
                   <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
-                  <h3 class="text-sm font-bold text-slate-700">${slide.col1 ? slide.col1.title : 'საბაზისო მიდგომა'}</h3>
+                  <h3 class="text-sm md:text-base font-bold text-slate-700">${slide.col1 ? slide.col1.title : 'საბაზისო მიდგომა'}</h3>
                 </div>
-                <ul class="mt-3 space-y-2 text-xs text-slate-600">
+                <ul class="mt-4 space-y-2.5 text-xs md:text-sm text-slate-600">
                   ${((slide.col1 && slide.col1.points) || []).map(p => `
                     <li class="flex items-start gap-2">
                       <span class="text-slate-400 font-bold">•</span>
@@ -368,12 +368,12 @@
                 </ul>
               </div>
 
-              <div class="bg-white rounded-xl p-5 border border-red-200 shadow-sm bg-red-50/10">
+              <div class="bg-white rounded-xl p-6 border border-red-200 shadow-sm bg-red-50/10">
                 <div class="flex items-center gap-2 pb-3 border-b border-red-100">
                   <span class="w-2.5 h-2.5 rounded-full bg-[#D52B1E]"></span>
-                  <h3 class="text-sm font-bold text-[#D52B1E]">${slide.col2 ? slide.col2.title : 'მოწინავე AI მიდგომა'}</h3>
+                  <h3 class="text-sm md:text-base font-bold text-[#D52B1E]">${slide.col2 ? slide.col2.title : 'მოწინავე AI მიდგომა'}</h3>
                 </div>
-                <ul class="mt-3 space-y-2 text-xs text-slate-700 font-medium">
+                <ul class="mt-4 space-y-2.5 text-xs md:text-sm text-slate-700 font-medium">
                   ${((slide.col2 && slide.col2.points) || []).map(p => `
                     <li class="flex items-start gap-2">
                       <span class="text-[#D52B1E] font-bold">✓</span>
@@ -404,13 +404,13 @@
               <span class="text-xs text-slate-400 font-mono">სლაიდი ${slide.slideNum} / ${deck.slides.length}</span>
             </div>
 
-            <div class="space-y-3 my-auto">
+            <div class="space-y-3.5 my-auto">
               ${(slide.rules || []).map(r => `
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-start gap-4">
-                  <span class="px-2.5 py-1 bg-[#D52B1E] text-white font-black text-xs rounded">${r.num}</span>
+                <div class="bg-white p-4.5 rounded-xl border border-slate-200 shadow-sm flex items-start gap-4 hover:border-red-300 transition">
+                  <span class="px-3 py-1 bg-[#D52B1E] text-white font-black text-xs rounded">${r.num}</span>
                   <div class="flex-1">
-                    <h3 class="text-sm font-bold text-slate-900">${r.title}</h3>
-                    <p class="text-xs text-slate-600 mt-1 leading-relaxed">${r.desc}</p>
+                    <h3 class="text-sm md:text-base font-bold text-slate-900">${r.title}</h3>
+                    <p class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">${r.desc}</p>
                   </div>
                 </div>
               `).join('')}
@@ -437,23 +437,23 @@
               <span class="text-xs text-slate-400 font-mono">სლაიდი ${slide.slideNum} / ${deck.slides.length}</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
-              <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+              <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
                 <span class="text-[11px] font-bold text-slate-500 uppercase">გამოწვევა</span>
-                <h3 class="text-sm font-bold text-slate-900 mt-2">პრობლემის ანალიზი</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">${b.scenario || ''}</p>
+                <h3 class="text-sm md:text-base font-bold text-slate-900 mt-2">პრობლემის ანალიზი</h3>
+                <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">${b.scenario || ''}</p>
               </div>
 
-              <div class="bg-white rounded-xl p-5 border border-blue-200 shadow-sm bg-blue-50/20">
+              <div class="bg-white rounded-xl p-6 border border-blue-200 shadow-sm bg-blue-50/20">
                 <span class="text-[11px] font-bold text-blue-600 uppercase">AI გადაწყვეტა</span>
-                <h3 class="text-sm font-bold text-slate-900 mt-2">დანერგილი მოდელი</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">${b.solution || ''}</p>
+                <h3 class="text-sm md:text-base font-bold text-slate-900 mt-2">დანერგილი მოდელი</h3>
+                <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">${b.solution || ''}</p>
               </div>
 
-              <div class="bg-white rounded-xl p-5 border border-emerald-200 shadow-sm bg-emerald-50/20">
+              <div class="bg-white rounded-xl p-6 border border-emerald-200 shadow-sm bg-emerald-50/20">
                 <span class="text-[11px] font-bold text-emerald-600 uppercase">შედეგი / Impact</span>
-                <h3 class="text-sm font-bold text-slate-900 mt-2">ბიზნეს ეფექტი</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">${b.impact || ''}</p>
+                <h3 class="text-sm md:text-base font-bold text-slate-900 mt-2">ბიზნეს ეფექტი</h3>
+                <p class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed">${b.impact || ''}</p>
               </div>
             </div>
 
@@ -483,7 +483,7 @@
                   <div class="w-8 h-8 rounded-full bg-red-50 text-[#D52B1E] font-black flex items-center justify-center shrink-0">
                     ${idx + 1}
                   </div>
-                  <p class="text-xs md:text-sm text-slate-800 font-semibold leading-relaxed">${t}</p>
+                  <p class="text-sm md:text-base text-slate-800 font-bold leading-relaxed">${t}</p>
                 </div>
               `).join('')}
             </div>
