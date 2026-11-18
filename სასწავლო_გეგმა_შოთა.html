@@ -1251,15 +1251,9 @@
               <div>${escapeHtml(l.practice)}</div>
             </td>
             <td class="td-actions">
-              ${(currentCourseKey === 'course1' && l.num === 1) ? `
-                <a href="slides_viewer.html" target="_blank" class="action-btn action-btn-presentation" title="ლექცია #1 საპრეზენტაციო სლაიდები">
-                  🖥️ სლაიდები
-                </a>
-              ` : `
-                <button onclick="openPresentationNotice(${l.num}, '${escapeAttr(l.title)}')" class="action-btn action-btn-presentation" title="საპრეზენტაციო სლაიდები">
-                  🖥️ სლაიდები
-                </button>
-              `}
+              <a href="slides_viewer.html?course=${currentCourseKey}&lec=${l.num}" target="_blank" class="action-btn action-btn-presentation" title="ლექცია #${l.num} საპრეზენტაციო სლაიდები და ვორქშოფი">
+                🖥️ სლაიდები
+              </a>
               <button onclick="openOfficialModal(${l.num})" class="action-btn" title="კალენდარული გეგმის ოფიციალური ჩანაწერი" style="border-color:#6366f1; color:#a5b4fc; font-weight:700;">
                 📑 გეგმა
               </button>
@@ -1311,15 +1305,9 @@
               </div>
 
               <div style="display:flex; gap:6px;">
-                ${(currentCourseKey === 'course1' && l.num === 1) ? `
-                  <a href="slides_viewer.html" target="_blank" class="action-btn action-btn-presentation" title="სლაიდები">
-                    🖥️ სლაიდები
-                  </a>
-                ` : `
-                  <button onclick="openPresentationNotice(${l.num}, '${escapeAttr(l.title)}')" class="action-btn action-btn-presentation" title="სლაიდები">
-                    🖥️ სლაიდები
-                  </button>
-                `}
+                <a href="slides_viewer.html?course=${currentCourseKey}&lec=${l.num}" target="_blank" class="action-btn action-btn-presentation" title="საპრეზენტაციო სლაიდები და ვორქშოფი">
+                  🖥️ სლაიდები
+                </a>
                 <button onclick="openOfficialModal(${l.num})" class="action-btn" title="კალენდარული გეგმა" style="border-color:#6366f1; color:#a5b4fc; font-weight:700;">
                   📑 გეგმა
                 </button>
@@ -1623,11 +1611,7 @@
     }
 
     function openPresentationNotice(lecNum, title) {
-      if (currentCourseKey === 'course1' && lecNum === 1) {
-        window.open('slides_viewer.html', '_blank');
-        return;
-      }
-      alert(`🖥️ ლექცია #${lecNum}: „${title}“\n\nსაპრეზენტაციო შაბლონი (Skillwill ბრენდინგით) მზადაა. სლაიდები მალე დაემატება!`);
+      window.open(`slides_viewer.html?course=${currentCourseKey}&lec=${lecNum}`, '_blank');
     }
 
     function exportAllComments() {
