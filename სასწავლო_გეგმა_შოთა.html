@@ -760,6 +760,42 @@
       transform: translateY(-1px) !important;
     }
     
+    .presentation-pill {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      padding: 3px 8px !important;
+      border-radius: 6px !important;
+      background: rgba(213, 43, 30, 0.2) !important;
+      color: #fca5a5 !important;
+      border: 1px solid rgba(213, 43, 30, 0.45) !important;
+      cursor: pointer !important;
+      text-decoration: none !important;
+      transition: all 0.2s ease !important;
+      white-space: nowrap !important;
+    }
+    .presentation-pill:hover {
+      background: #D52B1E !important;
+      color: #ffffff !important;
+      border-color: #D52B1E !important;
+      box-shadow: 0 0 10px rgba(213, 43, 30, 0.5) !important;
+      transform: translateY(-1px) !important;
+    }
+    .action-btn-presentation {
+      background: rgba(213, 43, 30, 0.15) !important;
+      color: #fca5a5 !important;
+      border-color: rgba(213, 43, 30, 0.45) !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+    }
+    .action-btn-presentation:hover {
+      background: #D52B1E !important;
+      color: #ffffff !important;
+      border-color: #D52B1E !important;
+    }
+    
   </style>
 </head>
 <body>
@@ -779,10 +815,7 @@
           </div>
         </div>
 
-        <div style="display: flex; gap: 10px; align-items: center;">
-          <a href="slides_viewer.html" target="_blank" class="btn" style="background: rgba(213, 43, 30, 0.18); color: #fca5a5; border: 1px solid rgba(213, 43, 30, 0.45); font-weight: 700; text-decoration: none;">
-            <span>🖥️</span> ლექცია #1 სლაიდების ნახვა
-          </a>
+        <div>
           <button onclick="exportNotes()" class="btn btn-primary">
             <span>📋</span> შენიშვნების ექსპორტი (<span id="notes-badge">0</span>)
           </button>
@@ -992,6 +1025,11 @@
               <div class="topic-title topic-title-clickable" onclick="openOfficialModal(${l.num})" title="დააჭირეთ კალენდარული გეგმის ოფიციალური ჩანაწერის სანახავად">
                 <span class="topic-name-text">${escapeHtml(l.title)}</span>
                 <span class="syllabus-pill" title="კალენდარული გეგმის ჩანაწერი">📑 გეგმა</span>
+                ${currentCourseKey === 'course1' && l.num === 1 ? `
+                  <a href="slides_viewer.html" target="_blank" onclick="event.stopPropagation();" class="presentation-pill" title="ლექცია #1 საპრეზენტაციო სლაიდები">
+                    🖥️ სლაიდები
+                  </a>
+                ` : ''}
               </div>
               ${l.resources ? `<div class="topic-res"><span>📚</span> ${escapeHtml(l.resources)}</div>` : ''}
               ${note ? `
@@ -1010,6 +1048,11 @@
               <div>${escapeHtml(l.practice)}</div>
             </td>
             <td class="td-actions">
+              ${currentCourseKey === 'course1' && l.num === 1 ? `
+                <a href="slides_viewer.html" target="_blank" class="action-btn action-btn-presentation" title="ლექცია #1 საპრეზენტაციო სლაიდები (Slide Deck)">
+                  🖥️ სლაიდები
+                </a>
+              ` : ''}
               <button onclick="openOfficialModal(${l.num})" class="action-btn" title="კალენდარული გეგმის ოფიციალური ჩანაწერი" style="border-color:#6366f1; color:#a5b4fc; font-weight:700;">
                 📑 გეგმა
               </button>
@@ -1064,6 +1107,11 @@
               </div>
 
               <div>
+                ${currentCourseKey === 'course1' && l.num === 1 ? `
+                  <a href="slides_viewer.html" target="_blank" class="action-btn action-btn-presentation" title="საპრეზენტაციო სლაიდები">
+                    🖥️ სლაიდები
+                  </a>
+                ` : ''}
                 <button onclick="openNoteModal(${l.num})" class="action-btn ${note ? 'has-note' : ''}">
                   💬 ${note ? 'შენიშვნა ჩანიშნულია' : 'შენიშვნა'}
                 </button>
@@ -1077,6 +1125,11 @@
               <h3 class="topic-title-clickable" onclick="openOfficialModal(${l.num})" style="font-size:15px; font-weight:800; color:#fff;" title="დააჭირეთ კალენდარული გეგმის ოფიციალური ჩანაწერის სანახავად">
                 <span class="topic-name-text">${escapeHtml(l.title)}</span>
                 <span class="syllabus-pill">📑 გეგმა</span>
+                ${currentCourseKey === 'course1' && l.num === 1 ? `
+                  <a href="slides_viewer.html" target="_blank" onclick="event.stopPropagation();" class="presentation-pill" title="ლექცია #1 საპრეზენტაციო სლაიდები">
+                    🖥️ სლაიდები
+                  </a>
+                ` : ''}
               </h3>
               ${l.resources ? `<div style="font-size:11px; color:#93c5fd; margin-top:4px;">📚 რესურსები: ${escapeHtml(l.resources)}</div>` : ''}
             </div>
