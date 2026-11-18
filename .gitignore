@@ -4,6 +4,7 @@ __pycache__/
 .template_assets/
 
 # Temporary / Scratch
+New folder/
 scratch/
 test_*.js
 *.tmp
