@@ -1636,9 +1636,7 @@
         return;
       }
 
-      let summary = '📝 Skillwill AI — ყველა კომენტარის ლოგი:
-
-';
+      let summary = `📝 Skillwill AI — ყველა კომენტარის ლოგი:\n\n`;
       allComments.forEach(c => {
         const course = DATA[c.courseKey] || { title: '' };
         summary += `[ლექცია #${c.lectureNum} | ${course.title} | ${c.date}]
