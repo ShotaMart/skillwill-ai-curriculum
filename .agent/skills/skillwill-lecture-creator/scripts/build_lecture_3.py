@@ -177,7 +177,7 @@ def build_lecture_3():
 
     tbb = s2.shapes.add_textbox(Inches(1.4), bot_y + Inches(0.3), Inches(16.2), Inches(1.4))
     tfb = tbb.text_frame; tfb.word_wrap = True; tfb.margin_left = tfb.margin_top = 0
-    p = tfb.paragraphs[0]; p.text = "💡 მთავარი არსი (0-ლეველის მენტალური მოდელი):"
+    p = tfb.paragraphs[0]; p.text = "💡 მთავარი არსი (მარტივი ანალოგია):"
     p.font.name = FONT_ARIAL; p.font.size = Pt(15); p.font.bold = True; p.font.color.rgb = COLOR_RED
 
     p = tfb.add_paragraph()
