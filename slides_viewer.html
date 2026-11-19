@@ -274,6 +274,10 @@
         <img src="${cornerTR}" alt="" class="absolute top-0 right-0 w-[8%] max-w-[80px] pointer-events-none select-none opacity-80" />
       `;
 
+      if (slide.customHtml) {
+        return slide.customHtml;
+      }
+
       if (slide.type === 'agenda') {
         return `
           <div class="w-full h-full p-6 md:p-10 flex flex-col justify-between bg-slate-50 relative">
