@@ -13,7 +13,6 @@ def build_lecture_4():
     asset_dir = r'd:\ხელოვნური ინტელექტის ინსტრუმენტები\assets'
     img_icon_title = os.path.join(asset_dir, 'icon_title.png')
     logo_dir = os.path.join(asset_dir, 'logos')
-    screenshot_dir = os.path.join(asset_dir, 'screenshots')
 
     prs = Presentation(template_path)
     prs.slide_width = Inches(19.0)
@@ -33,7 +32,6 @@ def build_lecture_4():
     COLOR_GREEN_BG = RGBColor(0xE6, 0xF4, 0xEA)
     COLOR_BLUE = RGBColor(0x1A, 0x73, 0xE8)
     COLOR_BLUE_BG = RGBColor(0xE8, 0xF0, 0xFE)
-    COLOR_TERRACOTTA = RGBColor(0xD9, 0x77, 0x06)
 
     FONT_ARIAL = 'Arial'
 
@@ -54,7 +52,7 @@ def build_lecture_4():
             p.font.color.rgb = COLOR_RED
 
             p2 = tf.add_paragraph()
-            p2.text = "Anthropic-ის წამყვანი AI ასისტენტის შესაძლებლობები და სამუშაო გარემო"
+            p2.text = "Anthropic-ის უახლესი AI ასისტენტის შესაძლებლობები და სამუშაო ფუნქციონალი"
             p2.alignment = PP_ALIGN.CENTER
             p2.font.name = FONT_ARIAL
             p2.font.size = Pt(18)
@@ -114,7 +112,7 @@ def build_lecture_4():
         line.line.fill.background()
 
     # -------------------------------------------------------------------------
-    # SLIDE 2: Who is Anthropic and what makes Claude unique?
+    # SLIDE 2: Anthropic & Claude Philosophy
     # -------------------------------------------------------------------------
     s2 = created_slides[0]
     add_header(s2, "Anthropic და Claude (უსაფრთხოება და ანალიტიკური სიღრმე)", "ფილოსოფია • რით განსხვავდება Claude სხვებისგან?")
@@ -135,10 +133,10 @@ def build_lecture_4():
     p.font.name = FONT_ARIAL; p.font.size = Pt(22); p.font.bold = True; p.font.color.rgb = COLOR_DARK; p.space_before = Pt(4)
 
     ant_points = [
-        ("დაფუძნება", "2021 წელს OpenAI-ის ყოფილი წამყვანი მკვლევრების (Dario & Daniela Amodei) მიერ."),
-        ("მისია & პრინციპი", "Constitutional AI — ეთიკური, პროგნოზირებადი და ადამიანზე ორიენტირებული უსაფრთხოების სტანდარტები."),
-        ("გლობალური პარტნიორები", "Amazon (AWS) და Google — მილიარდობით დოლარის ინვესტიცია და ინფრასტრუქტურული მხარდაჭერა."),
-        ("ფოკუსი", "არა უბრალოდ ჩატბოტი, არამედ სიღრმისეული ანალიტიკის, კვლევებისა და კოდინგის ინსტრუმენტი.")
+        ("დაფუძნება და მისია", "OpenAI-ის ყოფილი წამყვანი მკვლევრების მიერ დაფუძნებული ლაბორატორია უსაფრთხო და სანდო AI-ს შესაქმნელად."),
+        ("Constitutional AI", "მოდელი გაწვრთნილია მკაფიო ეთიკურ პრინციპებზე, რაც გამორიცხავს მავნე, აგრესიულ ან არაპროგნოზირებად ქცევას."),
+        ("გლობალური ინფრასტრუქტურა", "Amazon (AWS) და Google Cloud-ის სტრატეგიული პარტნიორობა და მძლავრი გამოთვლითი რესურსები."),
+        ("სამიზნე აუდიტორია", "პროფესიონალები, მკვლევრები და კომპანიები, რომლებსაც მაღალი სიზუსტე და მონაცემთა დაცვა სჭირდებათ.")
     ]
     for t, d in ant_points:
         p = tf1.add_paragraph(); p.text = f"• {t}: {d}"
@@ -158,9 +156,9 @@ def build_lecture_4():
     p.font.name = FONT_ARIAL; p.font.size = Pt(22); p.font.bold = True; p.font.color.rgb = COLOR_DARK; p.space_before = Pt(4)
 
     str_points = [
-        ("Natural & Nuanced Language (ბუნებრივი ენა)", "ყველაზე ნაკლებად რობოტული, აკადემიური და ზრდილობიანი ტონი. ქართულ ენაზე ავლენს უმაღლეს სტილისტურ გამართულობას."),
-        ("Massive Context Window (200K ტოკენი)", "ერთ საუბარში თავისუფლად იტევს 500+ გვერდიან წიგნს ან მთლიან კორპორაციულ კვლევას."),
-        ("Logic & Coding Leader (ლოგიკისა და კოდის ლიდერი)", "მსოფლიო ბენჩმარკებში (SWE-bench, HumanEval) Claude 3.5 Sonnet უპირობო პირველ ადგილს იკავებს.")
+        ("Natural & Nuanced Language (ბუნებრივი ენა)", "აკადემიური, გამართული და ზრდილობიანი ტონი. ქართულ ენაზე ავლენს უმაღლეს სტილისტურ და გრამატიკულ სისწორეს."),
+        ("Massive Context Window (200K+ ტოკენი)", "ერთ საუბარში თავისუფლად იტევს 500+ გვერდიან წიგნს, კონტრაქტს ან კოდის მთლიან რეპოზიტორიას."),
+        ("Logic & Coding Leader (ლოგიკისა და კოდის ლიდერი)", "გლობალურ ინდუსტრიულ ბენჩმარკებში რთული მსჯელობისა და პროგრამირების აღიარებული ჩემპიონი.")
     ]
     for t, d in str_points:
         p = tf2.add_paragraph(); p.text = f"⭐ {t}"
@@ -179,38 +177,38 @@ def build_lecture_4():
     p = tfb.paragraphs[0]; p.text = "💡 მთავარი არსი (მარტივი ანალოგია):"
     p.font.name = FONT_ARIAL; p.font.size = Pt(14); p.font.bold = True; p.font.color.rgb = COLOR_RED
     p = tfb.add_paragraph()
-    p.text = "თუ ChatGPT არის „სწრაფი ენციკლოპედისტი“, Claude არის „ანალიტიკოსი მკვლევარი“. ის არ ჩქარობს ზედაპირული პასუხის გაცემას, ღრმად ჩადის კონტექსტში და კითხულობს უზარმაზარ დოკუმენტებს ისე, რომ დეტალები არ ავიწყდება."
+    p.text = "თუ ტრადიციული ჩატბოტები მოკლე კითხვა-პასუხზე არიან ორიენტირებულნი, Claude მუშაობს როგორც ანალიტიკოსი პარტნიორი: კითხულობს დიდ დოკუმენტებს მთლიანობაში, იაზრებს კონტექსტს და არ ავიწყდება დეტალები."
     p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.color.rgb = COLOR_DARK; p.space_before = Pt(4)
 
     # -------------------------------------------------------------------------
-    # SLIDE 3: Claude 3.5 Family (Haiku, Sonnet, Opus)
+    # SLIDE 3: Claude 5.x Model Family (2026 Baseline: Haiku, Sonnet, Opus)
     # -------------------------------------------------------------------------
     s3 = created_slides[1]
-    add_header(s3, "Claude 3.5 მოდელების ოჯახი (ვის რა როლი აქვს?)", "მოდელები • სისწრაფის, ფასისა და ინტელექტის ბალანსი")
+    add_header(s3, "Claude 5.x მოდელების ოჯახი (Haiku, Sonnet, Opus)", "მოდელები • 2026 წლის აქტუალური თაობა და დანიშნულება")
 
     models_claude = [
         {
             "tag": "01 • ᲡᲘᲡᲬᲠᲐᲤᲔ & ᲔᲙᲝᲜᲝᲛᲘᲐ",
-            "name": "Claude 3.5 Haiku",
-            "role": "მსუბუქი და ულტრა-სწრაფი ასისტენტი",
-            "desc": "შექმნილია წამიერი რეაგირებისთვის. იდეალურია ყოველდღიური რუტინული ამოცანებისთვის, მომხმარებელთა ჩატბოტებისთვის და მოკლე ტექსტების დასამუშავებლად.",
-            "pros": "უმაღლესი სისწრაფე, მინიმალური ფასი",
+            "name": "Claude 5.2 Haiku",
+            "role": "ულტრა-სწრაფი და მსუბუქი მოდელი",
+            "desc": "შექმნილია წამიერი რეაგირებისთვის. იდეალურია ყოველდღიური რუტინული ამოცანებისთვის, მომხმარებელთა მხარდაჭერის ჩატბოტებისთვის და მოკლე ტექსტური შეჯამებისთვის.",
+            "pros": "მინიმალური ლატენტობა (სისწრაფე), ეკონომიური რესურსი",
             "color": COLOR_BG_LIGHT, "bcolor": COLOR_BORDER, "tcolor": COLOR_MUTED
         },
         {
             "tag": "02 • ᲝᲥᲠᲝᲡ ᲡᲢᲐᲜᲓᲐᲠᲢᲘ (ᲤᲚᲐᲒᲛᲐᲜᲘ)",
-            "name": "Claude 3.5 Sonnet",
-            "role": "ინდუსტრიის წამყვანი ინტელექტი",
-            "desc": "მთავარი სამუშაო მოდელი. აერთიანებს მაქსიმალურ ანალიტიკურ სიღრმეს, შეუდარებელ კოდინგს, Artifacts-ის გენერირებასა და სწრაფ პასუხს.",
-            "pros": "ოპტიმალური არჩევანი 95% პროფესიული ამოცანისთვის",
+            "name": "Claude 5.5 Sonnet",
+            "role": "ინდუსტრიის მთავარი სამუშაო ფლაგმანი",
+            "desc": "მთავარი სამუშაო მოდელი 95% პროფესიული ამოცანისთვის. აერთიანებს მაქსიმალურ ანალიტიკურ სიღრმეს, უმაღლეს კოდინგს, Artifacts-ის გენერირებასა და სწრაფ პასუხს.",
+            "pros": "ოპტიმალური ინტელექტი, სისწრაფე და სიზუსტე",
             "color": COLOR_CARD_RED, "bcolor": COLOR_BORDER_RED, "tcolor": COLOR_RED
         },
         {
-            "tag": "03 • ᲛᲐᲥᲡᲘᲛᲐᲚᲣᲠᲘ ᲡᲘᲫᲚᲘᲔᲠᲔ",
-            "name": "Claude 3 Opus",
-            "role": "ურთულესი კვლევების მოდელი",
-            "desc": "ყველაზე მძიმე მათემატიკური და სამეცნიერო ამოცანებისთვის. ამუშავებს უზარმაზარ აბსტრაქტულ მონაცემებს, სადაც სიჩქარეზე მნიშვნელოვანი უზუსტესი ლოგიკაა.",
-            "pros": "მაქსიმალური მსჯელობის სიღრმე",
+            "tag": "03 • ᲛᲐᲥᲡᲘᲛᲐᲚᲣᲠᲘ ᲘᲜᲢᲔᲚᲔᲥᲢᲘ",
+            "name": "Claude 5.5 Opus",
+            "role": "ურთულესი კვლევებისა და მეცნიერების მოდელი",
+            "desc": "ყველაზე მძლავრი მოდელი უკიდურესად რთული მათემატიკური, ლოგიკური და სამეცნიერო პრობლემებისთვის, სადაც სიჩქარეზე მნიშვნელოვანი უზუსტესი მსჯელობაა.",
+            "pros": "მაქსიმალური მსჯელობის სიღრმე და აბსტრაქცია",
             "color": COLOR_BG_LIGHT, "bcolor": COLOR_BORDER, "tcolor": COLOR_MUTED
         }
     ]
@@ -250,78 +248,112 @@ def build_lecture_4():
         p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.bold = True; p.font.color.rgb = COLOR_RED if i == 1 else COLOR_MUTED; p.space_before = Pt(8)
 
     # -------------------------------------------------------------------------
-    # SLIDE 4: Workspace Interface Anatomy (REAL UI SCREENSHOT!)
+    # SLIDE 4: Workspace Functional Architecture (NO Screenshots, Pure Structure!)
     # -------------------------------------------------------------------------
     s4 = created_slides[2]
-    add_header(s4, "Claude.ai სამუშაო ინტერფეისის ანატომია", "ინტერფეისი • რეალური სამუშაო გარემოს გაცნობა")
+    add_header(s4, "Claude.ai სამუშაო გარემოს ძირითადი ფუნქციები", "ფუნქციონალი • სამუშაო შესაძლებლობების რუკა")
 
-    # Left: Real screenshot card (Inches 10.0 x Inches 7.7)
-    scr_card_w = Inches(10.2); scr_card_h = Inches(7.7); scr_x = Inches(1.0); scr_y = Inches(2.35)
-    sc_box = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, scr_x, scr_y, scr_card_w, scr_card_h)
-    sc_box.fill.solid(); sc_box.fill.fore_color.rgb = COLOR_WHITE
-    sc_box.line.color.rgb = COLOR_BORDER; sc_box.line.width = Pt(1.5)
-
-    real_ui_img = os.path.join(screenshot_dir, 'claude_ui.png')
-    if os.path.exists(real_ui_img):
-        # Insert real UI screenshot inside box with padding
-        s4.shapes.add_picture(real_ui_img, scr_x + Inches(0.2), scr_y + Inches(0.8), width=scr_card_w - Inches(0.4), height=Inches(6.5))
-
-    tb_ui_label = s4.shapes.add_textbox(scr_x + Inches(0.4), scr_y + Inches(0.2), scr_card_w - Inches(0.8), Inches(0.5))
-    tf_ui_l = tb_ui_label.text_frame; tf_ui_l.word_wrap = True; tf_ui_l.margin_left = tf_ui_l.margin_top = 0
-    p = tf_ui_l.paragraphs[0]; p.text = "🖥️ CLAUDE.AI — ოფიციალური სამუშაო გარემო"
-    p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.bold = True; p.font.color.rgb = COLOR_DARK
-
-    # Right: UI Breakdown Callouts (Inches 6.5 x 7.7)
-    call_x = Inches(11.5); call_w = Inches(6.5); call_y = Inches(2.35)
-    call_box = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, call_x, call_y, call_w, scr_card_h)
-    call_box.fill.solid(); call_box.fill.fore_color.rgb = COLOR_BG_LIGHT
-    call_box.line.color.rgb = COLOR_BORDER; call_box.line.width = Pt(1.5)
-
-    tb_call = s4.shapes.add_textbox(call_x + Inches(0.4), call_y + Inches(0.4), call_w - Inches(0.8), scr_card_h - Inches(0.8))
-    tfc = tb_call.text_frame; tfc.word_wrap = True; tfc.margin_left = tfc.margin_top = 0
-
-    p = tfc.paragraphs[0]; p.text = "ᲘᲜᲢᲔᲠᲤᲔᲘᲡᲘᲡ 4 ᲫᲘᲠᲘᲗᲐᲓᲘ ᲖᲝᲜᲐ"
-    p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.bold = True; p.font.color.rgb = COLOR_RED
-
-    ui_zones = [
-        ("01 • Prompt Bar (შესაყვანი ველი)", "მთავარი არეალი შეკითხვის დასაწერად, მოდელის ასარჩევად (Sonnet/Haiku) და კონტექსტის სამართავად."),
-        ("02 • Paperclip (ფაილების მიმაგრება)", "დოკუმენტების (PDF, Word, Excel) და სურათების მარტივი ატვირთვა პირდაპირ ჩატში."),
-        ("03 • Sidebar (ნავიგაცია და არქივი)", "მარცხენა პანელი: წინა დიალოგების ისტორია, სწრაფი ძიება (Ctrl+K) და ახალი ჩატის დაწყება."),
-        ("04 • Chat Canvas (დიალოგის ველი)", "სუფთა ინტერფეისი, სადაც პასუხები ფორმატირდება სათაურებით, ცხრილებითა და კოდის ბლოკებით.")
+    ui_pillars = [
+        {
+            "tag": "01 • ᲛᲝᲓᲔᲚᲘᲡ ᲛᲐᲠᲗᲕᲐ",
+            "title": "Model Selection & Controls",
+            "sub": "მოდელის შერჩევა ამოცანის მიხედვით",
+            "points": [
+                "სასურველი მოდელის (Sonnet, Haiku, Opus) მარტივი გადართვა ჩატის დაწყებამდე.",
+                "Sonnet — ნაგულისხმევი არჩევანი ანალიტიკისა და კოდინგისთვის.",
+                "Haiku — გადართვა წამიერი და მარტივი რუტინული ამოცანებისას.",
+                "კონტექსტის ზომისა და რესურსების ოპტიმიზაცია."
+            ]
+        },
+        {
+            "tag": "02 • ᲤᲐᲘᲚᲔᲑᲘᲡ ᲨᲔᲧᲕᲐᲜᲐ",
+            "title": "Multimodal Input (Paperclip)",
+            "sub": "ფაილების ატვირთვა პირდაპირ ჩატში",
+            "points": [
+                "დოკუმენტების მიმაგრება: PDF, Word, Excel, CSV, TXT, კოდის ფაილები.",
+                "სურათებისა და დიაგრამების ატვირთვა (Vision ანალიზი).",
+                "რამდენიმე ფაილის ერთდროული ატვირთვა ჯვარედინი შედარებისთვის.",
+                "ფაილის წამიერი ინდექსაცია კონტექსტის მეხსიერებაში."
+            ]
+        },
+        {
+            "tag": "03 • ᲩᲐᲢᲘᲡ ᲛᲐᲠᲗᲕᲐ",
+            "title": "Chat Management & History",
+            "sub": "დიალოგების ორგანიზება და ძიება",
+            "points": [
+                "საუბრების ავტომატური დახარისხება და დასათაურება თემატიკის მიხედვით.",
+                "სწრაფი ძიება (Ctrl+K) წინა ჩატების ისტორიაში საკვანძო სიტყვებით.",
+                "ჩატის გადარქმევა, დაარქივება და წაშლა.",
+                "ახალი სუფთა სესიის დაწყება კონტექსტის გასასუფთავებლად."
+            ]
+        },
+        {
+            "tag": "04 • ᲞᲐᲡᲣᲮᲘᲡ ᲤᲝᲠᲛᲐᲢᲘᲠᲔᲑᲐ",
+            "title": "Rich Canvas & Output",
+            "sub": "სტრუქტურირებული პასუხები",
+            "points": [
+                "პასუხების ფორმატირება Markdown სტილით (სათაურები, ბულეტები, ხაზგასმა).",
+                "კოდის ბლოკები ენის ავტომატური ამოცნობითა და 1-კლიკიანი კოპირებით.",
+                "დიდი ანალიტიკური ცხრილები და მონაცემთა შედარება.",
+                "Artifacts რეჟიმის ავტომატური გააქტიურება ცალკე ფანჯარაში."
+            ]
+        }
     ]
-    for h, d in ui_zones:
-        p = tfc.add_paragraph(); p.text = f"\n📌 {h}"
-        p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.bold = True; p.font.color.rgb = COLOR_DARK; p.space_before = Pt(8)
-        p = tfc.add_paragraph(); p.text = d
-        p.font.name = FONT_ARIAL; p.font.size = Pt(12); p.font.color.rgb = COLOR_TEXT_MUTED; p.space_before = Pt(2)
+
+    card_w = Inches(8.35); card_h = Inches(3.6); card_gap_x = Inches(0.4); card_gap_y = Inches(0.4)
+    for i, pil in enumerate(ui_pillars):
+        row = i // 2
+        col = i % 2
+        cx = Inches(1.0) + col * (card_w + card_gap_x)
+        cy = Inches(2.35) + row * (card_h + card_gap_y)
+
+        c = s4.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, cy, card_w, card_h)
+        c.fill.solid()
+        c.fill.fore_color.rgb = COLOR_CARD_RED if i == 0 else COLOR_BG_LIGHT
+        c.line.color.rgb = COLOR_BORDER_RED if i == 0 else COLOR_BORDER
+        c.line.width = Pt(1.5)
+
+        tb = s4.shapes.add_textbox(cx + Inches(0.4), cy + Inches(0.3), card_w - Inches(0.8), card_h - Inches(0.6))
+        tf = tb.text_frame; tf.word_wrap = True; tf.margin_left = tf.margin_top = 0
+
+        p = tf.paragraphs[0]; p.text = pil["tag"]
+        p.font.name = FONT_ARIAL; p.font.size = Pt(11); p.font.bold = True
+        p.font.color.rgb = COLOR_RED if i == 0 else COLOR_MUTED
+
+        p = tf.add_paragraph(); p.text = pil["title"]
+        p.font.name = FONT_ARIAL; p.font.size = Pt(17); p.font.bold = True; p.font.color.rgb = COLOR_DARK; p.space_before = Pt(2)
+
+        for pt in pil["points"]:
+            p = tf.add_paragraph(); p.text = f"• {pt}"
+            p.font.name = FONT_ARIAL; p.font.size = Pt(12); p.font.color.rgb = COLOR_TEXT_MUTED; p.space_before = Pt(4)
 
     # -------------------------------------------------------------------------
     # SLIDE 5: Multimodal File Handling (PDF, Excel, Images)
     # -------------------------------------------------------------------------
     s5 = created_slides[3]
-    add_header(s5, "ფაილების დამუშავება (Multimodal: PDF, Excel და სურათები)", "მონაცემები • რა დოკუმენტების „წაკითხვა“ შეუძლია Claude-ს?")
+    add_header(s5, "ფაილების დამუშავება: PDF, მონაცემთა ცხრილები და სურათები", "მონაცემები • რა დოკუმენტების „წაკითხვა“ შეუძლია Claude-ს?")
 
     file_types = [
         {
             "tag": "01 • ᲓᲝᲙᲣᲛᲔᲜᲢᲔᲑᲘ",
             "title": "PDF, Word & Text",
-            "sub": "ტექსტური ანალიტიკა და შეჯამება",
+            "sub": "დიდი ტექსტების ანალიტიკა და შეჯამება",
             "points": [
                 "100+ გვერდიანი ხელშეკრულებების, კვლევებისა და წიგნების წამიერი დამუშავება.",
                 "ძირითადი თეზისების, იურიდიული რისკებისა და საკვანძო პირობების ამოღება.",
-                "კითხვა-პასუხი დოკუმენტის შინაარსზე (ზუსტი მითითებებით).",
+                "კითხვა-პასუხი დოკუმენტის შინაარსზე (ზუსტი მითითებებითა და ციტატებით).",
                 "დოკუმენტის სტილისტური გადამუშავება და ენობრივი თარგმანი."
             ]
         },
         {
             "tag": "02 • ᲛᲝᲜᲐᲪᲔᲛᲔᲑᲘ",
             "title": "Excel & CSV ცხრილები",
-            "sub": "სტრუქტურირებული ანალიზი",
+            "sub": "სტრუქტურირებული მონაცემები",
             "points": [
                 "ფინანსური რეპორტების, გაყიდვებისა და მომხმარებელთა სიების წაკითხვა.",
                 "მონაცემთა გაფილტვრა, დაჯგუფება და ტენდენციების აღმოჩენა.",
                 "მზა ფორმულების (Excel / SQL) და ანალიტიკური დასკვნების მომზადება.",
-                "ახალი, გასუფთავებული ცხრილების შექმნა."
+                "ახალი, გასუფთავებული და ფორმატირებული ცხრილების გენერირება."
             ]
         },
         {
@@ -332,7 +364,7 @@ def build_lecture_4():
                 "რთული დიაგრამების, ინფოგრაფიკისა და გრაფიკების ახსნა ციფრებში.",
                 "ხელნაწერი ტექსტების, ჩეკებისა და დოკუმენტების ფოტოების გაციფრულება (OCR).",
                 "UI დიზაინისა და ვებსაიტის მონახაზის (Wireframe) გაანალიზება.",
-                "ტექნიკური სქემების წაკითხვა."
+                "ტექნიკური სქემებისა და ნახაზების შინაარსობრივი წაკითხვა."
             ]
         }
     ]
@@ -365,83 +397,96 @@ def build_lecture_4():
             p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.color.rgb = COLOR_TEXT_MUTED; p.space_before = Pt(8)
 
     # -------------------------------------------------------------------------
-    # SLIDE 6: What are Artifacts? (REAL SPLIT-SCREEN SCREENSHOT!)
+    # SLIDE 6: What are Artifacts? (Conceptual Architecture, NO Screenshots)
     # -------------------------------------------------------------------------
     s6 = created_slides[4]
     add_header(s6, "რა არის Artifacts? — ინტერაქტიული სამუშაო სივრცე", "რევოლუციური ფუნქცია • გაყოფილი ეკრანის პარადიგმა")
 
     top_y = Inches(2.35)
-    tb_intro6 = s6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.0), top_y, Inches(17.0), Inches(1.2))
+    tb_intro6 = s6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.0), top_y, Inches(17.0), Inches(1.5))
     tb_intro6.fill.solid(); tb_intro6.fill.fore_color.rgb = COLOR_CARD_RED
     tb_intro6.line.color.rgb = COLOR_BORDER_RED; tb_intro6.line.width = Pt(1.5)
 
-    tb6_t = s6.shapes.add_textbox(Inches(1.4), top_y + Inches(0.18), Inches(16.2), Inches(0.85))
+    tb6_t = s6.shapes.add_textbox(Inches(1.4), top_y + Inches(0.25), Inches(16.2), Inches(1.0))
     tf6 = tb6_t.text_frame; tf6.word_wrap = True; tf6.margin_left = tf6.margin_top = 0
     p = tf6.paragraphs[0]; p.text = "🚀 პარადიგმის ცვლილება: ჩატბოტიდან სრულფასოვან სამუშაო სივრცემდე"
     p.font.name = FONT_ARIAL; p.font.size = Pt(14); p.font.bold = True; p.font.color.rgb = COLOR_RED
-    p = tf6.add_paragraph(); p.text = "ტრადიციულ ჩატში გრძელი კოდი ან დოკუმენტი დიალოგის ნაკადში იკარგებოდა. Artifacts ეკრანს ორად ყოფს: მარცხნივ ჩატია, მარჯვნივ კი ცალკე ინტერაქტიული პანელი!"
-    p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.color.rgb = COLOR_DARK; p.space_before = Pt(2)
+    p = tf6.add_paragraph()
+    p.text = "ტრადიციულ ჩატში გრძელი კოდი ან დოკუმენტი დიალოგის ნაკადში იკარგებოდა. Artifacts ეკრანს ორად ყოფს: მარცხნივ მიმდინარეობს ჩატი, ხოლო მარჯვნივ იხსნება დამოუკიდებელი, ცოცხალი ინტერაქტიული პანელი!"
+    p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.color.rgb = COLOR_DARK; p.space_before = Pt(4)
 
-    # Real Screenshot on Left (Inches 10.2 x 6.3)
-    art_box_x = Inches(1.0); art_box_y = Inches(3.75); art_box_w = Inches(10.2); art_box_h = Inches(6.3)
-    art_box = s6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, art_box_x, art_box_y, art_box_w, art_box_h)
-    art_box.fill.solid(); art_box.fill.fore_color.rgb = COLOR_WHITE
-    art_box.line.color.rgb = COLOR_BORDER; art_box.line.width = Pt(1.5)
-
-    art_real_img = os.path.join(screenshot_dir, 'artifacts_demo.png')
-    if os.path.exists(art_real_img):
-        s6.shapes.add_picture(art_real_img, art_box_x + Inches(0.2), art_box_y + Inches(0.2), width=art_box_w - Inches(0.4), height=art_box_h - Inches(0.4))
-
-    # Right: 3 Key Artifact Features (Inches 6.5 x 6.3)
-    feat_x = Inches(11.5); feat_w = Inches(6.5); feat_y = Inches(3.75)
-    feat_box = s6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, feat_x, feat_y, feat_w, art_box_h)
-    feat_box.fill.solid(); feat_box.fill.fore_color.rgb = COLOR_BG_LIGHT
-    feat_box.line.color.rgb = COLOR_BORDER; feat_box.line.width = Pt(1.5)
-
-    tb_feat = s6.shapes.add_textbox(feat_x + Inches(0.4), feat_y + Inches(0.4), feat_w - Inches(0.8), art_box_h - Inches(0.8))
-    tff = tb_feat.text_frame; tff.word_wrap = True; tff.margin_left = tff.margin_top = 0
-
-    p = tff.paragraphs[0]; p.text = "ARTIFACTS-ᲘᲡ 3 ᲣᲞᲘᲠᲐᲢᲔᲡᲝᲑᲐ"
-    p.font.name = FONT_ARIAL; p.font.size = Pt(12); p.font.bold = True; p.font.color.rgb = COLOR_RED
-
-    art_advantages = [
-        ("Live Preview (ცოცხალი შედეგი)", "HTML/JS კოდი, დიაგრამები და ვებ-კომპონენტები პირდაპირ ეკრანზე მუშაობს და იტესტება რეალურ დროში."),
-        ("Independent Object (დამოუკიდებელი ობიექტი)", "არტეფაქტი არსებობს როგორც დამოუკიდებელი დოკუმენტი — მისი რედაქტირება, კოპირება და ექსპორტი ხდება 1 კლიკით."),
-        ("Version History (ვერსიების ისტორია)", "Claude-ს ყოველი დამატებითი თხოვნა არტეფაქტს აახლებს ახალ ვერსიად, რაც ძველ ვერსიაზე დაბრუნების საშუალებას გაძლევთ.")
+    # 3 core pillars of Artifacts
+    art_pillars = [
+        {
+            "tag": "01 • ᲠᲝᲓᲘᲡ ᲘᲥᲛᲜᲔᲑᲐ?",
+            "title": "Self-Contained Content",
+            "sub": "დამოუკიდებელი ობიექტი",
+            "desc": "არტეფაქტი იქმნება მაშინ, როდესაც კონტენტი არის სრულყოფილი და გამოსაყენებელი: კოდი, დიაგრამა, ვებგვერდი ან დიდი დოკუმენტი (15+ ხაზი), რომელსაც მომხმარებელი შემდგომ გამოიყენებს."
+        },
+        {
+            "tag": "02 • ᲠᲝᲒᲝᲠ ᲛᲣᲨᲐᲝᲑᲡ?",
+            "title": "Live Interactive Preview",
+            "sub": "ცოცხალი გაშვება ბრაუზერში",
+            "desc": "HTML, React, CSS, SVG და Mermaid დიაგრამები პირდაპირ ეკრანზე მუშაობს. მომხმარებელს შეუძლია ღილაკებზე დაჭერა, მონაცემების შეყვანა და შედეგის მომენტალური ნახვა."
+        },
+        {
+            "tag": "03 • ᲕᲔᲠᲡᲘᲔᲑᲘᲡ ᲙᲝᲜᲢᲠᲝᲚᲘ",
+            "title": "Iterative Versioning",
+            "sub": "მუდმივი გაუმჯობესება",
+            "desc": "თქვენ შეგიძლიათ ჩატში მისცეთ დამატებითი შენიშვნა („შეცვალე ფერი“, „დაამატე ღილაკი“). Claude განაახლებს მარჯვენა არტეფაქტს, ძველი ვერსიები კი ისტორიაში ინახება."
+        }
     ]
-    for h, d in art_advantages:
-        p = tff.add_paragraph(); p.text = f"\n✅ {h}"
-        p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.bold = True; p.font.color.rgb = COLOR_DARK; p.space_before = Pt(8)
-        p = tff.add_paragraph(); p.text = d
-        p.font.name = FONT_ARIAL; p.font.size = Pt(12); p.font.color.rgb = COLOR_TEXT_MUTED; p.space_before = Pt(2)
+
+    card_w = Inches(5.4); card_gap = Inches(0.4); start_x = Inches(1.0); card_y = Inches(4.2)
+    for i, col in enumerate(art_pillars):
+        cx = start_x + i * (card_w + card_gap)
+
+        c = s6.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, card_y, card_w, Inches(5.85))
+        c.fill.solid(); c.fill.fore_color.rgb = COLOR_BG_LIGHT
+        c.line.color.rgb = COLOR_BORDER; c.line.width = Pt(1.5)
+
+        tb = s6.shapes.add_textbox(cx + Inches(0.4), card_y + Inches(0.4), card_w - Inches(0.8), Inches(5.0))
+        tf = tb.text_frame; tf.word_wrap = True; tf.margin_left = tf.margin_top = 0
+
+        p = tf.paragraphs[0]; p.text = col["tag"]
+        p.font.name = FONT_ARIAL; p.font.size = Pt(11); p.font.bold = True; p.font.color.rgb = COLOR_MUTED
+
+        p = tf.add_paragraph(); p.text = col["title"]
+        p.font.name = FONT_ARIAL; p.font.size = Pt(19); p.font.bold = True; p.font.color.rgb = COLOR_DARK; p.space_before = Pt(4)
+
+        p = tf.add_paragraph(); p.text = col["sub"]
+        p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.bold = True; p.font.color.rgb = COLOR_RED; p.space_before = Pt(2)
+
+        p = tf.add_paragraph(); p.text = f"\n{col['desc']}"
+        p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.color.rgb = COLOR_TEXT_MUTED; p.space_before = Pt(6)
 
     # -------------------------------------------------------------------------
-    # SLIDE 7: Artifacts Use Cases (Diagrams, Docs, Prototypes)
+    # SLIDE 7: Artifacts 3 Main Categories
     # -------------------------------------------------------------------------
     s7 = created_slides[5]
-    add_header(s7, "Artifacts-ის რეალური შესაძლებლობები (Use Cases)", "პრაქტიკა • რა იქმნება არტეფაქტის ფანჯარაში?")
+    add_header(s7, "Artifacts-ის 3 ძირითადი კატეგორია და შესაძლებლობები", "პრაქტიკა • რა იქმნება არტეფაქტის პანელში?")
 
     use_cases = [
         {
             "tag": "01 • ᲕᲘᲖᲣᲐᲚᲘᲖᲐᲪᲘᲐ",
             "title": "Interactive Diagrams",
             "geo": "(ინტერაქტიული დიაგრამები)",
-            "desc": "ბიზნეს-პროცესების ნაკადები, ორგანიზაციული სტრუქტურები და არქიტექტურული სქემები (Mermaid, SVG).",
-            "meta": "მაგალითი: გაყიდვების პროცესის სქემა, მომხმარებლის გზა (User Journey)."
+            "desc": "ბიზნეს-პროცესების ნაკადები, ორგანიზაციული სტრუქტურები და ლოგიკური ბლოკ-სქემები (Mermaid, SVG).",
+            "meta": "მაგალითი: გაყიდვების პროცესის სქემა, მომხმარებლის გზა (User Journey), ალგორითმის რუკა."
         },
         {
             "tag": "02 • ᲓᲝᲙᲣᲛᲔᲜᲢᲐᲪᲘᲐ",
-            "title": "Ready Documents",
+            "title": "Standalone Documents",
             "geo": "(სრულყოფილი დოკუმენტები)",
             "desc": "სრული წესდებები, ინსტრუქციები, სტატიები და ხელშეკრულებები, რომლებიც მზადაა ჩამოსატვირთად და გასაზიარებლად.",
-            "meta": "მაგალითი: კომპანიის შიდა რეგლამენტი, პროექტის ტექნიკური დავალება (PRD)."
+            "meta": "მაგალითი: კომპანიის შიდა რეგლამენტი, პროექტის ტექნიკური დავალება (PRD), ანალიტიკური რეპორტი."
         },
         {
             "tag": "03 • ᲞᲠᲝᲢᲝᲢᲘᲞᲔᲑᲘ",
             "title": "Live Code & Apps",
             "geo": "(ცოცხალი აპლიკაციები & კოდი)",
             "desc": "ინტერაქტიული კალკულატორები, ვიზუალური დაშბორდები, მინი-თამაშები და ვებსაიტის ინტერფეისები React/HTML/JS-ში.",
-            "meta": "მაგალითი: იპოთეკური სესხის ცოცხალი კალკულატორი, ფასების ცხრილი."
+            "meta": "მაგალითი: იპოთეკური სესხის ცოცხალი კალკულატორი, ფასების ცხრილი, ინტერაქტიული ქვიზი."
         }
     ]
 
@@ -498,7 +543,7 @@ def build_lecture_4():
 
     int_points = [
         ("Knowledge Cutoff (ცოდნის ზღვარი)", "მოდელმა იცის მხოლოდ ის ფაქტები, რომლებზეც გაიწვრთნა. უახლესი მოვლენები მისთვის უცნობია."),
-        ("როდის არის იდეალური?", "ლოგიკა, კოდირება, წერილების შედგენა, აბსტრაქტული აზროვნება და უნივერსალური ფაქტები."),
+        ("როდის არის იდეალური?", "ლოგიკა, კოდირება, წერილების შედგენა, აბსტრაქტული აზროვნება და უნივერსალური პრინციპები."),
         ("რისკი", "უახლეს ფაქტებზე დასმულ კითხვაზე შესაძლოა დაუშვას ჰალუცინაცია.")
     ]
     for h, d in int_points:
@@ -543,91 +588,51 @@ def build_lecture_4():
     p.font.name = FONT_ARIAL; p.font.size = Pt(13); p.font.color.rgb = COLOR_DARK; p.space_before = Pt(4)
 
     # -------------------------------------------------------------------------
-    # SLIDE 9: Ecosystem & Access (Claude.ai, Workspace, Enterprise)
+    # SLIDE 9: 5 Core Working Scenarios (Syllabus Roadmap, NO Leaking to Lecture 5!)
     # -------------------------------------------------------------------------
     s9 = created_slides[7]
-    add_header(s9, "Claude-ის ეკოსისტემა: პლატფორმები და ხელმისაწვდომობა", "პროდუქტები • სად და როგორ ვიყენებთ Claude-ს")
+    add_header(s9, "5 ტიპური სამუშაო ამოცანა Claude-ში", "სამუშაო რუკა • Claude I-ის პრაქტიკული შესაძლებლობები")
 
-    eco_columns = [
-        {
-            "cat": "01 • CLAUDE.AI (ᲡᲐᲛᲝᲛᲮᲛᲐᲠᲔᲑᲚᲝ)",
-            "title": "Desktop & Mobile",
-            "sub": "ყოველდღიური სამუშაო გარემო",
-            "tools": [
-                ("claude.png", "Claude.ai (Web App)", "ბრაუზერში მუშაობა (Free და Pro პაკეტები)"),
-                ("claude.png", "Claude Desktop (Mac/Win)", "დამოუკიდებელი აპლიკაცია თქვენს კომპიუტერზე")
-            ]
-        },
-        {
-            "cat": "02 • WORKSPACE & STORAGE",
-            "title": "Cloud Workspaces",
-            "sub": "მონაცემების ინტეგრაცია",
-            "tools": [
-                ("claude.png", "Artifacts Environment", "ინტერაქტიული დოკუმენტებისა და კოდის მართვა"),
-                ("google_cloud.png", "Google Drive Integration", "ფაილების პირდაპირი იმპორტი Google Drive-იდან")
-            ]
-        },
-        {
-            "cat": "03 • ENTERPRISE & SECURITY",
-            "title": "Developer & Team",
-            "sub": "კორპორაციული უსაფრთხოება",
-            "tools": [
-                ("claude.png", "Anthropic API", "მოდელების ინტეგრაცია საკუთარ პროგრამებში"),
-                ("aws.png", "AWS Bedrock / Data Boundary", "კორპორაციული მონაცემების სრული დაცვა და კონფიდენციალურობა")
-            ]
-        }
+    tasks_5 = [
+        ("01", "PDF დოკუმენტის შეჯამება და ანალიტიკა", "დიდი მოცულობის ხელშეკრულებების, კვლევებისა და წიგნების წამიერი დამუშავება, ძირითადი თეზისების ამოღება და იურიდიული რისკების გამოვლენა."),
+        ("02", "მონაცემთა ცხრილის წაკითხვა და ვიზუალიზაცია", "Excel/CSV ფაილების იმპორტი, ფინანსური მონაცემების გაფილტვრა, ძირითადი ტენდენციების აღმოჩენა და სტრუქტურული ცხრილების გენერირება."),
+        ("03", "სურათისა და ნახაზის აღწერა (Vision & OCR)", "ინფოგრაფიკის, ტექნიკური ნახაზების, ჩეკებისა და ხელნაწერი დოკუმენტების ფოტოების გაციფრულება და შინაარსობრივი ანალიზი."),
+        ("04", "ვებ-ძიება დამოწმებული წყაროებით (Citations)", "ინტერნეტში ცოცხალი ძიების გააქტიურება მიმდინარე მოვლენებზე, ოფიციალური წყაროების ციტირებითა და ჰალუცინაციების მინიმიზაციით."),
+        ("05", "ინტერაქტიული Artifact-ის შექმნა", "ცოცხალი ინტერაქტიული აპლიკაციის (კალკულატორი), ბიზნეს-პროცესის დიაგრამის (Mermaid) ან სრულყოფილი წესდების შექმნა ცალკე სამუშაო პანელში.")
     ]
 
-    col_w = Inches(5.4); col_gap = Inches(0.4); start_x = Inches(1.0)
-    for i, col in enumerate(eco_columns):
-        cx = start_x + i * (col_w + col_gap)
+    card_h = Inches(1.35); card_gap = Inches(0.2); start_y = Inches(2.35)
+    for i, (num, tname, tdesc) in enumerate(tasks_5):
+        cy = start_y + i * (card_h + card_gap)
 
-        cb = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx, Inches(2.35), col_w, Inches(7.7))
-        cb.fill.solid()
-        cb.fill.fore_color.rgb = COLOR_CARD_RED if i == 0 else COLOR_BG_LIGHT
-        cb.line.color.rgb = COLOR_BORDER_RED if i == 0 else COLOR_BORDER
-        cb.line.width = Pt(1.5)
+        c = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.0), cy, Inches(17.0), card_h)
+        c.fill.solid()
+        c.fill.fore_color.rgb = COLOR_CARD_RED if i == 0 else COLOR_BG_LIGHT
+        c.line.color.rgb = COLOR_BORDER_RED if i == 0 else COLOR_BORDER
+        c.line.width = Pt(1.5)
 
-        tb_head = s9.shapes.add_textbox(cx + Inches(0.35), Inches(2.55), col_w - Inches(0.7), Inches(1.6))
-        tf = tb_head.text_frame; tf.word_wrap = True; tf.margin_left = tf.margin_top = 0
+        # Number pill on left
+        pill = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1.3), cy + Inches(0.3), Inches(1.1), Inches(0.75))
+        pill.fill.solid()
+        pill.fill.fore_color.rgb = COLOR_RED if i == 0 else COLOR_WHITE
+        pill.line.color.rgb = COLOR_BORDER_RED if i == 0 else COLOR_BORDER
+        pill.line.width = Pt(1.2)
 
-        p = tf.paragraphs[0]; p.text = col["cat"]
-        p.font.name = FONT_ARIAL; p.font.size = Pt(11); p.font.bold = True
-        p.font.color.rgb = COLOR_RED if i == 0 else COLOR_MUTED
+        tb_p = s9.shapes.add_textbox(Inches(1.3), cy + Inches(0.3), Inches(1.1), Inches(0.75))
+        tf_p = tb_p.text_frame; tf_p.word_wrap = False; tf_p.margin_left = tf_p.margin_top = 0
+        p = tf_p.paragraphs[0]; p.text = num; p.alignment = PP_ALIGN.CENTER
+        p.font.name = FONT_ARIAL; p.font.size = Pt(18); p.font.bold = True
+        p.font.color.rgb = COLOR_WHITE if i == 0 else COLOR_DARK
 
-        p = tf.add_paragraph(); p.text = col["title"]
-        p.font.name = FONT_ARIAL; p.font.size = Pt(20); p.font.bold = True; p.font.color.rgb = COLOR_DARK; p.space_before = Pt(2)
+        # Text on right
+        tb_txt = s9.shapes.add_textbox(Inches(2.7), cy + Inches(0.2), Inches(15.0), Inches(0.95))
+        tf_t = tb_txt.text_frame; tf_t.word_wrap = True; tf_t.margin_left = tf_t.margin_top = 0
 
-        p = tf.add_paragraph(); p.text = col["sub"]
+        p = tf_t.paragraphs[0]; p.text = tname
+        p.font.name = FONT_ARIAL; p.font.size = Pt(16); p.font.bold = True; p.font.color.rgb = COLOR_DARK
+
+        p = tf_t.add_paragraph(); p.text = tdesc
         p.font.name = FONT_ARIAL; p.font.size = Pt(12); p.font.color.rgb = COLOR_TEXT_MUTED; p.space_before = Pt(3)
-
-        card_h = Inches(1.9)
-        spacing = Inches(2.2)
-        base_y = Inches(4.5)
-
-        for j, (l_file, t_name, t_desc) in enumerate(col["tools"]):
-            item_y = base_y + j * spacing
-
-            t_card = s9.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, cx + Inches(0.3), item_y, col_w - Inches(0.6), card_h)
-            t_card.fill.solid(); t_card.fill.fore_color.rgb = COLOR_WHITE
-            t_card.line.color.rgb = COLOR_BORDER_RED if i == 0 else COLOR_BORDER
-            t_card.line.width = Pt(1.2)
-
-            # Square Logo 1.1" x 1.1"
-            lp = os.path.join(logo_dir, l_file)
-            logo_sz = Inches(1.1)
-            logo_y = item_y + (card_h - logo_sz) / 2
-            if os.path.exists(lp):
-                s9.shapes.add_picture(lp, cx + Inches(0.5), logo_y, width=logo_sz, height=logo_sz)
-
-            tb_item = s9.shapes.add_textbox(cx + Inches(1.8), item_y + Inches(0.3), col_w - Inches(2.2), card_h - Inches(0.5))
-            tf = tb_item.text_frame; tf.word_wrap = True; tf.margin_left = tf.margin_top = 0
-
-            p = tf.paragraphs[0]; p.text = t_name
-            p.font.name = FONT_ARIAL; p.font.size = Pt(14); p.font.bold = True; p.font.color.rgb = COLOR_DARK
-
-            p = tf.add_paragraph(); p.text = t_desc
-            p.font.name = FONT_ARIAL; p.font.size = Pt(11); p.font.color.rgb = COLOR_TEXT_MUTED; p.space_before = Pt(3)
 
     # -------------------------------------------------------------------------
     # SAVE PPTX AND DISTRIBUTE TO TARGET DIRECTORIES
